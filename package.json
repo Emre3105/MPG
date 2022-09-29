@@ -1,0 +1,24 @@
+{
+  "name": "mpg",
+  "version": "1.0.0",
+  "description": "CodeDev",
+  "main": "index.js",
+  "scripts": {
+    "serve": "cd ui & npm run build & cd .. & node index.js",
+    "dev": "supervisor  index.js"
+    },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emre3105/MPG.git"
+  },
+  "author": "kanaan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emre3105/MPG/issues"
+  },
+  "homepage": "https://github.com/Emre3105/MPG#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "supervisor": "^0.12.0"
+  }
+}
