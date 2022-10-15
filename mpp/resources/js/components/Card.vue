@@ -1,6 +1,6 @@
 <template>
-    <div class="card">
-        <h3 class="name">{{name}}</h3>
+    <div class="card p-4 border-2 border-red-600 rounded bg-orange-400">
+        <h3 class="text-white">{{name}}</h3>
     </div>
 </template>
 
@@ -13,12 +13,5 @@ export default {
 </script>
 
 <style>
-    .card {
-        padding: 8px;
-        border: 2px solid brown;
-        background-color: orange;
-    }
-    .name {
-        color: white;
-    }
+
 </style>

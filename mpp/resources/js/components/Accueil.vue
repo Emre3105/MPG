@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Accueil</h1>
-        <div class="cards">
+        <div class="border-2 rounded p-4 flex justify-around w-1/3">
             <card v-for="name in names" :name="name"></card>
         </div>
     </div>
@@ -23,10 +23,5 @@ export default {
 </script>
 
 <style>
-    .cards {
-        padding: 8px;
-        width: 33%;
-        display: flex;
-        justify-content: space-around;
-    }
+
 </style>
