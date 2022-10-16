@@ -46,5 +46,31 @@
         </div>
     </div>
     <hr>
+    <div class="w-full">
+        <p class="text-2xl mb-4 w-min mx-auto">Cards</p>
+        <div class="card">
+            <p>Title</p>
+            <hr>
+            <div>
+                <p>My content</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="w-full">
+        <p class="text-2xl mb-4 w-min mx-auto">Alerts</p>
+        <div class="space-y-4">
+            <div class="alert alert-success">
+                <p>alert alert-success</p>
+            </div>
+            <div class="alert alert-warning">
+                <p>alert alert-warning</p>
+            </div>
+            <div class="alert alert-danger">
+                <p>alert alert-danger</p>
+            </div>
+        </div>
+    </div>
+    <hr>
 </div>
 @endsection

@@ -18,4 +18,36 @@
     .btn-danger {
         @apply py-2 px-4 bg-red hover:bg-red-dark text-white font-semibold shadow-sm rounded-lg border border-red hover:border-red-dark;
     }
+
+    .card {
+        @apply bg-white shadow-md hover:shadow-lg rounded-lg w-64;
+    }
+
+    .card > p {
+        @apply text-gray-darkest bg-gray-very-lightest w-full p-4 rounded-t-lg text-lg;
+    }
+
+    .card > hr {
+        @apply text-gray-darkest;
+    }
+
+    .card > div {
+        @apply text-gray-darkest p-4;
+    }
+
+    .alert {
+        @apply p-4 text-white text-lg rounded-b-lg;
+    }
+
+    .alert-success {
+        @apply bg-green;
+    }
+
+    .alert-warning {
+        @apply bg-orange-light;
+    }
+
+    .alert-danger {
+        @apply bg-red;
+    }
 }
