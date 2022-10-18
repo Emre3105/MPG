@@ -1,7 +1,22 @@
 @extends('head')
 @section('js')
-<div class="w-full h-full bg-gray-darkest text-white p-4 space-y-4">
-    <p class="text-4xl w-min mx-auto">Template</p>
+<div class="w-full h-full bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white p-4 space-y-4">
+    <div class="bg-white dark:bg-gray-dark border border-gray-dark fixed w-56 top-0 right-0 ml-auto p-4 rounded-md shadow-md">
+        <div>
+            <label for="dark-mode-toggle" class="inline-flex relative items-center cursor-pointer">
+                <input type="checkbox" id="dark-mode-toggle" class="sr-only peer" checked="" onclick="toggleDarkMode()">
+                <div class="w-11 h-6 bg-cyan none peer-focus:ring-4 peer-focus:ring-cyan dark:peer-focus:ring-cyan-dark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-light after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-dark"></div>
+                <span class="ml-3 text-sm font-medium">Mode sombre</span>
+            </label>
+        </div>
+        <span>Breakpoints : </span>
+        <span class="md:hidden">sm</span>
+        <span class="hidden md:inline lg:hidden">md</span>
+        <span class="hidden lg:inline xl:hidden">lg</span>
+        <span class="hidden xl:inline 2xl:hidden">xl</span>
+        <span class="hidden 2xl:inline">2xl</span>
+    </div>
+    <p class="text-4xl w-min mx-auto pb-4">Template</p>
     <hr>
     <div class="w-full">
         <p class="text-2xl mb-4 w-min mx-auto">Fontsizes</p>
@@ -18,21 +33,26 @@
     <hr>
     <div class="w-full">
         <p class="text-2xl mb-4 w-min mx-auto">Colors</p>
-        <div class="grid gap-2 grid-cols-6">
-            <div class="w-40 h-20 bg-gray-very-lightest flex justify-center items-center text-black"><p>bg-gray-very-lightest</p></div>
-            <div class="w-40 h-20 bg-gray-lightest flex justify-center items-center text-black"><p>bg-gray-lightest</p></div>
-            <div class="w-40 h-20 bg-gray-light flex justify-center items-center"><p>bg-gray-light</p></div>
-            <div class="w-40 h-20 bg-gray flex justify-center items-center"><p>bg-gray</p></div>
-            <div class="w-40 h-20 bg-gray-dark flex justify-center items-center"><p>bg-gray-dark</p></div>
-            <div class="w-40 h-20 bg-gray-darkest flex justify-center items-center border border-gray-dark"><p>bg-gray-darkest</p></div>
-            <div class="w-40 h-20 bg-cyan flex justify-center items-center"><p>bg-cyan</p></div>
-            <div class="w-40 h-20 bg-cyan-dark flex justify-center items-center"><p>bg-cyan-dark</p></div>
-            <div class="w-40 h-20 bg-red-light flex justify-center items-center"><p>bg-red-light</p></div>
-            <div class="w-40 h-20 bg-red flex justify-center items-center"><p>bg-red</p></div>
-            <div class="w-40 h-20 bg-red-dark flex justify-center items-center"><p>bg-red-dark</p></div>
-            <div class="w-40 h-20 bg-green-light flex justify-center items-center"><p>bg-green-light</p></div>
-            <div class="w-40 h-20 bg-green flex justify-center items-center"><p>bg-green</p></div>
-            <div class="w-40 h-20 bg-green-dark flex justify-center items-center"><p>bg-green-dark</p></div>
+        <div class="grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+            <div class="w-40 h-20 bg-white flex justify-center items-center border border-gray-very-lightest dark:text-gray-darkest mx-auto"><p>bg-white</p></div>
+            <div class="w-40 h-20 bg-gray-very-lightest flex justify-center items-center dark:text-gray-darkest mx-auto"><p>bg-gray-very-lightest</p></div>
+            <div class="w-40 h-20 bg-gray-lightest flex justify-center items-center dark:text-gray-darkest mx-auto"><p>bg-gray-lightest</p></div>
+            <div class="w-40 h-20 bg-gray-light flex justify-center items-center mx-auto"><p>bg-gray-light</p></div>
+            <div class="w-40 h-20 bg-gray flex justify-center items-center mx-auto"><p>bg-gray</p></div>
+            <div class="w-40 h-20 bg-gray-dark flex justify-center items-center mx-auto text-white"><p>bg-gray-dark</p></div>
+            <div class="w-40 h-20 bg-gray-darkest flex justify-center items-center border border-gray-dark mx-auto text-white"><p>bg-gray-darkest</p></div>
+            <div class="w-40 h-20 bg-black flex justify-center items-center mx-auto text-white"><p>bg-black</p></div>
+            <div class="w-40 h-20 bg-cyan flex justify-center items-center mx-auto"><p>bg-cyan</p></div>
+            <div class="w-40 h-20 bg-cyan-dark flex justify-center items-center mx-auto"><p>bg-cyan-dark</p></div>
+            <div class="w-40 h-20 bg-red-light flex justify-center items-center mx-auto"><p>bg-red-light</p></div>
+            <div class="w-40 h-20 bg-red flex justify-center items-center mx-auto"><p>bg-red</p></div>
+            <div class="w-40 h-20 bg-red-dark flex justify-center items-center mx-auto"><p>bg-red-dark</p></div>
+            <div class="w-40 h-20 bg-green-light flex justify-center items-center mx-auto"><p>bg-green-light</p></div>
+            <div class="w-40 h-20 bg-green flex justify-center items-center mx-auto"><p>bg-green</p></div>
+            <div class="w-40 h-20 bg-green-dark flex justify-center items-center mx-auto"><p>bg-green-dark</p></div>
+            <div class="w-40 h-20 bg-orange-light flex justify-center items-center mx-auto"><p>bg-orange-light</p></div>
+            <div class="w-40 h-20 bg-orange flex justify-center items-center mx-auto"><p>bg-orange</p></div>
+            <div class="w-40 h-20 bg-orange-dark flex justify-center items-center mx-auto"><p>bg-orange-dark</p></div>
         </div>
     </div>
     <hr>
@@ -72,5 +92,130 @@
         </div>
     </div>
     <hr>
+    <div class="w-full form">
+        <p class="text-2xl mb-4 w-min mx-auto">Inputs</p>
+        <div class="form-group">
+            <label for="disabledInput">Disabled input</label>
+            <input class="form-text-input form-disabled-input" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">
+        </div>
+        <div class="form-group">
+            <label for="readOnlyInput">Readonly input</label>
+            <input class="form-text-input" id="readOnlyInput" type="text" placeholder="Readonly input here..." readonly="">
+        </div>
+        <div class="form-group">
+            <label for="inputValid">Valid input</label>
+            <input class="form-text-input form-valid-input" type="text" value="correct value" id="inputValid">
+            <div class="form-valid-feedback">Success! You've done it.</div>
+        </div>
+        <div class="form-group">
+            <label for="inputInvalid">Invalid input</label>
+            <input class="form-text-input form-invalid-input" type="text" value="wrong value" id="inputInvalid">
+            <div class="form-invalid-feedback">Sorry, that username's taken. Try another?</div>
+        </div>
+        <div class="form-group">
+            <label for="inputDefault">Default input</label>
+            <input class="form-text-input" type="text" placeholder="Default input" id="inputDefault">
+        </div>
+        <div class="form-group">
+            <label>Group input</label>
+            <div class="form-group">
+                <div class="form-group-input">
+                    <input class="form-text-input" type="text" placeholder="Group input">
+                    <button class="btn-primary" type="button">Button</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="infoTextInput">Info input</label>
+            <input class="form-text-input" type="text" id="infoTextInput" placeholder="Enter email">
+            <div class="form-info">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input class="form-text-input" type="password" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Select</label>
+            <select class="form-text-input" id="exampleSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleTextarea">Textarea</label>
+            <textarea class="form-text-input" id="exampleTextarea" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="formFile">File</label>
+            <input class="form-file-input" type="file" id="formFile">
+        </div>
+        <div class="form-group">
+            <legend>Radio buttons</legend>
+            <div class="form-radio-container">
+                <input class="form-radio-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                <label for="optionsRadios1">
+                    Option one is this and that—be sure to include why it's great
+                </label>
+            </div>
+            <div class="form-radio-container">
+                <input class="form-radio-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                <label for="optionsRadios2">
+                    Option two can be something else and selecting it will deselect option one
+                </label>
+            </div>
+            <div class="form-radio-container">
+                <input class="form-radio-input" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="">
+                <label for="optionsRadios3">
+                    Option three is disabled
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <legend>Checkboxes</legend>
+            <div class="form-checkbox-container">
+                <input class="form-checkbox-input" type="checkbox" value="" id="flexCheckDefault">
+                <label for="flexCheckDefault">
+                    Default checkbox
+                </label>
+            </div>
+            <div class="form-checkbox-container">
+                <input class="form-checkbox-input" type="checkbox" value="" id="flexCheckChecked" checked="">
+                <label for="flexCheckChecked">
+                    Checked checkbox
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <legend>Switches</legend>
+            <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
+                <input type="checkbox" value="" id="default-toggle" class="sr-only peer">
+                <div class="w-11 h-6 bg-cyan peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan dark:peer-focus:ring-cyan-dark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-light after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-dark"></div>
+                <span class="ml-3 text-sm font-medium">Default switch checkbox input</span>
+            </label>
+            <label for="checked-toggle" class="inline-flex relative items-center cursor-pointer">
+                <input type="checkbox" value="" id="checked-toggle" class="sr-only peer" checked="">
+                <div class="w-11 h-6 bg-cyan peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan dark:peer-focus:ring-cyan-dark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-light after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-dark"></div>
+                <span class="ml-3 text-sm font-medium">Checked switch checkbox input</span>
+            </label>
+        </div>
+        <div class="form-group">
+            <legend>Ranges</legend>
+            <label for="customRange1" class="form-label">Example range</label>
+            <input type="range" class="form-range-input" id="customRange1">
+            <label for="disabledRange" class="form-label">Disabled range</label>
+            <input type="range" class="form-range-input" id="disabledRange" disabled="">
+            <label for="customRange3" class="form-label">Example range</label>
+            <input type="range" class="form-range-input" min="0" max="5" step="0.5" id="customRange3">
+        </div>
+    </div>
 </div>
+<script>
+    const body = document.getElementsByTagName('body')[0]
+    function toggleDarkMode() {
+        body.classList.toggle('dark')
+    }
+</script>
 @endsection

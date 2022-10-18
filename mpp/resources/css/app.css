@@ -40,7 +40,7 @@
     }
 
     .alert-success {
-        @apply bg-green;
+        @apply bg-green dark:bg-green-dark;
     }
 
     .alert-warning {
@@ -48,6 +48,66 @@
     }
 
     .alert-danger {
-        @apply bg-red;
+        @apply bg-red dark:bg-red-dark;
+    }
+
+    .form {
+        @apply space-y-4;
+    }
+
+    .form-group {
+        @apply grid grid-cols-1 space-y-2;
+    }
+
+    .form-text-input {
+        @apply p-2 bg-white rounded-md border border-gray-light text-gray-darkest;
+    }
+
+    .form-file-input {
+        @apply bg-white rounded-md border border-gray-light text-gray-darkest file:bg-cyan file:p-2 file:text-white file:font-semibold;
+    }
+
+    .form-disabled-input {
+        @apply bg-gray-very-lightest;
+    }
+
+    .form-valid-input {
+        @apply border-green text-green;
+    }
+    
+    .form-invalid-input {
+        @apply border border-red text-red;
+    }
+    
+    .form-valid-feedback {
+        @apply text-green text-xs;
+    }
+
+    .form-invalid-feedback {
+        @apply text-red text-xs;
+    }
+
+    .form-info {
+        @apply text-gray-darkest dark:text-white text-xs;
+    }
+
+    .form-group-input > input {
+        @apply rounded-r-none;
+    }
+
+    .form-group-input > button {
+        @apply rounded-l-none -ml-1;
+    }
+
+    .form-radio-input, .form-checkbox-input {
+        @apply w-4 h-4 accent-cyan;
+    }
+
+    .form-checkbox-container, .form-radio-container {
+        @apply flex items-center space-x-2;
+    }
+
+    .form-range-input {
+        @apply accent-cyan;
     }
 }

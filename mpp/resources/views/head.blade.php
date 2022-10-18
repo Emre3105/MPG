@@ -11,7 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
         @vite('resources/css/app.css')
     </head>
-    <body>
+    <body class="dark">
         <div id="app"></div>
         @yield('js')
         @include('footer')
