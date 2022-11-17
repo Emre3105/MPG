@@ -110,4 +110,28 @@
     .form-range-input {
         @apply accent-cyan;
     }
+
+    .table {
+        @apply w-full table-auto shadow-md rounded border-separate;
+    }
+
+    .table-head {
+        @apply bg-gray text-white overflow-hidden;
+    }
+
+    .table-primary {
+        @apply bg-white text-gray-darkest hover:bg-gray-very-lightest;
+    }
+
+    .table-secondary {
+        @apply bg-gray-lightest text-gray-darkest hover:bg-gray-light;
+    }
+
+    .table-head > td {
+        @apply font-semibold overflow-hidden;
+    }
+
+    .table-head > td, .table-primary > td, .table-secondary > td {
+        @apply p-3;
+    }
 }
