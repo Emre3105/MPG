@@ -1,6 +1,7 @@
 <template>
     <div class="card p-4 border-2 border-red-600 rounded bg-orange-400">
-        <h3 class="text-white">{{name}}</h3>
+        <i class="fa-solid fa-basketball"></i>
+        <h3 class="text-dark">{{name}}</h3>
     </div>
 </template>
 

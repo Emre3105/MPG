@@ -9,6 +9,7 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+        <script src="https://kit.fontawesome.com/032109fd0c.js" crossorigin="anonymous"></script>
         @vite('resources/css/app.css')
     </head>
     <body class="dark">
