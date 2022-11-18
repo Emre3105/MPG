@@ -6,13 +6,15 @@
             <hr>
             <div>
                 <!-- il faut que je fasse mon propre axios pour ajouter le csrf : https://pusher.com/tutorials/laravel-vue-axios/ -->
-                <form v-on:submit.prevent="formSubmit" method="post"> <!-- action="register" -->
-                    <label for="inputUsername">Nom d'utilisateur</label>
-                    <input class="form-text-input" type="text" placeholder="Nom d'utilisateur" id="inputUsername" v-model="form.username" name="username" required>
-
-                    <label for="inputPassword">Mot de passe</label>
-                    <input class="form-text-input" type="password" id="inputPassword" placeholder="Mot de passe" v-model="form.password" name="password" required>
-
+                <form v-on:submit.prevent="formSubmit" method="post" class="form"> <!-- action="register" -->
+                    <div class="form-group">
+                        <label for="inputUsername">Nom d'utilisateur</label>
+                        <input class="form-text-input" type="text" placeholder="Nom d'utilisateur" id="inputUsername" v-model="form.username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Mot de passe</label>
+                        <input class="form-text-input" type="password" id="inputPassword" placeholder="Mot de passe" v-model="form.password" name="password" required>
+                    </div>
                     <button class="btn-primary">Créer mon compte</button>
                 </form>
             </div>
@@ -26,9 +28,6 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            username: '',
-            password: '',
-            output: '',
             form: {
                 username: '',
                 password: ''
@@ -37,17 +36,16 @@ export default {
     },
     methods: {
         formSubmit(e) {
-            e.preventDefault();
-            let currentObj = this;
+            e.preventDefault()
             axios.post('/register', {
                 username: this.form.username,
                 password: this.form.password
             })
             .then(function (response) {
-                currentObj.output = response.data;
+                console.log(response.data)
             })
             .catch(function (error) {
-                currentObj.output = error;
+                console.log(error)
             });
         }
     }
