@@ -20,7 +20,7 @@
     }
 
     .card {
-        @apply bg-white shadow-md hover:shadow-lg rounded-lg w-64;
+        @apply bg-white shadow-md hover:shadow-lg rounded-lg;
     }
 
     .card > p {
