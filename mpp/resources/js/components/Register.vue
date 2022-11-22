@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <p class="text-2xl mb-4 w-min mx-auto">Création de compte</p>
+    <div class="w-full flex justify-center">
         <div class="card">
             <p>Création de compte</p>
             <hr>
@@ -15,7 +14,7 @@
                         <label for="inputPassword">Mot de passe</label>
                         <input class="form-text-input" type="password" id="inputPassword" placeholder="Mot de passe" v-model="form.password" name="password" required>
                     </div>
-                    <button class="btn-primary">Créer mon compte</button>
+                    <button class="btn-primary w-full">Créer mon compte</button>
                 </form>
             </div>
         </div>
