@@ -12,7 +12,7 @@
         <script src="https://kit.fontawesome.com/032109fd0c.js" crossorigin="anonymous"></script>
         @vite('resources/css/app.css')
     </head>
-    <body class="dark">
-        <div id="app"></div>
+    <body class="dark flex flex-col h-screen">
+        <div id="app" class="h-full"></div>
         @yield('js')
         @include('footer')
