@@ -14,7 +14,7 @@ import Star from "./Star.vue";
 export default {
     components: {Star},
     props: {
-        toggled: Boolean
+        name: String
     }
 }
 

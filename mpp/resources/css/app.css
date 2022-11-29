@@ -45,6 +45,14 @@
         color: black;
     }
 
+    .quitter{
+        float: right;
+    }
+
+    .quitter:hover{
+        color: red;
+    }
+
     .alert {
         @apply p-4 text-white text-lg rounded-b-lg;
     }
