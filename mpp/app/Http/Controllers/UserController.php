@@ -7,6 +7,10 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index () {
+        return view('login');
+    }
+
     public function create() {
         return view('register');
     }
