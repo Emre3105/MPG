@@ -7,7 +7,7 @@
         </div>
         <hr>
         <div class="flex flex-wrap m-auto w-3/4 h-3/4 place-content-center gap-x-[15%] gap-y-[10%] -mt-6">
-            <card-league v-for="name in names" :name="name"></card-league>
+            <card-league v-for="league in leagues" :key="league.id"></card-league>
         </div>
     </div>
 
@@ -25,9 +25,9 @@ export default {
         MenuRejoindre,
         CardLeague,
     },
+    props: ['leagues'],
     data() {
         return {
-            names: ["1", "2", "3", "4"],
             showModal: false
         }
     },
@@ -35,7 +35,7 @@ export default {
         closeModal(){
             this.showModal = false
         }
-    }
+    },
 }
 </script>
 

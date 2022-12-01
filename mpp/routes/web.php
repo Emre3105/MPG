@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LeagueController;
+use App\Models\League;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('accueil');
+    $leagues = League::all();
+    return view('accueil', ['leagues' => $leagues]);
 });
 
 Route::get('/template', function () {
     return view('template');
 });
+
+Route::get('/league/players',[LeagueController::class, 'showPlayers'])->name('league.players');
+
+Route::get('/leagues', [LeagueController::class, 'showLeagues'])->name('leagues');
+

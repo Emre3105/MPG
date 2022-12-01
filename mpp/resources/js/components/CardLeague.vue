@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <p>Ligue n°{{name}} <star></star></p>
+        <p>Yo{{league}} <star></star></p>
         <hr>
         <div>
             <p><i class="fa-solid fa-user"></i></p>
@@ -13,9 +13,7 @@ import Star from "./Star.vue";
 
 export default {
     components: {Star},
-    props: {
-        name: String
-    }
+    props: ['league']
 }
 
 </script>
