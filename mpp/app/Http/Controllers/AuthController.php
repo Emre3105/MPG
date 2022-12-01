@@ -17,12 +17,7 @@ class AuthController extends Controller
     }  
       
     public function login(Request $request)
-    {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-   
+    {   
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
@@ -49,7 +44,7 @@ class AuthController extends Controller
             return redirect()->intended('dashboard')
                         ->withSuccess('Signed in');
         }
-        
+
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
     
@@ -62,10 +57,6 @@ class AuthController extends Controller
     
     public function dashboard()
     {
-        if(Auth::check()){
-            return view('accueil');
-        }
-  
-        return redirect()->route('auth.login.index')->withSuccess('You are not allowed to access');
+        return view('accueil');
     }
 }
