@@ -24,7 +24,7 @@ Route::get('/template', function () {
     return view('template');
 });
 
-Route::get('dashboard', [AuthController::class, 'dashboard']);
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('connexion', [AuthController::class, 'index'])->name('auth.login.index');
 Route::post('connexion', [AuthController::class, 'login'])->name('auth.login');
 Route::get('inscription', [AuthController::class, 'create'])->name('auth.register.index');

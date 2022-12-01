@@ -12,7 +12,10 @@
         @vite('resources/css/app.css')
     </head>
     <body class="dark">
-        <div id="app" class="min-h-screen bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white">
+        @if(Auth::check())
+            @include('header')
+        @endif
+        <div id="app" class="min-h-screen bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white py-8 px-4">
             @yield('content')
         </div>
         @include('footer')
