@@ -1,4 +1,7 @@
 @extends('head')
 @section('content')
-@vite('resources/js/accueil.js')
+<p>Accueil</p>
+<a href="{{ route('auth.login.index')}}">
+    <button class="btn-primary">Me connecter</button>
+</a>
 @endsection
