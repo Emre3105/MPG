@@ -12,7 +12,11 @@
         <script src="https://kit.fontawesome.com/032109fd0c.js" crossorigin="anonymous"></script>
         @vite('resources/css/app.css')
     </head>
-    <body class="dark flex flex-col h-screen">
-        <div id="app" class="h-full"></div>
-        @yield('js')
+    <body class="dark">
+        @if(Auth::check())
+            @include('header')
+        @endif
+        <div id="app" class="min-h-screen bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white py-8 px-4">
+            @yield('content')
+        </div>
         @include('footer')

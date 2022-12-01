@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// https://laravel.com/docs/9.x/controllers
+// index (get), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
 Route::get('/', function () {
     return view('accueil');
-});
+})->middleware('auth');
 
 Route::get('/template', function () {
     return view('template');
 });
+
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('connexion', [AuthController::class, 'index'])->name('auth.login.index');
+Route::post('connexion', [AuthController::class, 'login'])->name('auth.login');
+Route::get('inscription', [AuthController::class, 'create'])->name('auth.register.index');
+Route::post('inscription', [AuthController::class, 'store'])->name('auth.register');
+Route::get('deconnexion', [AuthController::class, 'logout'])->name('auth.logout');
