@@ -18,7 +18,7 @@ use App\Http\Controllers\AuthController;
 // index (get), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
 Route::get('/', function () {
     return view('accueil');
-})->middleware('auth');
+});
 
 Route::get('/template', function () {
     return view('template');
