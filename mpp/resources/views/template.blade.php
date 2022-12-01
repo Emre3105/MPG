@@ -1,5 +1,5 @@
 @extends('head')
-@section('js')
+@section('content')
 <div class="w-full h-full bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white p-4 space-y-4">
     <div class="bg-white dark:bg-gray-dark border border-gray-dark fixed w-56 top-0 right-0 ml-auto p-4 rounded-md shadow-md">
         <div>
@@ -88,6 +88,21 @@
             </div>
             <div class="alert alert-danger">
                 <p>alert alert-danger</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="w-full">
+        <p class="text-2xl mb-4 w-min mx-auto">Texts</p>
+        <div class="space-y-4">
+            <div class="text-success">
+                <p>text-success</p>
+            </div>
+            <div class="text-warning">
+                <p>text-warning</p>
+            </div>
+            <div class="text-danger">
+                <p>text-danger</p>
             </div>
         </div>
     </div>

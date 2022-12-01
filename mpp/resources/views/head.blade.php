@@ -12,6 +12,7 @@
         @vite('resources/css/app.css')
     </head>
     <body class="dark">
-        <div id="app"></div>
-        @yield('js')
+        <div id="app" class="min-h-screen bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white">
+            @yield('content')
+        </div>
         @include('footer')

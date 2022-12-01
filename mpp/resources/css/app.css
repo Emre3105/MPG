@@ -51,6 +51,18 @@
         @apply bg-red dark:bg-red-dark;
     }
 
+    .text-success {
+        @apply text-xs text-green;
+    }
+
+    .text-warning {
+        @apply text-xs text-orange-light;
+    }
+
+    .text-danger {
+        @apply text-xs text-red;
+    }
+
     .form {
         @apply space-y-4;
     }

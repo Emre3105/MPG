@@ -16,14 +16,14 @@
                 <ul class="navbar-nav">
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('auth.login.index') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register-user') }}">Register</a>
+                        <a class="nav-link" href="{{ route('auth.register.index') }}">Register</a>
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('signout') }}">Logout</a>
+                        <a class="nav-link" href="{{ route('auth.logout') }}">Logout</a>
                     </li>
                     @endguest
                 </ul>
