@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserRequest;
 
 class AuthController extends Controller
 {
@@ -35,19 +36,20 @@ class AuthController extends Controller
         return view('auth.register');
     }
       
-    public function store(Request $request)
-    {  
-        $request->validate([
-            'username' => 'required|unique:users',
-            'password' => 'required|min:6',
-        ]);
-           
+    public function store(UserRequest $request)
+    {           
         $data = $request->all();
         $check = User::create([
-            'username' => $data['username'],
-            'password' => Hash::make($data['password'])
+            'username' => $request->get('username'),
+            'password' => Hash::make($request->get('password'))
         ]);
-         
+
+        $credentials = $request->only('username', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard')
+                        ->withSuccess('Signed in');
+        }
+        
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
     
