@@ -24,7 +24,7 @@
     }
 
     .card > p {
-        @apply text-gray-darkest bg-gray-very-lightest w-full p-4 rounded-t-lg text-lg;
+        @apply text-gray-darkest bg-gray-light w-full p-4 rounded-t-lg text-lg;
     }
 
     .card > hr {
@@ -33,6 +33,24 @@
 
     .card > div {
         @apply text-gray-darkest p-4;
+    }
+
+    .star {
+        display: inline;
+        float: right;
+        color: gold;
+    }
+
+    .star:hover {
+        color: black;
+    }
+
+    .quitter{
+        float: right;
+    }
+
+    .quitter:hover{
+        color: red;
     }
 
     .alert {
@@ -74,11 +92,11 @@
     .form-valid-input {
         @apply border-green text-green;
     }
-    
+
     .form-invalid-input {
         @apply border border-red text-red;
     }
-    
+
     .form-valid-feedback {
         @apply text-green text-xs;
     }
