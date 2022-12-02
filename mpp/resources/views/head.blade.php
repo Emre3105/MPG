@@ -11,6 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
         <script src="https://kit.fontawesome.com/032109fd0c.js" crossorigin="anonymous"></script>
         @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
     </head>
     <body class="dark">
         @if(Auth::check())
