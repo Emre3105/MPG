@@ -13,6 +13,9 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (auth()->check()) { //a user is logged in
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
     }  
       
@@ -28,6 +31,9 @@ class AuthController extends Controller
 
     public function create()
     {
+        if (auth()->check()) { //a user is logged in
+            return redirect()->route('dashboard');
+        }
         return view('auth.register');
     }
       

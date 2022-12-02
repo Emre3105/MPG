@@ -17,6 +17,9 @@ use App\Http\Controllers\AuthController;
 // https://laravel.com/docs/9.x/controllers
 // index (get), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
 Route::get('/', function () {
+    if (auth()->check()) { //a user is logged in
+        return redirect()->route('dashboard');
+    }
     return view('accueil');
 });
 
