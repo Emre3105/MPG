@@ -26,7 +26,7 @@ class AuthController extends Controller
             return redirect()->route('home')
                         ->withSuccess('Signed in');
         }
-        return redirect()->route('auth.login.index')->withSuccess('Login details are not valid');
+        return redirect()->route('auth.login.index')->withErrors(['incorrect' => 'Désolé, votre mot de passe est incorrect.']);
     }
 
     public function create()

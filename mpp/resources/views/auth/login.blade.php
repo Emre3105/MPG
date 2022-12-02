@@ -22,6 +22,9 @@
                     @endif
                 </div>
                 <button type="submit" class="btn-primary w-96">Se connecter</button>
+                @if ($errors->has('incorrect'))
+                    <p class="text-danger text-center text-base">{{ $errors->first('incorrect') }}</p>
+                @endif
             </form>
             <div class="mt-4 mb-2 flex items-center text-gray-lightest">
                 <hr class="w-1/2">
