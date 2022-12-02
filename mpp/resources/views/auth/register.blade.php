@@ -15,7 +15,10 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword">Mot de passe</label>
+                    <label for="inputPassword">
+                        Mot de passe
+                        <password-restriction></password-restriction>
+                    </label>
                     <input class="form-text-input" type="password" id="inputPassword" placeholder="Mot de passe" name="password" required>
                     @if ($errors->has('password'))
                         <span class="text-danger">{{ $errors->first('password') }}</span>
