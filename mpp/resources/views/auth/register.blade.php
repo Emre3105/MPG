@@ -21,6 +21,13 @@
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
                 </div>
+                <div class="form-group">
+                    <label for="inputConfirmPassword">Confirmation du mot de passe</label>
+                    <input class="form-text-input" type="password" id="inputConfirmPassword" placeholder="Confirmation du mot de passe" name="password_confirmation" required>
+                    @if ($errors->has('password_confirmation'))
+                        <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                    @endif
+                </div>
                 <button type="submit" class="btn-primary w-96">S'inscrire</button>
             </form>
             <div class="mt-4 mb-2 flex items-center text-gray-lightest">

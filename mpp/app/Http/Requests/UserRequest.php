@@ -34,6 +34,7 @@ class UserRequest extends FormRequest
                 ->symbols()
                 ->uncompromised(),
             ],
+            'password_confirmation' => 'required|same:password',
         ];
     }
 }
