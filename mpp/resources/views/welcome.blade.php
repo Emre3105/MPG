@@ -1,6 +1,6 @@
 @extends('head')
 @section('content')
-<p>Accueil</p>
+<p>Bienvenue</p>
 <a href="{{ route('auth.login.index')}}">
     <button class="btn-primary">Me connecter</button>
 </a>

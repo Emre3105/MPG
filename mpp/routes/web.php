@@ -20,8 +20,8 @@ Route::get('/', function () {
     if (auth()->check()) { //a user is logged in
         return redirect()->route('dashboard');
     }
-    return view('accueil');
-});
+    return view('welcome');
+})->name('welcome');
 
 Route::get('/template', function () {
     return view('template');
