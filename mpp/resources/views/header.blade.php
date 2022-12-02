@@ -5,7 +5,7 @@
         py-4 px-4 md:py-0
         text-lg"
     >
-        <div><a href="{{ route('dashboard') }}">Logo</a></div>
+        <div><a href="{{ route('home') }}">Logo</a></div>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             id="menu-button"
@@ -28,7 +28,7 @@
                 md:flex md:justify-between"
             >
                 <li>
-                    <a class="md:p-4 py-2 block hover:text-gray-darkest" href="{{ route('dashboard') }}">Accueil</a>
+                    <a class="md:p-4 py-2 block hover:text-gray-darkest" href="{{ route('home') }}">Accueil</a>
                 </li>
                 <li>
                     <a class="md:p-4 py-2 block hover:text-gray-darkest" href="{{ route('auth.logout') }}">Déconnexion</a>
