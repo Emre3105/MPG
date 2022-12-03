@@ -1,4 +1,5 @@
 @extends('head')
 @section('content')
-<dashboard></dashboard>
+    <p class="title text-center">Mes ligues</p>
+    <leagues :leagues="{{$leagues}}"></leagues>
 @endsection

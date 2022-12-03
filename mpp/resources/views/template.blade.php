@@ -42,6 +42,7 @@
                     <p class="text-3xl">text-3xl</p>
                     <p class="text-4xl">text-4xl</p>
                     <p class="text-5xl">text-5xl</p>
+                    <p class="title">title</p>
                 </div>
                 <hr>
                 <div class="w-full">

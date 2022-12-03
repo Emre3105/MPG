@@ -1,6 +1,15 @@
 <template>
-    <div class="card">
-        <p>Ligue n°{{name}} <star></star></p>
+    <div class="card w-full sm:w-80">
+        <p class="flex justify-between items-center">
+            <span>
+                {{name}}
+            </span>
+            <i
+                :class="favorite ? 'fa-solid' : 'fa-regular'"
+                class="fa-star text-gold hover:text-gold-dark cursor-pointer"
+                @click="favorite = !favorite"
+            ></i>
+        </p>
         <hr>
         <div>
             <p><i class="fa-solid fa-user"></i></p>
@@ -9,15 +18,16 @@
 </template>
 
 <script>
-import Star from "./Star.vue";
-
 export default {
-    components: {Star},
     props: {
         name: String
-    }
+    },  
+    data() {
+        return {
+            favorite: false
+        }
+    },
 }
-
 </script>
 
 <style>

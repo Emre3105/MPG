@@ -15,12 +15,12 @@ import { createApp } from 'vue'
 
 const app = createApp({})
 
-import Star from './components/Star.vue'
-import Dashboard from './components/Dashboard.vue'
+import Leagues from './components/Leagues.vue'
+import CardLeague from './components/CardLeague.vue'
 import PasswordRestriction from './components/PasswordRestriction.vue'
 
-app.component('star', Star)
-app.component('dashboard', Dashboard)
+app.component('leagues', Leagues)
+app.component('card-league', CardLeague)
 app.component('password-restriction', PasswordRestriction)
 
 /**
