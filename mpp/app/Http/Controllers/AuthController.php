@@ -8,6 +8,7 @@ use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
+use App\Models\League;
 
 class AuthController extends Controller
 {
@@ -63,6 +64,11 @@ class AuthController extends Controller
     
     public function home()
     {
-        return view('home');
+        $userId = Auth::user()->id;
+        $leagues = League::where('admin_id', $userId)
+            ->orderBy('status', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('home', ['leagues' => $leagues]);
     }
 }
