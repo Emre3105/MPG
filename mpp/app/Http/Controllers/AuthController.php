@@ -13,6 +13,9 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (auth()->check()) { //a user is logged in
+            return redirect()->route('home');
+        }
         return view('auth.login');
     }  
       
@@ -20,14 +23,17 @@ class AuthController extends Controller
     {   
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
+            return redirect()->route('home')
                         ->withSuccess('Signed in');
         }
-        return redirect()->route('auth.login.index')->withSuccess('Login details are not valid');
+        return redirect()->route('auth.login.index')->withErrors(['incorrect' => 'Désolé, votre mot de passe est incorrect.']);
     }
 
     public function create()
     {
+        if (auth()->check()) { //a user is logged in
+            return redirect()->route('home');
+        }
         return view('auth.register');
     }
       
@@ -41,11 +47,11 @@ class AuthController extends Controller
 
         $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
+            return redirect()->route('home')
                         ->withSuccess('Signed in');
         }
 
-        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect("home")->withSuccess('You have signed-in');
     }
     
     public function logout() {
@@ -55,8 +61,8 @@ class AuthController extends Controller
         return redirect()->route('auth.login.index');
     }
     
-    public function dashboard()
+    public function home()
     {
-        return view('dashboard');
+        return view('home');
     }
 }

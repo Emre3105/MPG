@@ -15,10 +15,20 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword">Mot de passe</label>
+                    <label for="inputPassword">
+                        Mot de passe
+                        <password-restriction></password-restriction>
+                    </label>
                     <input class="form-text-input" type="password" id="inputPassword" placeholder="Mot de passe" name="password" required>
                     @if ($errors->has('password'))
                         <span class="text-danger">{{ $errors->first('password') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="inputConfirmPassword">Confirmation du mot de passe</label>
+                    <input class="form-text-input" type="password" id="inputConfirmPassword" placeholder="Confirmation du mot de passe" name="password_confirmation" required>
+                    @if ($errors->has('password_confirmation'))
+                        <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                     @endif
                 </div>
                 <button type="submit" class="btn-primary w-96">S'inscrire</button>
