@@ -18,6 +18,7 @@
     <join-panel
         :shown="showJoinPanel"
         :recommended-leagues="data.recommendedLeagues"
+        :url-join="urlJoin"
         @close="showJoinPanel = !showJoinPanel"
     ></join-panel>
     <hr>
@@ -57,7 +58,8 @@ export default {
     },
     props: {
         urlBrowse: String,
-        urlFavorite: String
+        urlFavorite: String,
+        urlJoin: String
     },
     data() {
         return {

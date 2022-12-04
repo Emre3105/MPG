@@ -4,5 +4,6 @@
     <leagues
         url-browse="{{ route('league.browse') }}"
         url-favorite="{{ route('league.favorite') }}"
+        url-join="{{ route('league.join', ['code' => '0']) }}"
     ></leagues>
 @endsection

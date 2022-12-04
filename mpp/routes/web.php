@@ -40,3 +40,4 @@ Route::get('accueil', function() {
 
 Route::get('ligues', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');
 Route::post('ligues/favori', [LeagueController::class, 'favorite'])->name('league.favorite')->middleware('auth');
+Route::get('ligues/rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join')->middleware('auth');

@@ -57,4 +57,25 @@ class LeagueController extends Controller
         }
         return("Can't apply changes");
     }
+
+    public function join($code) {
+        $userId = Auth::user()->id;
+        $league = League::where('code', $code)->first();
+        if (!$league) {
+            return redirect()->route('league.browse')->withErrors(['not_exists' => "Désolé, cette ligue n'existe pas."]);
+        }
+        if ($league->current_players >= $league->max_players) {
+            return redirect()->route('league.browse')->withErrors(['limit' => "Désolé, cette ligue est pleine."]);
+        }
+        if (Player::where(['user_id' => $userId,'league_id' => $league->id])->exists()) {
+            return redirect()->route('league.browse')->withErrors(['already' => "Désolé, vous faites déjà partie de cette ligue."]);
+        }
+        Player::create([
+            'user_id' => $userId,
+            'league_id' => $league->id
+        ]);
+        $league->current_players = $league->current_players + 1;
+        $league->save();
+        return redirect()->route('home.index')->with('message', 'Bienvenue dans votre nouvelles ligue !');
+    }
 }

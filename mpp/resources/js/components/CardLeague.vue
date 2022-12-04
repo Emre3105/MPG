@@ -40,15 +40,17 @@ export default {
     },
     methods: {
         async makeFavorite() {
-            this.isFavorite = !this.isFavorite
-            this.loading = true
-            
-            await axios
-            .post(this.urlFavorite, {
-                league_id: this.id
-            })  
-
-            this.loading = false
+            if (!loading) {
+                this.isFavorite = !this.isFavorite
+                this.loading = true
+                
+                await axios
+                .post(this.urlFavorite, {
+                    league_id: this.id
+                })  
+    
+                this.loading = false
+            }
         }
     },
     mounted() {
