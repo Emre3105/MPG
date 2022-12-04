@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LeagueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +34,8 @@ Route::get('inscription', [AuthController::class, 'create'])->name('auth.registe
 Route::post('inscription', [AuthController::class, 'store'])->name('auth.register');
 Route::get('deconnexion', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::get('accueil', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
+Route::get('accueil', function() {
+    return view('home');
+})->name('home.index')->middleware('auth');
+
+Route::get('ligues', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');

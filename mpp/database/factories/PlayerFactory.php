@@ -20,7 +20,7 @@ class PlayerFactory extends Factory
             League::factory(1)->create();
         }
 
-        $userId = 17; //\App\Models\User::all()->random()->id
+        $userId = \App\Models\User::all()->random()->id;
         $randomLeague = League::whereNotIn(
             'id', DB::table('players')->select('league_id')->where('user_id', $userId)
         )->inRandomOrder()->first();
