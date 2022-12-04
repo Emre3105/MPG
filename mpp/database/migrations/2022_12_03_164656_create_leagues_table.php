@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
+            $table->integer('current_players')->default(1);
             $table->integer('max_players');
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('admin_id');

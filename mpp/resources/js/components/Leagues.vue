@@ -35,6 +35,8 @@
             <card-league
                 :id="league.id"
                 :name="league.name"
+                :current-players="league.current_players"
+                :max-players="league.max_players"
                 :can-be-favorite="true"
                 :favorite="league.favorite ? true : false"
                 :url-favorite="urlFavorite"

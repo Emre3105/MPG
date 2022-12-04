@@ -13,7 +13,10 @@
         </p>
         <hr>
         <div>
-            <p><i class="fa-solid fa-user"></i></p>
+            <p>
+                <i class="fa-solid fa-people-group"></i>
+                <span> : {{currentPlayers}}/{{maxPlayers}} Joueurs</span>
+            </p>
         </div>
     </div>
 </template>
@@ -23,6 +26,8 @@ export default {
     props: {
         id: Number,
         name: String,
+        currentPlayers: Number,
+        maxPlayers: Number,
         canBeFavorite: Boolean,
         favorite: Boolean,
         urlFavorite: String
