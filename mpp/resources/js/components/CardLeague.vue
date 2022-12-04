@@ -5,9 +5,10 @@
                 {{name}}
             </span>
             <i
-                :class="favorite ? 'fa-solid' : 'fa-regular'"
+                v-if="canBeFavorite"
+                :class="isFavorite ? 'fa-solid' : 'fa-regular'"
                 class="fa-star text-gold hover:text-gold-dark cursor-pointer"
-                @click="favorite = !favorite"
+                @click="makeFavorite"
             ></i>
         </p>
         <hr>
@@ -20,12 +21,33 @@
 <script>
 export default {
     props: {
-        name: String
+        id: Number,
+        name: String,
+        canBeFavorite: Boolean,
+        favorite: Boolean,
+        urlFavorite: String
     },  
     data() {
         return {
-            favorite: false
+            loading: false,
+            isFavorite: false
         }
+    },
+    methods: {
+        async makeFavorite() {
+            this.isFavorite = !this.isFavorite
+            this.loading = true
+            
+            await axios
+            .post(this.urlFavorite, {
+                league_id: this.id
+            })  
+
+            this.loading = false
+        }
+    },
+    mounted() {
+        this.isFavorite = this.favorite
     },
 }
 </script>

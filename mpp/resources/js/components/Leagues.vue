@@ -32,7 +32,13 @@
         grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4
     ">
         <div class="mb-4 flex justify-center" v-for="league in data.leagues">
-            <card-league :name="league.name"></card-league>
+            <card-league
+                :id="league.id"
+                :name="league.name"
+                :can-be-favorite="true"
+                :favorite="league.favorite ? true : false"
+                :url-favorite="urlFavorite"
+            ></card-league>
         </div>
     </div>
 </template>
@@ -48,7 +54,8 @@ export default {
         CardLeague,
     },
     props: {
-        url: String
+        urlBrowse: String,
+        urlFavorite: String
     },
     data() {
         return {
@@ -62,7 +69,7 @@ export default {
             this.loading = true
 
             await axios
-                .get(this.url)
+                .get(this.urlBrowse)
                 .then(response => (
                     this.data = response.data
                 ))

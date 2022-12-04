@@ -39,3 +39,4 @@ Route::get('accueil', function() {
 })->name('home.index')->middleware('auth');
 
 Route::get('ligues', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');
+Route::post('ligues/favori', [LeagueController::class, 'favorite'])->name('league.favorite')->middleware('auth');

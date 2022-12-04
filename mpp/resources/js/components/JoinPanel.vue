@@ -19,7 +19,13 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 mx-4 mt-4 -mb-4">
             <div class="mb-4 flex justify-center" v-for="league in recommendedLeagues">
-                <card-league :name="league.name"></card-league>
+                <card-league
+                    :id="league.id"
+                    :name="league.name"
+                    :can-be-favorite="false"
+                    :favorite="false"
+                    url-favorite=""
+                ></card-league>
             </div>
         </div>
     </div>
