@@ -17,6 +17,7 @@ class League extends Model
     protected $fillable = [
         'name',
         'code',
+        'current_players',
         'max_players',
         'admin_id'
     ];

@@ -23,11 +23,15 @@ class PlayerFactory extends Factory
         $userId = \App\Models\User::all()->random()->id;
         $randomLeague = League::whereNotIn(
             'id', DB::table('players')->select('league_id')->where('user_id', $userId)
-        )->inRandomOrder()->first();
+        )->inRandomOrder()->whereRaw('leagues.current_players < leagues.max_players')->first();
 
         if (!$randomLeague) {
             dd('cet utilisateur est présent dans toutes les ligues');
         }
+
+        $randomLeague->current_players = $randomLeague->current_players + 1;
+        $randomLeague->save();
+
         return [
             'user_id' => $userId,
             'league_id' => $randomLeague->id

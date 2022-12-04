@@ -26,7 +26,9 @@ class LeagueController extends Controller
             ->orderBy('leagues.created_at', 'desc')
             ->get();
 
-        $recommendableLeagues = League::whereNotIn('id', $leagues->pluck('id'))->get();
+        $recommendableLeagues = League::whereNotIn('id', $leagues->pluck('id'))
+            ->whereRaw('current_players < max_players')
+            ->get();
         $recommendedLeagues = array_filter([
             $recommendableLeagues->where('max_players', 2)->first(),
             $recommendableLeagues->where('max_players', 4)->first(),
