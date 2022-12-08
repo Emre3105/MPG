@@ -6,8 +6,8 @@
             </span>
             <i
                 v-if="canBeFavorite"
-                :class="isFavorite ? 'fa-solid' : 'fa-regular'"
-                class="fa-star text-gold hover:text-gold-dark cursor-pointer"
+                :class="[isFavorite ? 'fa-solid' : 'fa-regular', loading ? 'text-gray-lightest cursor-progress' : 'text-gold hover:text-gold-dark cursor-pointer']"
+                class="fa-star"
                 @click="makeFavorite"
             ></i>
         </p>
@@ -40,15 +40,15 @@ export default {
     },
     methods: {
         async makeFavorite() {
-            if (!loading) {
-                this.isFavorite = !this.isFavorite
+            if (!this.loading) {
                 this.loading = true
                 
                 await axios
                 .post(this.urlFavorite, {
                     league_id: this.id
-                })  
-    
+                })
+
+                this.isFavorite = !this.isFavorite
                 this.loading = false
             }
         }
