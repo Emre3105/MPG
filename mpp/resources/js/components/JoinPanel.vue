@@ -4,8 +4,8 @@
         transition-all duration-300 ease-out
         overflow-hidden
     ">
-        <hr class="-mx-4 mt-4" v-if="shown">
-        <div :class="shown ? 'mt-4' : 'mt-8'" class="flex sm:items-center mt-4">
+        <hr class="-mx-4 mt-8" v-if="shown">
+        <div :class="shown ? 'mt-4' : 'mt-12'" class="flex sm:items-center">
             <form class="hidden sm:block" @submit.prevent="join">
                 <span class="text-lg">J'ai un code : </span>
                 <input class="form-text-input ml-0.5" type="text" placeholder="Dx2mA63E" v-model="code" required>
@@ -43,7 +43,7 @@ export default {
     props: {
         shown: Boolean,
         urlJoin: String,
-        recommendedLeagues: Array
+        recommendedLeagues: Object
     },
     data() {
         return {
@@ -60,7 +60,6 @@ export default {
                 this.loading = true
                 await axios
                 .post(this.urlJoin.slice(0, -1) + this.code)
-                this.$emit('reload')
                 this.code = ""
                 this.loading = false
             }

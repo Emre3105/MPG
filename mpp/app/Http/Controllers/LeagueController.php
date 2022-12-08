@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Hash;
-use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\League;
 use App\Models\Player;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\LeagueStoreRequest;
+use Illuminate\Support\Str;
 
 class LeagueController extends Controller
 {
@@ -77,5 +77,22 @@ class LeagueController extends Controller
         $league->current_players = $league->current_players + 1;
         $league->save();
         return redirect()->route('home.index')->with('message', 'Bienvenue dans votre nouvelles ligue !');
+    }
+
+    public function store(LeagueStoreRequest $request) {
+        $league = League::create([
+            'name' => $request->name,
+            'code' => Str::random(8),
+            'current_players' => 1,
+            'max_players' => $request->max_players,
+            'admin_id' => Auth::user()->id
+        ]);
+
+        $player = Player::create([
+            'user_id' => Auth::user()->id,
+            'league_id' => $league->id
+        ]);
+
+        return redirect()->route('home.index')->with('message', 'Votre ligue a bien été créée');
     }
 }

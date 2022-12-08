@@ -6,11 +6,11 @@
         space-y-4 sm:space-y-0
         mt-4 sm:mt-10 sm:mx-32
     ">
-        <button class="btn-primary w-full sm:w-32" @click="loading ? '' : showJoinPanel = !showJoinPanel">
+        <button class="btn-primary w-full sm:w-32" @click="switchOnJoinPanel">
             Rejoindre
             <i class="fa-solid fa-magnifying-glass-arrow-right"></i>
         </button>
-        <button class="btn-primary w-full sm:w-32">
+        <button class="btn-primary w-full sm:w-32" @click="switchOnStorePanel">
             Créer
             <i class="fa-solid fa-circle-plus"></i>
         </button>
@@ -20,8 +20,12 @@
         :recommended-leagues="data.recommendedLeagues"
         :url-join="urlJoin"
         @close="showJoinPanel = !showJoinPanel"
-        @reload="load"
     ></join-panel>
+    <store-panel
+        :shown="showStorePanel"
+        :url-store="urlStore"
+        @close="(showStorePanel = !showStorePanel)"
+    ></store-panel>
     <hr>
     <div v-if="loading" class="flex justify-center mt-10">
         <svg aria-hidden="true" class="mr-2 w-8 h-8 text-gray animate-spin fill-cyan" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,21 +54,25 @@
 <script>
 import CardLeague from './CardLeague.vue'
 import JoinPanel from "./JoinPanel.vue"
+import StorePanel from "./StorePanel.vue"
 import 'axios'
 
 export default {
     components: {
         JoinPanel,
+        StorePanel,
         CardLeague,
     },
     props: {
         urlBrowse: String,
         urlFavorite: String,
-        urlJoin: String
+        urlJoin: String,
+        urlStore: String
     },
     data() {
         return {
             showJoinPanel: false,
+            showStorePanel: false,
             data: [],
             loading: false
         }
@@ -80,6 +88,18 @@ export default {
                 ))
             
             this.loading = false
+        },
+        switchOnJoinPanel () {
+            if (!this.loading) {
+                this.showStorePanel = false
+                this.showJoinPanel = !this.showJoinPanel
+            }
+        },
+        switchOnStorePanel () {
+            if (!this.loading) {
+                this.showJoinPanel = false
+                this.showStorePanel = !this.showStorePanel
+            }
         }
     },
     mounted() {

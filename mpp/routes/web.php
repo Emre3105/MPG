@@ -38,6 +38,11 @@ Route::get('accueil', function() {
     return view('home');
 })->name('home.index')->middleware('auth');
 
-Route::get('ligues', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');
-Route::post('ligues/favori', [LeagueController::class, 'favorite'])->name('league.favorite')->middleware('auth');
-Route::post('ligues/rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join')->middleware('auth');
+
+Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
+{
+    Route::get('/', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');
+    Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite')->middleware('auth');
+    Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join')->middleware('auth');
+    Route::post('creer', [LeagueController::class, 'store'])->name('league.store')->middleware('auth');
+});
