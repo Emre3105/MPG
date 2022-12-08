@@ -27,18 +27,30 @@
                     :can-be-favorite="false"
                     :favorite="false"
                     url-favorite=""
+                    class="cursor-pointer"
+                    @click="showJoinModal(league.code, league.name)"
                 ></card-league>
             </div>
         </div>
     </div>
+    <join-modal
+        v-if="joinModalShown"
+        :code="joinModalCode"
+        :name="joinModalName"
+        :url-join="(urlJoin.slice(0, -1) + joinModalCode)"
+        @cancel="joinModalShown = false"
+    ></join-modal>
 </template>
 
 <script>
 import CardLeague from './CardLeague.vue'
+import JoinModal from './JoinModal.vue'
 
 export default {
+    emits: ['close'],
     components:{
-        CardLeague
+        CardLeague,
+        JoinModal
     },
     props: {
         shown: Boolean,
@@ -48,6 +60,9 @@ export default {
     data() {
         return {
             code: '',
+            joinModalShown: false,
+            joinModalCode: '',
+            joinModalName: '',
             loading: false
         }
     },
@@ -63,15 +78,13 @@ export default {
                 this.code = ""
                 this.loading = false
             }
+        },
+        showJoinModal (code, name) {
+            this.joinModalCode = code
+            this.joinModalName = name
+            this.joinModalShown = true
         }
-    },
-    mounted() {
-        // document.addEventListener('keyup', (e) => {
-        //     if (e.key === "Escape" && this.shown) {
-        //         this.hide()
-        //     }
-        // })
-    },
+    }
 }
 </script>
 

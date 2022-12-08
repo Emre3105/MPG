@@ -28,6 +28,7 @@
 
 <script>
 export default {
+    emits: ['close'],
     props: {
         shown: Boolean,
         urlStore: String,
