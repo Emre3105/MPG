@@ -23,7 +23,7 @@ class LeagueController extends Controller
             ->where('users.id', $userId)
             ->orderBy('players.favorite', 'desc')
             ->orderBy('leagues.status', 'asc')
-            ->orderBy('leagues.created_at', 'desc')
+            ->orderBy('leagues.name', 'asc')
             ->get();
 
         $recommendableLeagues = League::whereNotIn('id', $leagues->pluck('id'))
