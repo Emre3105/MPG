@@ -77,6 +77,8 @@
                         <button class="btn-secondary">btn-secondary</button>
                         <button class="btn-success">btn-success</button>
                         <button class="btn-danger">btn-danger</button>
+                        <button class="btn-loading">btn-loading</button>
+                        <button class="btn-disabled">btn-disabled</button>
                     </div>
                 </div>
                 <hr>
