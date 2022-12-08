@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LeagueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\AuthController;
 // index (get), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
 Route::get('/', function () {
     if (auth()->check()) { //a user is logged in
-        return redirect()->route('home');
+        return redirect()->route('home.index');
     }
     return view('welcome');
 })->name('welcome');
@@ -27,9 +28,21 @@ Route::get('/template', function () {
     return view('template');
 });
 
-Route::get('accueil', [AuthController::class, 'home'])->name('home')->middleware('auth');
 Route::get('connexion', [AuthController::class, 'index'])->name('auth.login.index');
 Route::post('connexion', [AuthController::class, 'login'])->name('auth.login');
 Route::get('inscription', [AuthController::class, 'create'])->name('auth.register.index');
 Route::post('inscription', [AuthController::class, 'store'])->name('auth.register');
 Route::get('deconnexion', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::get('accueil', function() {
+    return view('home');
+})->name('home.index')->middleware('auth');
+
+
+Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
+{
+    Route::get('/', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');
+    Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite')->middleware('auth');
+    Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join')->middleware('auth');
+    Route::post('creer', [LeagueController::class, 'store'])->name('league.store')->middleware('auth');
+});

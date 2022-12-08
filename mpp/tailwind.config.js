@@ -27,8 +27,14 @@ module.exports = {
       'orange-light': '#FB923C',
       'orange': '#F97316',
       'orange-dark': '#EA580C',
+      'gold': '#FFD700',
+      'gold-dark': '#EEBC1D'
     },
     extend: {
+      transitionProperty: {
+        'height': 'height',
+        'max-height': 'max-height'
+      }
     },
   },
   plugins: [],
