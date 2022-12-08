@@ -20,6 +20,7 @@
         :recommended-leagues="data.recommendedLeagues"
         :url-join="urlJoin"
         @close="showJoinPanel = !showJoinPanel"
+        @reload="load"
     ></join-panel>
     <hr>
     <div v-if="loading" class="flex justify-center mt-10">
