@@ -10,9 +10,9 @@
                 <p class="text-2xl">Êtes-vous certain(e) de vouloir rejoindre la ligue {{name}} ?</p>
                 <i class="fa-solid fa-xmark text-lg cursor-pointer h-min" @click="cancel"></i>
             </div>
-            <div class="flex justify-around mt-8">
-                <button class="btn-secondary w-32" :class="loading ? 'cursor-not-allowed' : ''" @click="cancel">Annuler</button>
-                <button class="btn-primary w-32" :class="loading ? 'cursor-progress' : ''" @click="join">Rejoindre</button>
+            <div class="flex flex-col sm:flex-row justify-around mt-4 sm:mt-8">
+                <button class="btn-secondary w-full sm:w-32 mb-4 sm:mb-0" :class="loading ? 'cursor-not-allowed' : ''" @click="cancel">Annuler</button>
+                <button class="btn-primary w-full sm:w-32" :class="loading ? 'cursor-progress' : ''" @click="join">Rejoindre</button>
             </div>
         </div>
     </div>
