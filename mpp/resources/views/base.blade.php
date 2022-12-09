@@ -1,5 +1,10 @@
 @extends('head')
 @section('base')
+    @if (Auth::check())
+        <navbar :auth="true"></navbar>
+    @else
+        <navbar :auth="false"></navbar>
+    @endif
     <div class="min-h-screen py-8 px-4">
         @yield('content')
     </div>
