@@ -1,4 +1,4 @@
-@extends('head')
+@extends('base')
 @section('content')
 <div class="w-full flex justify-center">
     <div class="card">

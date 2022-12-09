@@ -1,4 +1,4 @@
-@extends('head')
+@extends('base')
 @section('content')
 <p>Bienvenue</p>
 <a href="{{ route('auth.login.index')}}">
