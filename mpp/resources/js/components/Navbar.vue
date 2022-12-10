@@ -26,6 +26,7 @@
                     </g>
                 </svg>
             </a>
+            <dark-mode-toggler class="md:hidden"></dark-mode-toggler>
             <i @click="toggleNavbar" class="
                 fas fa-bars
                 cursor-pointer
@@ -35,11 +36,12 @@
             ></i>
         </div>
         <!-- menu à afficher quand l'écran est grand -->
-        <div class="hidden md:flex mr-2">
+        <div class="hidden md:flex">
             <a v-for="item in items" :href="item.url" class="px-3 py-2 hover:text-gray-lightest">
                 <i :class="item.icon"></i>
                 <span class="ml-2">{{item.name}}</span>
             </a>
+            <dark-mode-toggler class="mx-2"></dark-mode-toggler>
         </div>
         <!-- menu à afficher quand l'écran est petit -->
         <div
@@ -55,22 +57,27 @@
 </template>
   
 <script>
-    export default {
-        name: "navbar",
-        props: {
-            urlHome: String,
-            items: Array
-        },
-        data() {
-            return {
-                showMenu: false
-            }
-        },
-        methods: {
-            toggleNavbar: function(){
-                this.showMenu = !this.showMenu;
-            }
+import DarkModeToggler from './DarkModeToggler.vue'
+
+export default {
+    name: "navbar",
+    components: {
+        DarkModeToggler
+    },
+    props: {
+        urlHome: String,
+        items: Array
+    },
+    data() {
+        return {
+            showMenu: false
+        }
+    },
+    methods: {
+        toggleNavbar: function(){
+            this.showMenu = !this.showMenu;
         }
     }
+}
 </script>
   

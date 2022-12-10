@@ -18,7 +18,12 @@
                     <div>
                         <label for="dark-mode-toggle" class="inline-flex relative items-center cursor-pointer">
                             <input type="checkbox" id="dark-mode-toggle" class="sr-only peer" checked="" onclick="toggleDarkMode()">
-                            <div class="w-11 h-6 bg-cyan none peer-focus:ring-4 peer-focus:ring-cyan dark:peer-focus:ring-cyan-dark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-light after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-dark"></div>
+                            <div class="
+                                w-11 h-6 bg-white peer-checked:bg-cyan border border-gray hover:border-gray-dark peer-checked:border-0 rounded-full
+                                after:absolute after:top-[2px] after:left-[3px] peer-checked:after:left-[1px] after:h-5 after:w-5
+                                after:bg-cyan peer-checked:after:bg-white after:rounded-full
+                                peer-checked:after:translate-x-full after:transition-all"
+                            ></div>
                             <span class="ml-3 text-sm font-medium">Mode sombre</span>
                         </label>
                     </div>
@@ -226,12 +231,22 @@
                         <legend>Switches</legend>
                         <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
                             <input type="checkbox" value="" id="default-toggle" class="sr-only peer">
-                            <div class="w-11 h-6 bg-cyan peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan dark:peer-focus:ring-cyan-dark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-light after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-dark"></div>
+                            <div class="
+                                w-11 h-6 bg-white peer-checked:bg-cyan border border-gray hover:border-gray-dark peer-checked:border-0 rounded-full
+                                after:absolute after:top-[2px] after:left-[3px] peer-checked:after:left-[1px] after:h-5 after:w-5
+                                after:bg-cyan peer-checked:after:bg-white after:rounded-full
+                                peer-checked:after:translate-x-full after:transition-all"
+                            ></div>
                             <span class="ml-3 text-sm font-medium">Default switch checkbox input</span>
                         </label>
                         <label for="checked-toggle" class="inline-flex relative items-center cursor-pointer">
                             <input type="checkbox" value="" id="checked-toggle" class="sr-only peer" checked="">
-                            <div class="w-11 h-6 bg-cyan peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-cyan dark:peer-focus:ring-cyan-dark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-light after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-dark"></div>
+                            <div class="
+                                w-11 h-6 bg-white peer-checked:bg-cyan border border-gray hover:border-gray-dark peer-checked:border-0 rounded-full
+                                after:absolute after:top-[2px] after:left-[3px] peer-checked:after:left-[1px] after:h-5 after:w-5
+                                after:bg-cyan peer-checked:after:bg-white after:rounded-full
+                                peer-checked:after:translate-x-full after:transition-all"
+                            ></div>
                             <span class="ml-3 text-sm font-medium">Checked switch checkbox input</span>
                         </label>
                     </div>
