@@ -1,6 +1,11 @@
 @extends('head')
 @section('base')
 <?php
+if (session('darkmode') != null && session('darkmode')) {
+    $darkMode = true;
+} else {
+    $darkMode = false;
+}
 if (Auth::check()) {
     $urlHome = route('home.index');
     $items = array(
@@ -29,7 +34,7 @@ if (Auth::check()) {
     );
 }
 ?>
-    <navbar url-home="{{$urlHome}}" :items="{{ json_encode($items) }}"></navbar>
+    <navbar url-home="{{$urlHome}}" :items="{{ json_encode($items) }}" url-dark-mode="{{route('darkmode')}}" :dark-mode="{{ json_encode($darkMode) }}"></navbar>
     <div class="min-h-screen py-8 px-4">
         @yield('content')
     </div>

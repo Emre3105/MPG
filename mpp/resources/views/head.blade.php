@@ -13,7 +13,13 @@
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
     </head>
-    <body class="dark">
+    <body class="
+        <?php
+            if (session('darkmode') != null && session('darkmode')) {
+                echo('dark');
+            }
+        ?>
+    ">
         <div id="app" class="bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white flex flex-col justify-between">
             @yield('base')
         </div>

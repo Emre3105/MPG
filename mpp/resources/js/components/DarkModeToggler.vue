@@ -2,7 +2,8 @@
     <div class="flex items-center space-x-2.5">
         <i class="fa-regular fa-sun"></i>
         <label :for="id" class="inline-flex relative items-center cursor-pointer">
-            <input type="checkbox" :id="id" class="sr-only peer" checked="" @click="toggleDarkMode">
+            <input v-if="darkMode" type="checkbox" :id="id" class="sr-only peer" checked="" @click="toggleDarkMode">
+            <input v-else type="checkbox" :id="id" class="sr-only peer" @click="toggleDarkMode">
             <div class="
                 w-11 h-6 bg-white peer-checked:bg-cyan hover:peer-checked:bg-cyan-dark border border-gray hover:border-gray-dark peer-checked:border-0 rounded-full
                 after:absolute after:top-[2px] after:left-[3px] peer-checked:after:left-[1px] after:h-5 after:w-5
@@ -16,15 +17,25 @@
 
 <script>
 export default {
+    props: {
+        urlDarkMode: String,
+        darkMode: Boolean
+    },
     data() {
         return {
             show: false,
-            id: null
+            id: null,
+            loading: false
         }
     },
     methods: {
-        toggleDarkMode () {
+        async toggleDarkMode () {
             document.getElementsByTagName('body')[0].classList.toggle('dark')
+            if (!this.loading) {
+                this.loading = true
+                await axios.post(this.urlDarkMode)
+                this.loading = false
+            }
         }
     },
     mounted() {
