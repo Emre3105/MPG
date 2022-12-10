@@ -16,9 +16,11 @@ import { createApp } from 'vue'
 const app = createApp({})
 
 import Leagues from './components/Leagues.vue'
+import Navbar from './components/Navbar.vue'
 import PasswordRestriction from './components/PasswordRestriction.vue'
 
 app.component('leagues', Leagues)
+app.component('navbar', Navbar)
 app.component('password-restriction', PasswordRestriction)
 
 /**

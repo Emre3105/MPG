@@ -14,10 +14,8 @@
         @vite('resources/js/app.js')
     </head>
     <body class="dark">
-        @if(Auth::check())
-            @include('header')
-        @endif
-        <div id="app" class="min-h-screen bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white py-8 px-4">
-            @yield('content')
+        <div id="app" class="bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white flex flex-col justify-between">
+            @yield('base')
         </div>
-        @include('footer')
+    </body>
+</html>

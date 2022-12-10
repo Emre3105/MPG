@@ -1,4 +1,4 @@
-@extends('head')
+@extends('base')
 @section('content')
     <p class="title text-center">Mes ligues</p>
     <leagues
