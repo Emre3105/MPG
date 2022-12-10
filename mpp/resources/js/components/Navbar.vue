@@ -1,6 +1,6 @@
 <template>
-    <nav :class="showMenu ? 'md:pb-1' : 'pb-1'" class="flex flex-wrap items-center justify-between px-2 pt-1 bg-gray-darkest border-b border-white">
-        <div class="w-full relative flex justify-between md:w-auto ml-2 items-center mb-1 md:mb-0">
+    <nav class="flex flex-wrap items-center justify-between bg-gray-darkest border-b border-white text-lg font-bold">
+        <div class="w-full relative flex justify-between md:w-auto ml-2 my-1 items-center px-2">
             <a :href="auth ? urlLeagues : urlHome">
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                     width="192.000000pt" height="184.000000pt"
@@ -34,29 +34,35 @@
                 md:hidden"
             ></i>
         </div>
-        <div :class="{'hidden': !showMenu, 'flex': showMenu}" class="
-            md:flex flex-col md:flex-row
-            w-full md:w-auto
-        ">
-            <a v-if="!auth" class="px-3 py-2 text-lg font-bold hover:text-gray-lightest" :href="urlHome">
+        <!-- menu à afficher quand l'écran est grand -->
+        <div class="hidden md:flex">
+            <a v-if="!auth" :href="urlHome" class="px-3 py-2 hover:text-gray-lightest">
                 <i class="fa-solid fa-house"></i>
                 <span class="ml-2">Accueil</span>
             </a>
-            <a v-if="auth" :href="urlLeagues" class="
-                md:px-3 py-3 md:py-2 -mx-2 md:mx-0
-                text-lg font-bold md:hover:text-gray-lightest text-center
-                border-t border-white md:border-t-0
-                hover:bg-white hover:bg-opacity-5 md:hover:bg-gray-darkest"
-            >
+            <a v-if="auth" :href="urlLeagues" class="px-3 py-2 hover:text-gray-lightest">
                 <i class="fa-solid fa-table"></i>
                 <span class="ml-2">Mes ligues</span>
             </a>
-            <a v-if="auth" :href="urlLogout" class="
-                md:px-3 py-3 md:py-2 -mx-2 md:mx-0 
-                text-lg font-bold md:hover:text-gray-lightest text-center
-                border-t border-white md:border-t-0
-                hover:bg-white hover:bg-opacity-5 md:hover:bg-gray-darkest"
-            >
+            <a v-if="auth" :href="urlLogout" class="px-3 py-2 hover:text-gray-lightest">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="ml-2">Déconnexion</span>
+            </a>
+        </div>
+        <!-- menu à afficher quand l'écran est petit -->
+        <div
+            :class="showMenu ? 'max-h-28' : 'max-h-0 overflow-hidden'"
+            class="flex flex-col md:hidden w-full transition-all duration-200 ease-out"
+        >
+            <a v-if="!auth" :href="urlHome" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
+                <i class="fa-solid fa-house"></i>
+                <span class="ml-2">Accueil</span>
+            </a>
+            <a v-if="auth" :href="urlLeagues" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
+                <i class="fa-solid fa-table"></i>
+                <span class="ml-2">Mes ligues</span>
+            </a>
+            <a v-if="auth" :href="urlLogout" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 <span class="ml-2">Déconnexion</span>
             </a>
