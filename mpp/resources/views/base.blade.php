@@ -1,9 +1,19 @@
 @extends('head')
 @section('base')
     @if (Auth::check())
-        <navbar :auth="true"></navbar>
+        <navbar
+            :auth="true"
+            url-home="{{route('welcome')}}"
+            url-leagues="{{route('home.index')}}"
+            url-logout="{{route('auth.logout')}}"
+        ></navbar>
     @else
-        <navbar :auth="false"></navbar>
+        <navbar
+            :auth="false"
+            url-home="{{ route('welcome') }}"
+            url-leagues="{{route('home.index')}}"
+            url-logout="{{route('auth.logout')}}"
+        ></navbar>
     @endif
     <div class="min-h-screen py-8 px-4">
         @yield('content')
