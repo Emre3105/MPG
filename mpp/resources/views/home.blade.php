@@ -1,5 +1,6 @@
 @extends('base')
 @section('content')
+test
     <p class="title text-center">Mes ligues</p>
     <leagues
         url-browse="{{ route('league.browse') }}"
