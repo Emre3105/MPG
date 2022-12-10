@@ -25,10 +25,6 @@ if (Auth::check()) {
             "url" => route('auth.login.index'),
             "icon" => "fa-solid fa-arrow-right-to-bracket",
             "name" => "Connexion"
-        ), (object) array(
-            "url" => route('auth.register.index'),
-            "icon" => "fa-solid fa-user-plus",
-            "name" => "Inscription"
         )
     );
 }
