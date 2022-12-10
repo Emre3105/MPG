@@ -8,7 +8,7 @@
         <div class="w-96 bg-white rounded text-gray-dark p-4 mx-4">
             <div class="flex space-x-1">
                 <p class="text-2xl">Êtes-vous certain(e) de vouloir rejoindre la ligue {{name}} ?</p>
-                <i class="fa-solid fa-xmark text-lg cursor-pointer h-min" @click="cancel"></i>
+                <i class="fa-solid fa-xmark text-lg cursor-pointer h-min hover:text-gray-dark" @click="cancel"></i>
             </div>
             <div class="flex flex-col sm:flex-row justify-around mt-4 sm:mt-8">
                 <button class="btn-secondary w-full sm:w-32 mb-4 sm:mb-0" :class="loading ? 'cursor-not-allowed' : ''" @click="cancel">Annuler</button>

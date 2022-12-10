@@ -36,11 +36,11 @@
     }
 
     .card {
-        @apply bg-white shadow-md hover:shadow-lg rounded-lg;
+        @apply bg-white shadow-md hover:shadow-lg rounded-lg cursor-pointer;
     }
 
     .card > p {
-        @apply text-gray-darkest bg-gray-light w-full p-4 rounded-t-lg text-lg;
+        @apply text-gray-darkest bg-gray-very-lightest w-full p-4 rounded-t-lg text-lg;
     }
 
     .card > hr {

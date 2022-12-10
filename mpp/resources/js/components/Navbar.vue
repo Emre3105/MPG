@@ -1,12 +1,12 @@
 <template>
     <div class="fixed w-full">
-        <nav class="flex flex-wrap items-center justify-between bg-gray-darkest border-b border-white text-lg font-bold">
+        <nav class="flex flex-wrap items-center justify-between bg-gray-very-lightest dark:bg-gray-darkest border-b border-white text-lg font-bold">
             <div class="w-full relative flex justify-between md:w-auto ml-2 my-1 items-center px-2">
                 <a :href="urlHome">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                         width="192.000000pt" height="184.000000pt"
                         viewBox="0 0 192.000000 184.000000" preserveAspectRatio="xMidYMid meet"
-                        class="w-14 h-14 fill-white hover:fill-gray-lightest"
+                        class="w-14 h-14 fill-gray-darkest dark:fill-white hover:fill-gray-dark dark:hover:fill-gray-very-lightest"
                     >
                         <g transform="translate(0.000000,184.000000) scale(0.100000,-0.100000)" stroke="none">
                             <path d="M803 1707 l-162 -122 -1 -736 0 -735 70 -47 c39 -26 77 -47 85 -47
@@ -31,14 +31,14 @@
                 <i @click="toggleNavbar" class="
                     fas fa-bars
                     cursor-pointer
-                    text-3xl hover:text-gray-lightest
+                    text-3xl hover:text-gray-dark dark:hover:text-gray-lightest
                     px-2 h-min
                     md:hidden"
                 ></i>
             </div>
             <!-- menu à afficher quand l'écran est grand -->
             <div class="hidden md:flex">
-                <a v-for="item in items" :href="item.url" class="px-3 py-2 hover:text-gray-lightest">
+                <a v-for="item in items" :href="item.url" class="px-3 py-2 hover:text-gray-dark dark:hover:text-gray-very-lightest">
                     <i :class="item.icon"></i>
                     <span class="ml-2">{{item.name}}</span>
                 </a>
@@ -47,9 +47,9 @@
             <!-- menu à afficher quand l'écran est petit -->
             <div
                 :class="showMenu ? 'max-h-28' : 'max-h-0 overflow-hidden'"
-                class="flex flex-col md:hidden w-full transition-all duration-200 ease-out"
+                class="flex flex-col md:hidden w-full transition-all duration-200 ease-out shadow-lg"
             >
-                <a v-for="item in items" :href="item.url" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
+                <a v-for="item in items" :href="item.url" class="py-3 text-center border-t border-white hover:bg-black dark:hover:bg-white hover:bg-opacity-5 dark:hover:bg-opacity-5">
                     <i :class="item.icon"></i>
                     <span class="ml-2">{{item.name}}</span>
                 </a>
