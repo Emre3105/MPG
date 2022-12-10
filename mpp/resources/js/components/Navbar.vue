@@ -1,7 +1,7 @@
 <template>
     <nav class="flex flex-wrap items-center justify-between bg-gray-darkest border-b border-white text-lg font-bold">
         <div class="w-full relative flex justify-between md:w-auto ml-2 my-1 items-center px-2">
-            <a :href="auth ? urlLeagues : urlHome">
+            <a :href="urlHome">
                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                     width="192.000000pt" height="184.000000pt"
                     viewBox="0 0 192.000000 184.000000" preserveAspectRatio="xMidYMid meet"
@@ -35,18 +35,10 @@
             ></i>
         </div>
         <!-- menu à afficher quand l'écran est grand -->
-        <div class="hidden md:flex">
-            <a v-if="!auth" :href="urlHome" class="px-3 py-2 hover:text-gray-lightest">
-                <i class="fa-solid fa-house"></i>
-                <span class="ml-2">Accueil</span>
-            </a>
-            <a v-if="auth" :href="urlLeagues" class="px-3 py-2 hover:text-gray-lightest">
-                <i class="fa-solid fa-table"></i>
-                <span class="ml-2">Mes ligues</span>
-            </a>
-            <a v-if="auth" :href="urlLogout" class="px-3 py-2 hover:text-gray-lightest">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span class="ml-2">Déconnexion</span>
+        <div class="hidden md:flex mr-2">
+            <a v-for="item in items" :href="item.url" class="px-3 py-2 hover:text-gray-lightest">
+                <i :class="item.icon"></i>
+                <span class="ml-2">{{item.name}}</span>
             </a>
         </div>
         <!-- menu à afficher quand l'écran est petit -->
@@ -54,41 +46,31 @@
             :class="showMenu ? 'max-h-28' : 'max-h-0 overflow-hidden'"
             class="flex flex-col md:hidden w-full transition-all duration-200 ease-out"
         >
-            <a v-if="!auth" :href="urlHome" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
-                <i class="fa-solid fa-house"></i>
-                <span class="ml-2">Accueil</span>
-            </a>
-            <a v-if="auth" :href="urlLeagues" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
-                <i class="fa-solid fa-table"></i>
-                <span class="ml-2">Mes ligues</span>
-            </a>
-            <a v-if="auth" :href="urlLogout" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span class="ml-2">Déconnexion</span>
+            <a v-for="item in items" :href="item.url" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
+                <i :class="item.icon"></i>
+                <span class="ml-2">{{item.name}}</span>
             </a>
         </div>
     </nav>
-  </template>
+</template>
   
-  <script>
-  export default {
-    name: "navbar",
-    props: {
-        auth: Boolean,
-        urlHome: String,
-        urlLeagues: String,
-        urlLogout: String
-    },
-    data() {
-        return {
-            showMenu: false
-        }
-    },
-    methods: {
-        toggleNavbar: function(){
-            this.showMenu = !this.showMenu;
+<script>
+    export default {
+        name: "navbar",
+        props: {
+            urlHome: String,
+            items: Array
+        },
+        data() {
+            return {
+                showMenu: false
+            }
+        },
+        methods: {
+            toggleNavbar: function(){
+                this.showMenu = !this.showMenu;
+            }
         }
     }
-  }
-  </script>
+</script>
   

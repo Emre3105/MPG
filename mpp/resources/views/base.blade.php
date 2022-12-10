@@ -1,20 +1,31 @@
 @extends('head')
 @section('base')
-    @if (Auth::check())
-        <navbar
-            :auth="true"
-            url-home="{{route('welcome')}}"
-            url-leagues="{{route('home.index')}}"
-            url-logout="{{route('auth.logout')}}"
-        ></navbar>
-    @else
-        <navbar
-            :auth="false"
-            url-home="{{ route('welcome') }}"
-            url-leagues="{{route('home.index')}}"
-            url-logout="{{route('auth.logout')}}"
-        ></navbar>
-    @endif
+<?php
+if (Auth::check()) {
+    $urlHome = route('home.index');
+    $items = array(
+        (object) array(
+            "url" => route('home.index'),
+            "icon" => "fa-solid fa-table",
+            "name" => "Mes ligues"
+        ), (object) array(
+            "url" => route('auth.logout'),
+            "icon" => "fa-solid fa-arrow-right-from-bracket",
+            "name" => "Déconnexion"
+        )
+    );
+} else {
+    $urlHome = route('welcome');
+    $items = array(
+        (object) array(
+            "url" => route('welcome'),
+            "icon" => "fa-solid fa-house",
+            "name" => "Accueil"
+        )
+    );
+}
+?>
+    <navbar url-home="{{$urlHome}}" :items="{{ json_encode($items) }}"></navbar>
     <div class="min-h-screen py-8 px-4">
         @yield('content')
     </div>
