@@ -43,7 +43,7 @@
         </div>
         <!-- menu à afficher quand l'écran est petit -->
         <div
-            :class="showMenu ? 'max-h-28' : 'max-h-0 overflow-hidden'"
+            :class="showMenu ? 'max-h-40' : 'max-h-0 overflow-hidden'"
             class="flex flex-col md:hidden w-full transition-all duration-200 ease-out"
         >
             <a v-for="item in items" :href="item.url" class="py-3 text-center border-t border-white hover:bg-white hover:bg-opacity-5">
