@@ -28,15 +28,6 @@ Route::get('/template', function () {
     return view('template');
 });
 
-Route::post('mode-sombre', function() {
-    $darkMode = session('darkmode');
-    if (!$darkMode) {
-        session(['darkmode' => true]);
-    } else {
-        session(['darkmode' => false]);
-    }
-})->name('darkmode');
-
 Route::get('connexion', [AuthController::class, 'index'])->name('auth.login.index');
 Route::post('connexion', [AuthController::class, 'login'])->name('auth.login');
 Route::get('inscription', [AuthController::class, 'create'])->name('auth.register.index');

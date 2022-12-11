@@ -27,7 +27,7 @@
                         </g>
                     </svg>
                 </a>
-                <dark-mode-toggler class="md:hidden" :url-dark-mode="urlDarkMode" :dark-mode="darkMode"></dark-mode-toggler>
+                <dark-mode-toggler class="md:hidden"></dark-mode-toggler>
                 <i @click="toggleNavbar" class="
                     fas fa-bars
                     cursor-pointer
@@ -42,7 +42,7 @@
                     <i :class="item.icon"></i>
                     <span class="ml-2">{{item.name}}</span>
                 </a>
-                <dark-mode-toggler class="mx-2" :url-dark-mode="urlDarkMode" :dark-mode="darkMode"></dark-mode-toggler>
+                <dark-mode-toggler class="mx-2"></dark-mode-toggler>
             </div>
             <!-- menu à afficher quand l'écran est petit -->
             <div
@@ -69,9 +69,7 @@ export default {
     },
     props: {
         urlHome: String,
-        items: Array,
-        urlDarkMode: String,
-        darkMode: Boolean
+        items: Array
     },
     data() {
         return {
