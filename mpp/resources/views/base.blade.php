@@ -9,6 +9,10 @@ if (Auth::check()) {
             "icon" => "fa-solid fa-table",
             "name" => "Mes ligues"
         ), (object) array(
+            "url" => route('basketballer.index'),
+            "icon" => "fa-solid fa-person-circle-question",
+            "name" => "Basketteurs"
+        ), (object) array(
             "url" => route('auth.logout'),
             "icon" => "fa-solid fa-arrow-right-from-bracket",
             "name" => "Déconnexion"
@@ -21,6 +25,10 @@ if (Auth::check()) {
             "url" => route('welcome'),
             "icon" => "fa-solid fa-house",
             "name" => "Accueil"
+        ), (object) array(
+            "url" => route('basketballer.index'),
+            "icon" => "fa-solid fa-person-circle-question",
+            "name" => "Basketteurs"
         ), (object) array(
             "url" => route('auth.login.index'),
             "icon" => "fa-solid fa-arrow-right-to-bracket",

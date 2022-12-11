@@ -266,14 +266,14 @@
                     <table class="table">
                         <thead>
                             <tr class="table-head">
-                                <td>table-head</td>
-                                <td>Column heading</td>
-                                <td>Column heading</td>
-                                <td>Column heading</td>
+                                <th>table-head</th>
+                                <th>Column heading</th>
+                                <th>Column heading</th>
+                                <th>Column heading</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <tr class="table-primary">
+                            <tr class="table-primary">
                                 <td>table-primary</td>
                                 <td>Column content</td>
                                 <td>Column content</td>

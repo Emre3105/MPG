@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\BasketballerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,16 @@ Route::get('accueil', function() {
 
 Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
 {
-    Route::get('/', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');
-    Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite')->middleware('auth');
-    Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join')->middleware('auth');
-    Route::post('creer', [LeagueController::class, 'store'])->name('league.store')->middleware('auth');
+    Route::get('/', [LeagueController::class, 'browse'])->name('league.browse');
+    Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite');
+    Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
+    Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
+});
+
+Route::group(['prefix' => 'joueurs'], function()
+{
+    Route::get('/', [BasketballerController::class, 'index'])->name('basketballer.index');
+    // Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite');
+    // Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
+    // Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
 });
