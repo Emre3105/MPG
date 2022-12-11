@@ -6,7 +6,7 @@
     ">
         <hr class="-mx-4 mt-4" v-if="shown">
         <div :class="shown ? 'mt-4' : 'mt-8'" class="w-full text-right">
-            <i class="ml-auto cursor-pointer fa-regular fa-circle-xmark text-3xl hover:text-gray-very-lightest" @click="hide"></i>
+            <i class="ml-auto cursor-pointer fa-regular fa-circle-xmark text-3xl hover:text-gray-dark dark:hover:text-gray-very-lightest" @click="hide"></i>
             <form class="mt-4 form lg:w-1/2 mx-auto" @submit.prevent="store">
                 <div class="form-group">
                     <input class="form-text-input" id="nameInput" type="text" placeholder="Nom" v-model="name" required>

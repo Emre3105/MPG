@@ -38,7 +38,6 @@ Route::get('accueil', function() {
     return view('home');
 })->name('home.index')->middleware('auth');
 
-
 Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
 {
     Route::get('/', [LeagueController::class, 'browse'])->name('league.browse')->middleware('auth');

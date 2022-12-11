@@ -1,6 +1,6 @@
 <template>
-    <div :class="shown ? 'max-h-screen md:max-h-96' : 'max-h-0'" class="
-        my-4 px-4
+    <div :class="shown ? 'max-h-screen md:max-h-96 pb-4 mt-4 -mb-8' : 'max-h-0'" class="
+        mt-2 px-4
         transition-all duration-300 ease-out
         overflow-hidden
     ">
@@ -11,7 +11,7 @@
                 <input class="form-text-input ml-0.5" type="text" placeholder="Dx2mA63E" v-model="code" required>
                 <button type="submit" class="ml-4" :class="loading ? 'btn-loading' : 'btn-primary'">Rejoindre la ligue</button>
             </form>
-            <i class="ml-auto cursor-pointer fa-regular fa-circle-xmark text-3xl hover:text-gray-very-lightest" @click="hide"></i>
+            <i class="ml-auto cursor-pointer fa-regular fa-circle-xmark text-3xl hover:text-gray-dark dark:hover:text-gray-very-lightest" @click="hide"></i>
         </div>
         <form class="sm:hidden mt-4" @submit.prevent="join">
             <input class="form-text-input w-full" type="text" placeholder="Dx2mA63E" required>
@@ -27,7 +27,7 @@
                     :can-be-favorite="false"
                     :favorite="false"
                     url-favorite=""
-                    class="cursor-pointer mx-auto"
+                    class="mx-auto"
                     @click="showJoinModal(league.code, league.name)"
                 ></card-league>
             </div>

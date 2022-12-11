@@ -1,12 +1,12 @@
 <template>
-    <div class="card w-full sm:w-80">
+    <div class="card w-full sm:w-80 hover:scale-[1.01]">
         <p class="flex justify-between items-center">
             <span>
                 {{name}}
             </span>
             <i
                 v-if="canBeFavorite"
-                :class="[isFavorite ? 'fa-solid' : 'fa-regular', loading ? 'text-gray-lightest cursor-progress' : 'text-gold hover:text-gold-dark cursor-pointer']"
+                :class="[isFavorite ? 'fa-solid' : 'fa-regular', loading ? 'text-gray-lightest cursor-progress' : 'text-gold-dark hover:text-gold-darkest cursor-pointer']"
                 class="fa-star"
                 @click="makeFavorite"
             ></i>

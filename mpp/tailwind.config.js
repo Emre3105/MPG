@@ -28,7 +28,8 @@ module.exports = {
       'orange': '#F97316',
       'orange-dark': '#EA580C',
       'gold': '#FFD700',
-      'gold-dark': '#EEBC1D'
+      'gold-dark': '#EEBC1D',
+      'gold-darkest': '#B79400'
     },
     extend: {
       transitionProperty: {
