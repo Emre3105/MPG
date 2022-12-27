@@ -50,7 +50,7 @@ Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
 Route::group(['prefix' => 'joueurs'], function()
 {
     Route::get('/', [BasketballerController::class, 'index'])->name('basketballer.index');
-    // Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite');
+    Route::post('/', [BasketballerController::class, 'browse'])->name('basketballer.browse');
     // Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
     // Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
 });

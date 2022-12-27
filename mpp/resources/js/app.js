@@ -18,10 +18,12 @@ const app = createApp({})
 import Leagues from './components/Leagues.vue'
 import Navbar from './components/Navbar.vue'
 import PasswordRestriction from './components/PasswordRestriction.vue'
+import BasketballersTable from './components/BasketballersTable.vue'
 
 app.component('leagues', Leagues)
 app.component('navbar', Navbar)
 app.component('password-restriction', PasswordRestriction)
+app.component('basketballers-table', BasketballersTable)
 
 /**
  * The following block of code may be used to automatically register your
