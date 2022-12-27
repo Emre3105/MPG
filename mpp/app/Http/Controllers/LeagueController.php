@@ -95,4 +95,15 @@ class LeagueController extends Controller
 
         return redirect()->route('home.index')->with('message', 'Votre ligue a bien été créée');
     }
+
+    public function show($id) {
+        return view('league', [
+            'league' => League::findOrFail($id)
+        ]);
+    }
+
+    public function browsePlayers($id) {
+        $league = League::findOrFail($id);
+        return DB::table('users')->select('users.username')->whereIn('users.id', $league->players->pluck("user_id"))->get();
+    }
 }

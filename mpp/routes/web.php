@@ -17,7 +17,7 @@ use App\Http\Controllers\BasketballerController;
 */
 
 // https://laravel.com/docs/9.x/controllers
-// index (get), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
+// index (get), browse (post), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
 Route::get('/', function () {
     if (auth()->check()) { //a user is logged in
         return redirect()->route('home.index');
@@ -45,6 +45,8 @@ Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
     Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite');
     Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
     Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
+    Route::get('/{id}', [LeagueController::class, 'show'])->name('league.show');
+    Route::post('/{id}/joueurs', [LeagueController::class, 'browsePlayers'])->name('league.player.browse');
 });
 
 Route::group(['prefix' => 'joueurs'], function()

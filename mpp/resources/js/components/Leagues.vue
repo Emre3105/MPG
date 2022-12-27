@@ -38,15 +38,17 @@
         grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4
     ">
         <div class="mb-4 flex justify-center" v-for="league in data.leagues">
-            <card-league
-                :id="league.id"
-                :name="league.name"
-                :current-players="league.current_players"
-                :max-players="league.max_players"
-                :can-be-favorite="true"
-                :favorite="league.favorite ? true : false"
-                :url-favorite="urlFavorite"
-            ></card-league>
+            <a :href="trimmedUrlShow + league.id">
+                <card-league
+                    :id="league.id"
+                    :name="league.name"
+                    :current-players="league.current_players"
+                    :max-players="league.max_players"
+                    :can-be-favorite="true"
+                    :favorite="league.favorite ? true : false"
+                    :url-favorite="urlFavorite"
+                ></card-league>
+            </a>
         </div>
     </div>
 </template>
@@ -67,14 +69,16 @@ export default {
         urlBrowse: String,
         urlFavorite: String,
         urlJoin: String,
-        urlStore: String
+        urlStore: String,
+        urlShow: String
     },
     data() {
         return {
             showJoinPanel: false,
             showStorePanel: false,
             data: [],
-            loading: false
+            loading: false,
+            trimmedUrlShow: ''
         }
     },
     methods: {
@@ -104,6 +108,7 @@ export default {
     },
     mounted() {
         this.load()
+        this.trimmedUrlShow = this.urlShow.slice(0, -1)
     },
 }
 </script>
