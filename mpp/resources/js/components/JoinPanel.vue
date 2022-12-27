@@ -27,7 +27,7 @@
                     :can-be-favorite="false"
                     :favorite="false"
                     url-favorite=""
-                    class="mx-auto"
+                    class="mx-auto cursor-pointer"
                     @click="showJoinModal(league.code, league.name)"
                 ></card-league>
             </div>

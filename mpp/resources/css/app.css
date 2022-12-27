@@ -36,7 +36,7 @@
     }
 
     .card {
-        @apply bg-white shadow-md hover:shadow-lg rounded-lg cursor-pointer;
+        @apply bg-white shadow-md hover:shadow-lg rounded-lg;
     }
 
     .card > p {
