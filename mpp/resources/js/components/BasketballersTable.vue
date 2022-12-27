@@ -1,4 +1,10 @@
 <template>
+    <div class="flex mb-8">
+        <input class="form-text-input w-full rounded-r-none focus:outline-none" type="text" placeholder="Rechercher" v-model="filter" @change="load('')">
+        <div class="bg-cyan rounded-r-md flex items-center px-2">
+            <i class="fa-solid fa-magnifying-glass text-2xl"></i>
+        </div>
+    </div>
     <div class="table-container">
         <table class="table">
             <thead>
@@ -55,28 +61,34 @@ export default {
                 }
             ],
             selectedColumn: '',
-            selectedDirection: 'desc'
+            selectedDirection: 'desc',
+            filter: ''
         }
     },
     methods: {
         async load(column) {
-            this.loading = true
-
-            if (this.selectedColumn == column) {
-                this.selectedDirection == 'asc' ? this.selectedDirection = 'desc' : this.selectedDirection = 'asc'
+            if (!this.loading) {
+                this.loading = true
+    
+                if (this.selectedColumn == column) {
+                    this.selectedDirection == 'asc' ? this.selectedDirection = 'desc' : this.selectedDirection = 'asc'
+                }
+                if (column != '') {
+                    this.selectedColumn = column
+                }
+    
+                await axios
+                    .post(this.urlBrowse, {
+                        column: this.selectedColumn,
+                        direction: this.selectedDirection,
+                        filter: this.filter
+                    })
+                    .then(response => (
+                        this.data = response.data
+                    ))
+                
+                this.loading = false
             }
-            this.selectedColumn = column
-
-            await axios
-                .post(this.urlBrowse, {
-                    column: this.selectedColumn,
-                    direction: this.selectedDirection
-                })
-                .then(response => (
-                    this.data = response.data
-                ))
-            
-            this.loading = false
         },
     },
     mounted() {

@@ -17,6 +17,13 @@ class BasketballerController extends Controller
             in_array($request->column, ["name", "team", "position", "odds"]) &&
             ($request->direction == "asc" || $request->direction == "desc")
         ) {
+            if (isset($request->filter) && $request->filter != "") {
+                return Basketballer::where('name','LIKE','%'.$request->filter.'%')
+                    ->orWhere('team','LIKE','%'.$request->filter.'%')
+                    ->orWhere('position','LIKE','%'.$request->filter.'%')
+                    ->orderBy($request->column, $request->direction)
+                    ->get();
+            }
             return Basketballer::orderBy($request->column, $request->direction)->get();
         }
         return redirect()->back()->with('error', 'Une erreur est survenue.');
