@@ -76,7 +76,9 @@ class LeagueController extends Controller
         ]);
         $league->current_players = $league->current_players + 1;
         $league->save();
-        return redirect()->route('home.index')->with('message', 'Bienvenue dans votre nouvelles ligue !');
+        return view('league', [
+            'league' => $league
+        ]);
     }
 
     public function store(LeagueStoreRequest $request) {
