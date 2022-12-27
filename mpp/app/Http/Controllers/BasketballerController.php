@@ -12,8 +12,13 @@ class BasketballerController extends Controller
     }
 
     public function browse(Request $request) {
+        if (!isset($request->column)) {
+            $request->column = "odds";
+        }
+        if (!isset($request->direction)) {
+            $request->direction = "desc";
+        }
         if (
-            isset($request->column) && isset($request->direction) &&
             in_array($request->column, ["name", "team", "position", "odds"]) &&
             ($request->direction == "asc" || $request->direction == "desc")
         ) {
