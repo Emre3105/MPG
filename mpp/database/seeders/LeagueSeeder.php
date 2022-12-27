@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\League;
+use App\Models\Player;
 
 class LeagueSeeder extends Seeder
 {
@@ -15,6 +16,10 @@ class LeagueSeeder extends Seeder
      */
     public function run()
     {
-        League::factory(1)->create();
+        $league = League::factory(1)->create()->first();
+        $check = Player::create([
+            'user_id' => $league->admin_id,
+            'league_id' => $league->id
+        ]);
     }
 }
