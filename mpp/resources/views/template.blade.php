@@ -263,54 +263,56 @@
                 <hr>
                 <div class="w-full">
                     <p class="text-2xl mb-4 w-min mx-auto">Tables</p>
-                    <table class="table">
-                        <thead>
-                            <tr class="table-head">
-                                <td>table-head</td>
-                                <td>Column heading</td>
-                                <td>Column heading</td>
-                                <td>Column heading</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="table-primary">
-                                <td>table-primary</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="table-secondary">
-                                <td>table-secondary</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="table-primary">
-                                <td>table-primary</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="table-secondary">
-                                <td>table-secondary</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="table-primary">
-                                <td>table-primary</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="table-secondary">
-                                <td>table-secondary</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr class="table-head">
+                                    <th>table-head</th>
+                                    <th>Column heading</th>
+                                    <th>Column heading</th>
+                                    <th>Column heading</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-primary">
+                                    <td>table-primary</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                </tr>
+                                <tr class="table-secondary">
+                                    <td>table-secondary</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                </tr>
+                                <tr class="table-primary">
+                                    <td>table-primary</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                </tr>
+                                <tr class="table-secondary">
+                                    <td>table-secondary</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                </tr>
+                                <tr class="table-primary">
+                                    <td>table-primary</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                </tr>
+                                <tr class="table-secondary">
+                                    <td>table-secondary</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                    <td>Column content</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <script>
