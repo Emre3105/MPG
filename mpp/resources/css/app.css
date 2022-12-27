@@ -140,23 +140,23 @@
     }
 
     .table-container {
-        @apply overflow-x-auto;
+        @apply rounded-lg overflow-hidden overflow-x-auto border border-gray-darkest shadow-md;
     }
 
     .table {
-        @apply w-full table-auto shadow-md border border-gray-darkest;
+        @apply w-full table-auto;
     }
 
     .table-head {
-        @apply bg-gray text-white overflow-hidden border-b border-gray-darkest;
+        @apply bg-gray text-white;
     }
 
     .table-primary {
-        @apply bg-white text-gray-darkest hover:bg-gray-very-lightest border-b border-gray-darkest;
+        @apply bg-white text-gray-darkest hover:bg-gray-very-lightest border-t border-gray-darkest;
     }
 
     .table-secondary {
-        @apply bg-gray-lightest text-gray-darkest hover:bg-gray-light border-b border-gray-darkest;
+        @apply bg-gray-lightest text-gray-darkest hover:bg-gray-light border-t border-gray-darkest;
     }
 
     .table-head > td {
