@@ -13,7 +13,7 @@
                 <p v-for="item in data">{{item.username}}</p>
                 <button class="btn-secondary w-full" @click="copy">
                     <i class="fa-regular fa-copy"></i>
-                    Copier le code ligue {{ league.code }}
+                    Copier le code ligue #{{ league.code }}
                 </button>
             </div>
         </div>

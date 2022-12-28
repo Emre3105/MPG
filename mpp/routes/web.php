@@ -45,7 +45,7 @@ Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
     Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite');
     Route::get('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
     Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
-    Route::get('/{id}', [LeagueController::class, 'show'])->name('league.show');
+    Route::get('/{code}', [LeagueController::class, 'show'])->name('league.show');
     Route::post('/{id}/joueurs', [LeagueController::class, 'browsePlayers'])->name('league.player.browse');
 });
 

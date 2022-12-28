@@ -98,9 +98,9 @@ class LeagueController extends Controller
         return redirect()->route('home.index')->with('message', 'Votre ligue a bien été créée');
     }
 
-    public function show($id) {
+    public function show($code) {
         return view('league', [
-            'league' => League::findOrFail($id)
+            'league' => League::where('code', $code)->firstOrFail()
         ]);
     }
 

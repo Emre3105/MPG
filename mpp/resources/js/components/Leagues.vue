@@ -19,6 +19,7 @@
         :shown="showJoinPanel"
         :recommended-leagues="data.recommendedLeagues"
         :url-join="urlJoin"
+        :url-show="urlShow"
         @close="showJoinPanel = !showJoinPanel"
     ></join-panel>
     <store-panel
@@ -38,7 +39,7 @@
         grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4
     ">
         <div class="mb-4 flex justify-center" v-for="league in data.leagues">
-            <a :href="trimmedUrlShow + league.id">
+            <a :href="trimmedUrlShow + league.code">
                 <card-league
                     :id="league.id"
                     :name="league.name"
