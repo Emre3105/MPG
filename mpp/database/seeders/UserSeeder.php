@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\TransferMarket;
 
 class UserSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(1)->create();
+        $user = User::factory(1)->create()->first();
+        TransferMarket::create([
+            'user_id' => $user->id
+        ]);
     }
 }
