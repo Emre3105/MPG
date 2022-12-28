@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\TransferMarket;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 
