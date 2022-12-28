@@ -55,6 +55,7 @@ export default {
     props: {
         shown: Boolean,
         urlJoin: String,
+        urlShow: String,
         recommendedLeagues: Object
     },
     data() {
@@ -74,9 +75,8 @@ export default {
             if (!this.loading) {
                 this.loading = true
                 await axios
-                .post(this.urlJoin.slice(0, -1) + this.code)
-                this.code = ""
-                this.loading = false
+                .get(this.urlJoin.slice(0, -1) + this.code)
+                window.location.href = this.urlShow.slice(0, -1) + this.code
             }
         },
         showJoinModal (code, name) {
