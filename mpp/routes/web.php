@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\BasketballerController;
+use App\Http\Controllers\TransferMarketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +57,9 @@ Route::group(['prefix' => 'joueurs'], function()
     Route::post('/', [BasketballerController::class, 'browse'])->name('basketballer.browse');
     // Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
     // Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
+});
+
+Route::group(['prefix' => 'mercato'], function()
+{
+    Route::get('/', [TransferMarketController::class, 'index'])->name('transfer_market.index');
 });
