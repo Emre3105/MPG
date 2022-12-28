@@ -86,9 +86,9 @@ export default {
     transform: translateY(0px);
     opacity: 1;
 }
-.slide-fade-leave-from {
-    /* default opacity: 1;*/
-}
+/* .slide-fade-leave-from {
+    default opacity: 1;
+} */
 .slide-fade-leave-active {
     transition: opacity .3s;
 }
