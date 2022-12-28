@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\League;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class PlayerFactory extends Factory
@@ -19,8 +20,11 @@ class PlayerFactory extends Factory
         if(!League::exists()) {
             League::factory(1)->create();
         }
+        if(!User::exists()) {
+            User::factory(1)->create();
+        }
 
-        $userId = \App\Models\User::all()->random()->id;
+        $userId = User::all()->random()->id;
         $randomLeague = League::whereNotIn(
             'id', DB::table('players')->select('league_id')->where('user_id', $userId)
         )->inRandomOrder()->whereRaw('leagues.current_players < leagues.max_players')->first();

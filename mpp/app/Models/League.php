@@ -21,4 +21,9 @@ class League extends Model
         'max_players',
         'admin_id'
     ];
+
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
 }

@@ -76,7 +76,9 @@ class LeagueController extends Controller
         ]);
         $league->current_players = $league->current_players + 1;
         $league->save();
-        return redirect()->route('home.index')->with('message', 'Bienvenue dans votre nouvelles ligue !');
+        return view('league', [
+            'league' => $league
+        ]);
     }
 
     public function store(LeagueStoreRequest $request) {
@@ -93,6 +95,36 @@ class LeagueController extends Controller
             'league_id' => $league->id
         ]);
 
-        return redirect()->route('home.index')->with('message', 'Votre ligue a bien été créée');
+        return $league;
+    }
+
+    public function show($code) {
+        $league = League::where('code', $code)->firstOrFail();
+        if (Player::where('league_id', $league->id)->where('user_id', Auth::user()->id)->exists()) {
+            return view('league', [
+                'league' => League::where('code', $code)->firstOrFail()
+            ]);
+        }
+        return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas accès à cette ligue."]);
+    }
+
+    public function browsePlayers($id) {
+        $league = League::findOrFail($id);
+        return DB::table('users')->select('users.username')->whereIn('users.id', $league->players->pluck("user_id"))->get();
+    }
+
+    public function launch($id) {
+        $league = League::findOrFail($id);
+        if (Player::where('league_id', $league->id)->where('user_id', Auth::user()->id)->exists()) {
+            if (Auth::user()->id == $league->admin_id) {
+                $league->status = 1;
+                $league->save();
+                return view('league', [
+                    'league' => $league
+                ]);
+            }
+            return redirect()->route('league.show', $league->code)->withErrors(['error' => "Désolé, vous n'avez pas les droits sur cette ligue."]);
+        }
+        return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas les droits sur cette ligue."]);
     }
 }

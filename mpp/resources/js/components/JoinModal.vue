@@ -12,7 +12,9 @@
             </div>
             <div class="flex flex-col sm:flex-row justify-around mt-4 sm:mt-8">
                 <button class="btn-secondary w-full sm:w-32 mb-4 sm:mb-0" :class="loading ? 'cursor-not-allowed' : ''" @click="cancel">Annuler</button>
-                <button class="btn-primary w-full sm:w-32" :class="loading ? 'cursor-progress' : ''" @click="join">Rejoindre</button>
+                <a :href="urlJoin">
+                    <button class="btn-primary w-full sm:w-32" :class="loading ? 'cursor-progress' : ''">Rejoindre</button>
+                </a>
             </div>
         </div>
     </div>
@@ -36,14 +38,6 @@ export default {
             if (!this.loading) {
                 this.$emit('cancel')
             }
-        },
-        async join() {
-            if (!this.loading) {
-                this.loading = true
-                await axios
-                .post(this.urlJoin)
-                this.$emit('cancel')
-            }
         }
     },
     mounted() {
@@ -61,7 +55,3 @@ export default {
     },
 }
 </script>
-
-<style>
-
-</style>

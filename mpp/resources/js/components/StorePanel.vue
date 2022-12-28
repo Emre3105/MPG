@@ -32,6 +32,7 @@ export default {
     props: {
         shown: Boolean,
         urlStore: String,
+        urlShow: String
     },
     data() {
         return {
@@ -52,13 +53,11 @@ export default {
                     name: this.name,
                     max_players: this.maxPlayers
                 })
-                this.loading = false
+                .then(response => (
+                    window.location.href = this.urlShow.slice(0, -1) + response.data.code
+                ))
             }
         }
     }
 }
 </script>
-
-<style>
-
-</style>
