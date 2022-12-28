@@ -42,10 +42,7 @@
         <div class="mb-4 flex justify-center" v-for="league in data.leagues">
             <a :href="trimmedUrlShow + league.code">
                 <card-league
-                    :id="league.id"
-                    :name="league.name"
-                    :current-players="league.current_players"
-                    :max-players="league.max_players"
+                    :league="league"
                     :can-be-favorite="true"
                     :favorite="league.favorite ? true : false"
                     :url-favorite="urlFavorite"
@@ -114,7 +111,3 @@ export default {
     },
 }
 </script>
-
-<style>
-
-</style>

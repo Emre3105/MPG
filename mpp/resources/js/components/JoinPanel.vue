@@ -20,13 +20,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 mx-4 mt-4 -mb-4">
             <div class="mb-4" v-for="league in recommendedLeagues">
                 <card-league
-                    :id="league.id"
-                    :name="league.name"
-                    :current-players="league.current_players"
-                    :max-players="league.max_players"
-                    :can-be-favorite="false"
-                    :favorite="false"
-                    url-favorite=""
+                    :league="league"
                     class="mx-auto cursor-pointer"
                     @click="showJoinModal(league.code, league.name)"
                 ></card-league>
@@ -87,7 +81,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>
