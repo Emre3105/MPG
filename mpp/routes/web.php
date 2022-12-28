@@ -47,6 +47,7 @@ Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
     Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
     Route::get('/{code}', [LeagueController::class, 'show'])->name('league.show');
     Route::post('/{id}/joueurs', [LeagueController::class, 'browsePlayers'])->name('league.player.browse');
+    Route::get('/{id}/lancement', [LeagueController::class, 'launch'])->name('league.launch');
 });
 
 Route::group(['prefix' => 'joueurs'], function()

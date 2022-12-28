@@ -99,13 +99,32 @@ class LeagueController extends Controller
     }
 
     public function show($code) {
-        return view('league', [
-            'league' => League::where('code', $code)->firstOrFail()
-        ]);
+        $league = League::where('code', $code)->firstOrFail();
+        if (Player::where('league_id', $league->id)->where('user_id', Auth::user()->id)->exists()) {
+            return view('league', [
+                'league' => League::where('code', $code)->firstOrFail()
+            ]);
+        }
+        return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas accès à cette ligue."]);
     }
 
     public function browsePlayers($id) {
         $league = League::findOrFail($id);
         return DB::table('users')->select('users.username')->whereIn('users.id', $league->players->pluck("user_id"))->get();
+    }
+
+    public function launch($id) {
+        $league = League::findOrFail($id);
+        if (Player::where('league_id', $league->id)->where('user_id', Auth::user()->id)->exists()) {
+            if (Auth::user()->id == $league->admin_id) {
+                $league->status = 1;
+                $league->save();
+                return view('league', [
+                    'league' => $league
+                ]);
+            }
+            return redirect()->route('league.show', $league->code)->withErrors(['error' => "Désolé, vous n'avez pas les droits sur cette ligue."]);
+        }
+        return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas les droits sur cette ligue."]);
     }
 }

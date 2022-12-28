@@ -11,6 +11,16 @@
             <hr>
             <div class="text-lg space-y-2">
                 <p v-for="item in data">{{item.username}}</p>
+                <a v-if="league.admin_id == auth && league.current_players == league.max_players" :href="urlLaunchLeague" class="block">
+                    <button class="btn-primary w-full">
+                        <i class="fa-solid fa-forward-step"></i>
+                        Lancer la ligue
+                    </button>
+                </a>
+                <button v-if="league.admin_id == auth && league.current_players != league.max_players" class="btn-disabled w-full">
+                    <i class="fa-solid fa-forward-step"></i>
+                    Lancer la ligue
+                </button>
                 <button class="btn-secondary w-full" @click="copy">
                     <i class="fa-regular fa-copy"></i>
                     Copier le code ligue #{{ league.code }}
@@ -24,7 +34,9 @@
 export default {
     props: {
         league: Object,
-        urlBrowsePlayers: String
+        auth: Number,
+        urlBrowsePlayers: String,
+        urlLaunchLeague: String
     },
     data() {
         return {
