@@ -95,7 +95,7 @@ class LeagueController extends Controller
             'league_id' => $league->id
         ]);
 
-        return redirect()->route('home.index')->with('message', 'Votre ligue a bien été créée');
+        return $league;
     }
 
     public function show($code) {

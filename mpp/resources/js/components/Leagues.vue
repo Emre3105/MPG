@@ -25,6 +25,7 @@
     <store-panel
         :shown="showStorePanel"
         :url-store="urlStore"
+        :url-show="urlShow"
         @close="(showStorePanel = !showStorePanel)"
     ></store-panel>
     <hr>
