@@ -40,9 +40,13 @@ class AuthController extends Controller
     public function store(UserRequest $request)
     {           
         $data = $request->all();
-        $check = User::create([
+        $user = User::create([
             'username' => $request->get('username'),
             'password' => Hash::make($request->get('password'))
+        ]);
+
+        TransferMarket::create([
+            'user_id' => $user->id
         ]);
 
         $credentials = $request->only('username', 'password');
@@ -50,8 +54,7 @@ class AuthController extends Controller
             return redirect()->route('home.index')
                         ->withSuccess('Signed in');
         }
-
-        return redirect()->route("home.index")->withSuccess('You have signed-in');
+        return redirect()->route('auth.login.index')->withErrors(['incorrect' => 'Désolé, la connexion a échoué.']);
     }
     
     public function logout() {
