@@ -20,4 +20,9 @@ class TransferMarket extends Model
         'total',
         'remaining_budget'
     ];
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
 }
