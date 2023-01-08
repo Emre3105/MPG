@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\BasketballerController;
 use App\Http\Controllers\TransferMarketController;
+use App\Http\Controllers\BidController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,5 @@ Route::group(['prefix' => 'mercato'], function()
 {
     Route::get('/', [TransferMarketController::class, 'index'])->name('transfer_market.index');
 });
+
+Route::post('/enchere', [BidController::class, 'browse'])->name('bid.browse');

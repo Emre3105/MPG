@@ -16,6 +16,7 @@
                             <i v-if="selectedColumn == item.column_name && selectedDirection == 'desc'" class="fa-solid fa-caret-down"></i>
                         </div>
                     </th>
+                    <th v-if="transferMarket"></th>
                 </tr>
             </thead>
             <tbody v-if="!loading">
@@ -24,6 +25,7 @@
                     <td>{{ item.team }}</td>
                     <td>{{ item.position }}</td>
                     <td>{{ item.odds }}</td>
+                    <td v-if="transferMarket"><i class="fa-solid fa-circle-plus cursor-pointer text-2xl" @click="addBid(item.id)"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -39,7 +41,11 @@
 <script>
 export default {
     props: {
-        urlBrowse: String
+        urlBrowse: String,
+        transferMarket: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -90,6 +96,24 @@ export default {
                 this.loading = false
             }
         },
+        async addBid(id) {
+            if (!this.loading) {
+                this.loading = true
+    
+                // await axios
+                //     .post(this.urlBrowse, {
+                //         column: this.selectedColumn,
+                //         direction: this.selectedDirection,
+                //         filter: this.filter
+                //     })
+                //     .then(response => (
+                //         this.data = response.data
+                //     ))
+                console.log("ajouter le basketteur " + id)
+                
+                this.loading = false
+            }
+        }
     },
     mounted() {
         this.load('odds')
