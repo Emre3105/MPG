@@ -4,10 +4,18 @@
             <basketballers-table
                 :url-browse="urlBrowseBasketballer"
                 :transfer-market="true"
+                :selected-basketballer-ids="bids"
+                @add-bid="(basketballerId) => addBid(basketballerId)"
             ></basketballers-table>
         </div>
         <div class="w-1/2">
-            <p>Liste des enchères</p>
+            <div class="card">
+                <p class="text-center">Mes enchères</p>
+                <hr>
+                <div>
+                    <p v-for="bid in bids">{{ bid }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -25,11 +33,11 @@ export default {
     data() {
         return {
             loading: false,
-            bids: null
+            bids: []
         }
     },
     methods: {
-        async load() {
+        async loadBids() {
             if (!this.loading) {
                 this.loading = true
 
@@ -48,13 +56,15 @@ export default {
                         this.bids = response.data
                     ))
                 }
-
                 this.loading = false
             }
         },
+        addBid(basketballerId) {
+            this.bids.push(basketballerId)
+        }
     },
     mounted() {
-        this.load()
+        this.loadBids()
     },
 }
 </script>

@@ -40,11 +40,16 @@
 
 <script>
 export default {
+    emits: ['addBid', 'remove'],
     props: {
         urlBrowse: String,
         transferMarket: {
             type: Boolean,
             default: false
+        },
+        selectedBasketballerIds: {
+            type: Array,
+            default: []
         }
     },
     data() {
@@ -96,23 +101,8 @@ export default {
                 this.loading = false
             }
         },
-        async addBid(id) {
-            if (!this.loading) {
-                this.loading = true
-    
-                // await axios
-                //     .post(this.urlBrowse, {
-                //         column: this.selectedColumn,
-                //         direction: this.selectedDirection,
-                //         filter: this.filter
-                //     })
-                //     .then(response => (
-                //         this.data = response.data
-                //     ))
-                console.log("ajouter le basketteur " + id)
-                
-                this.loading = false
-            }
+        addBid(basketballerId) {
+            this.$emit('addBid', basketballerId)
         }
     },
     mounted() {
