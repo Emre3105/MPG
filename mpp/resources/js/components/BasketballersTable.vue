@@ -42,12 +42,19 @@
 export default {
     emits: ['addBid', 'remove'],
     props: {
-        urlBrowse: String,
+        urlBrowse: {
+            type: String,
+            default: ""
+        },
         transferMarket: {
             type: Boolean,
             default: false
         },
         selectedBasketballerIds: {
+            type: Array,
+            default: []
+        },
+        basketballers: {
             type: Array,
             default: []
         }
@@ -78,6 +85,7 @@ export default {
     },
     methods: {
         async load(column) {
+            console.log("loading basketballers")
             if (!this.loading) {
                 this.loading = true
     
@@ -106,7 +114,11 @@ export default {
         }
     },
     mounted() {
-        this.load('odds')
+        if (this.basketballers.length > 0) {
+            this.data = this.basketballers
+        } else {
+            this.load('odds')
+        }
     },
 }
 </script>
