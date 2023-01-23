@@ -8,6 +8,7 @@
     <div v-else class="flex justify-between mt-8">
         <div class="w-1/2 mr-4">
             <basketballers-table
+                :url-browse="urlBrowseBasketballer"
                 :basketballers="basketballers"
                 :transfer-market="true"
                 :selected-basketballer-ids="bids"

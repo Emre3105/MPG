@@ -42,10 +42,7 @@
 export default {
     emits: ['addBid', 'remove'],
     props: {
-        urlBrowse: {
-            type: String,
-            default: ""
-        },
+        urlBrowse: String,
         transferMarket: {
             type: Boolean,
             default: false
@@ -85,7 +82,6 @@ export default {
     },
     methods: {
         async load(column) {
-            console.log("loading basketballers")
             if (!this.loading) {
                 this.loading = true
     
@@ -116,6 +112,7 @@ export default {
     mounted() {
         if (this.basketballers.length > 0) {
             this.data = this.basketballers
+            this.selectedColumn = "odds"
         } else {
             this.load('odds')
         }
