@@ -20,13 +20,19 @@
                 <p class="text-center mr-2">Mes enchères</p>
                 <hr>
                 <div class="space-y-2">
+                    <p class="text-sm text-right">
+                        Budget restant : {{ remainingBudget }}M / 250M
+                    </p>
                     <div v-for="bid in bids" class="flex items-center">
                         <p class="w-full">{{ bid.name }}</p>
                         <p>{{ bid.odds }}</p>
-                        <div class="form-group ml-2">
-                            <input class="form-text-input w-8 p-1 text-center" type="text" :value="bid.odds" @change="updateBid(bid.id, $event.target.value)">
+                        <div class="form-group ml-2 mr-6">
+                            <input class="form-text-input w-8 p-1 text-center" type="text" :value="bid.price" @change="updateBid(bid.id, $event.target.value)">
                         </div>
+                        <i class="fa-solid fa-trash-can cursor-pointer hover:scale-110" @click="removeBid(bid.id)"></i>
                     </div>
+                    <button v-if="dataChanged && isValid" class="btn-primary w-full" @click="save">Enregister</button>
+                    <button v-if="dataChanged && !isValid" class="btn-disabled w-full">Enregister</button>
                 </div>
             </div>
         </div>
@@ -47,15 +53,29 @@ export default {
         return {
             loading: true,
             bids: [],
-            basketballers: []
+            basketballers: [],
+            dataChanged: false,
+            isValid: false,
+            remainingBudget: 250
         }
     },
     methods: {
+        addBid(basketballerId) {
+            const bid = this.findBid(basketballerId)
+            if (!bid) {
+                const basketballer = this.basketballers.filter((el) => {
+                    return el.id == basketballerId
+                })[0]
+                basketballer.price = basketballer.odds
+                this.bids.push(basketballer)
+                this.remainingBudget = this.remainingBudget - basketballer.price
+                this.updateIsValid()
+            }
+        },
         findBid(basketballerId) {
-            const bid = this.bids.filter((el) => {
+            return this.bids.filter((el) => {
                 return el.id == basketballerId
-            })
-            return bid
+            })[0]
         },
         async loadBasketballers() {
             await axios
@@ -83,20 +103,31 @@ export default {
                     this.bids = response.data
                 ))
             }
+            this.bids.forEach((bid) => {
+                this.remainingBudget = this.remainingBudget - bid.price
+            })
+        },
+        removeBid(basketballerId) {
+            const bid = this.findBid(basketballerId)
+            this.bids = this.bids.filter((bid) => {
+                return bid.id != basketballerId
+            })
+            this.remainingBudget = this.remainingBudget + bid.price
+            this.updateIsValid()
         },
         updateBid(basketballerId, price) {
             const bidIndex = this.bids.findIndex((bid => bid.id == basketballerId))
+            this.remainingBudget = this.remainingBudget + this.bids[bidIndex].price
             this.bids[bidIndex].price = parseInt(price)
+            this.remainingBudget = this.remainingBudget - price
+            this.updateIsValid()
         },
-        addBid(basketballerId) {
-            const bid = this.findBid(basketballerId)
-            if (bid.length <= 0) {
-                // if bid is already added
-                const basketballer = this.basketballers.filter((el) => {
-                    return el.id == basketballerId
-                })[0]
-                basketballer.price = basketballer.odds
-                this.bids.push(basketballer)
+        updateIsValid() {
+            this.dataChanged = true
+            if (this.bids.length >= 8 && this.remainingBudget >= 0) {
+                this.isValid = true
+            } else {
+                this.isValid = false
             }
         }
     },
