@@ -24,6 +24,7 @@
                     <p class="text-sm text-right" :class="remainingBudget < 0 ? 'text-red' : ''">
                         Budget restant : {{ remainingBudget }}M / 250M
                     </p>
+                    <p v-if="bids.length <= 0" class="italic text-center">[Vous n'avez pas encore enregistré d'enchères]</p>
                     <div v-for="bid in bids" class="flex items-center">
                         <p class="font-bold w-10">{{ getAcronym(bid.position) }}</p>
                         <p class="w-full">{{ bid.name }}</p>
@@ -70,13 +71,13 @@ export default {
         }
     },
     methods: {
-        addBid(basketballerId) {
+        addBid(basketballerId, price=null) {
             const bid = this.findBid(basketballerId)
             if (!bid) {
                 const basketballer = this.basketballers.filter((el) => {
                     return el.id == basketballerId
                 })[0]
-                basketballer.price = basketballer.odds
+                price ? basketballer.price = price : basketballer.price = basketballer.odds
                 this.bids.push(basketballer)
                 this.remainingBudget = this.remainingBudget - basketballer.price
                 this.updateIsValid()
@@ -144,7 +145,9 @@ export default {
                 await axios
                 .post(this.urlBrowseBid)
                 .then(response => (
-                    this.bids = response.data
+                    response.data.forEach((bid) => {
+                        this.addBid(bid.basketballer_id, bid.price)
+                    })
                 ))
             } else {
                 await axios
@@ -152,12 +155,12 @@ export default {
                     league_id: this.leagueId
                 })
                 .then(response => (
-                    this.bids = response.data
+                    response.data.forEach((bid) => {
+                        this.addBid(bid.basketballer_id, bid.price)
+                    })
                 ))
             }
-            this.bids.forEach((bid) => {
-                this.remainingBudget = this.remainingBudget - bid.price
-            })
+            this.dataChanged = false
         },
         removeBid(basketballerId) {
             const bid = this.findBid(basketballerId)
@@ -174,6 +177,7 @@ export default {
                 .post(this.urlSaveBid, {
                     bids: this.bids
                 })
+                this.dataChanged = false
                 this.saving = false
             }
         },
