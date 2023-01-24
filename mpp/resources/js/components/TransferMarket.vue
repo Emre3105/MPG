@@ -28,7 +28,13 @@
                         <p class="w-full">{{ bid.name }}</p>
                         <p>{{ bid.odds }}</p>
                         <div class="form-group ml-2 mr-6">
-                            <input class="form-text-input w-8 p-1 text-center" type="text" :value="bid.price" @change="updateBid(bid.id, $event.target.value)">
+                            <input
+                                class="form-text-input w-8 p-1 text-center"
+                                :class="bid.price < bid.odds ? 'border-red outline-red text-red' : ''"
+                                type="text"
+                                :value="bid.price"
+                                @change="updateBid(bid.id, $event.target.value)"
+                            >
                         </div>
                         <i class="fa-solid fa-trash-can cursor-pointer hover:scale-110" @click="removeBid(bid.id)"></i>
                     </div>
@@ -72,6 +78,15 @@ export default {
                 this.remainingBudget = this.remainingBudget - basketballer.price
                 this.updateIsValid()
             }
+        },
+        areAllPricesValid() {
+            let res = true
+            this.bids.forEach((bid) => {
+                if (bid.price < bid.odds) {
+                    res = false
+                }
+            })
+            return res
         },
         areAllPositionsPresent() {
             let res = true
@@ -158,7 +173,7 @@ export default {
         },
         updateIsValid() {
             this.dataChanged = true
-            if (this.bids.length >= 8 && this.remainingBudget >= 0 && this.areAllPositionsPresent()) {
+            if (this.bids.length >= 8 && this.remainingBudget >= 0 && this.areAllPricesValid() && this.areAllPositionsPresent()) {
                 this.isValid = true
             } else {
                 this.isValid = false
