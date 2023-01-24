@@ -17,4 +17,23 @@ class BidController extends Controller
         }
         return TransferMarket::where('user_id', $userId)->first()->bids;
     }
+
+    public function save(Request $request) {
+        if (isset($request->bids)) {
+            $userId = Auth::user()->id;
+            if (isset($request->league_id)) {
+                //
+                return null;
+            }
+            $transferMarketId = TransferMarket::where('user_id', $userId)->first()->id;
+            Bid::where('transfer_market_id', $transferMarketId)->delete();
+            foreach ($request->bids as $bid) {
+                Bid::create([
+                    'transfer_market_id' => $transferMarketId,
+                    'basketballer_id' => $bid["id"],
+                    'price' => $bid["price"]
+                ]);
+            }
+        }
+    }
 }

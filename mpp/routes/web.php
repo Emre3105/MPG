@@ -65,4 +65,8 @@ Route::group(['prefix' => 'mercato'], function()
     Route::get('/', [TransferMarketController::class, 'index'])->name('transfer_market.index');
 });
 
-Route::post('/enchere', [BidController::class, 'browse'])->name('bid.browse');
+Route::group(['prefix' => 'enchere'], function()
+{
+    Route::post('/', [BidController::class, 'browse'])->name('bid.browse');
+    Route::post('/enregister', [BidController::class, 'save'])->name('bid.save');
+});

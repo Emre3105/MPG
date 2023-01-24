@@ -39,7 +39,7 @@
                         </div>
                         <i class="fa-solid fa-trash-can cursor-pointer hover:scale-110" @click="removeBid(bid.id)"></i>
                     </div>
-                    <button v-if="dataChanged && isValid" class="btn-primary w-full" @click="save">Enregister</button>
+                    <button v-if="dataChanged && isValid" class="w-full" :class="saving ? 'btn-loading' : 'btn-primary'" @click="save">Enregister</button>
                     <button v-if="dataChanged && !isValid" class="btn-disabled w-full">Enregister</button>
                 </div>
             </div>
@@ -52,6 +52,7 @@ export default {
     props: {
         urlBrowseBasketballer: String,
         urlBrowseBid: String,
+        urlSaveBid: String,
         leagueId: {
             type: Number,
             default: null
@@ -60,6 +61,7 @@ export default {
     data() {
         return {
             loading: true,
+            saving: false,
             bids: [],
             basketballers: [],
             dataChanged: false,
@@ -165,8 +167,15 @@ export default {
             this.remainingBudget = this.remainingBudget + bid.price
             this.updateIsValid()
         },
-        save() {
-            return true
+        async save() {
+            if (!this.saving) {
+                this.saving = true
+                await axios
+                .post(this.urlSaveBid, {
+                    bids: this.bids
+                })
+                this.saving = false
+            }
         },
         updateBid(basketballerId, price) {
             const bidIndex = this.bids.findIndex((bid => bid.id == basketballerId))
