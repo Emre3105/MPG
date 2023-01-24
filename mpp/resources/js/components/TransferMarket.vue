@@ -24,6 +24,7 @@
                         Budget restant : {{ remainingBudget }}M / 250M
                     </p>
                     <div v-for="bid in bids" class="flex items-center">
+                        <p class="font-bold w-10">{{ getAcronym(bid.position) }}</p>
                         <p class="w-full">{{ bid.name }}</p>
                         <p>{{ bid.odds }}</p>
                         <div class="form-group ml-2 mr-6">
@@ -72,10 +73,43 @@ export default {
                 this.updateIsValid()
             }
         },
+        areAllPositionsPresent() {
+            let res = true
+            const positions = ["Ailier", "Ailier Fort", "Arrière", "Meneur", "Pivot"]
+            positions.forEach((position) => {
+                if (!this.isPositionPresent(position)) {
+                    res = false
+                }
+            })
+            return res
+        },
         findBid(basketballerId) {
             return this.bids.filter((el) => {
                 return el.id == basketballerId
             })[0]
+        },
+        getAcronym(position) {
+            if (position == "Ailier") {
+                return "AL"
+            }
+            if (position == "Ailier Fort") {
+                return "ALF"
+            }
+            if (position == "Arrière") {
+                return "AR"
+            }
+            if (position == "Meneur") {
+                return "M"
+            }
+            if (position == "Pivot") {
+                return "P"
+            }
+            return "ERR"
+        },
+        isPositionPresent(position) {
+            return this.bids.filter((bid) => {
+                return bid.position == position
+            }).length > 0
         },
         async loadBasketballers() {
             await axios
@@ -124,7 +158,7 @@ export default {
         },
         updateIsValid() {
             this.dataChanged = true
-            if (this.bids.length >= 8 && this.remainingBudget >= 0) {
+            if (this.bids.length >= 8 && this.remainingBudget >= 0 && this.areAllPositionsPresent()) {
                 this.isValid = true
             } else {
                 this.isValid = false
