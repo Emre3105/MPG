@@ -35,6 +35,7 @@
                                 :class="bid.price < bid.odds ? 'border-red outline-red text-red' : ''"
                                 type="text"
                                 :value="bid.price"
+                                @keypress="isNumber($event)"
                                 @change="updateBid(bid.id, $event.target.value)"
                             >
                         </div>
@@ -125,6 +126,11 @@ export default {
             }
             return "ERR"
         },
+        isNumber(event) {
+            if (event.keyCode < 48 || event.keyCode > 57) {
+                event.preventDefault()
+            }
+        },
         isPositionPresent(position) {
             return this.bids.filter((bid) => {
                 return bid.position == position
@@ -182,6 +188,9 @@ export default {
             }
         },
         updateBid(basketballerId, price) {
+            if (price == "") {
+                price = 0
+            }
             const bidIndex = this.bids.findIndex((bid => bid.id == basketballerId))
             this.remainingBudget = this.remainingBudget + this.bids[bidIndex].price
             this.bids[bidIndex].price = parseInt(price)
