@@ -69,4 +69,5 @@ Route::group(['prefix' => 'enchere'], function()
 {
     Route::post('/', [BidController::class, 'browse'])->name('bid.browse');
     Route::post('/enregister', [BidController::class, 'save'])->name('bid.save');
+    Route::post('/importer', [BidController::class, 'import'])->name('bid.import');
 });

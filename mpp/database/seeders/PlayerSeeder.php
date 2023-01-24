@@ -15,6 +15,9 @@ class PlayerSeeder extends Seeder
      */
     public function run()
     {
-        Player::factory(10)->create();
+        $player = Player::factory(1)->create()->first();
+        TransferMarket::create([
+            'player_id' => $player->id
+        ]);
     }
 }

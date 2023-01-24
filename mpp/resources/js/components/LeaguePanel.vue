@@ -28,6 +28,16 @@
             </div>
         </div>
     </div>
+    <div v-if="league.status == 1">
+        <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
+        <transfer-market
+            :url-browse-basketballer="urlBrowseBasketballer"
+            :url-browse-bid="urlBrowseBid"
+            :url-save-bid="urlSaveBid"
+            :url-import="urlImport"
+            :league-id="league.id"
+        ></transfer-market>
+    </div>
 </template>
   
 <script>
@@ -36,7 +46,11 @@ export default {
         league: Object,
         auth: Number,
         urlBrowsePlayers: String,
-        urlLaunchLeague: String
+        urlLaunchLeague: String,
+        urlBrowseBasketballer: String,
+        urlBrowseBid: String,
+        urlSaveBid: String,
+        urlImport: String
     },
     data() {
         return {

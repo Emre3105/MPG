@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\League;
 use App\Models\Player;
+use App\Models\TransferMarket;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\LeagueStoreRequest;
 use Illuminate\Support\Str;
@@ -70,9 +71,12 @@ class LeagueController extends Controller
         if (Player::where(['user_id' => $userId,'league_id' => $league->id])->exists()) {
             return redirect()->route('league.browse')->withErrors(['already' => "Désolé, vous faites déjà partie de cette ligue."]);
         }
-        Player::create([
+        $player = Player::create([
             'user_id' => $userId,
             'league_id' => $league->id
+        ]);
+        TransferMarket::create([
+            'player_id' => $player->id
         ]);
         $league->current_players = $league->current_players + 1;
         $league->save();
@@ -93,6 +97,9 @@ class LeagueController extends Controller
         $player = Player::create([
             'user_id' => Auth::user()->id,
             'league_id' => $league->id
+        ]);
+        TransferMarket::create([
+            'player_id' => $player->id
         ]);
 
         return $league;
