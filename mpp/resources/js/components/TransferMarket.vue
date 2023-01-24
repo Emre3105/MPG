@@ -11,8 +11,9 @@
                 :url-browse="urlBrowseBasketballer"
                 :basketballers="basketballers"
                 :transfer-market="true"
-                :selected-basketballer-ids="bids"
+                :selected-basketballers="bids"
                 @add-bid="(basketballerId) => addBid(basketballerId)"
+                @remove-bid="(basketballerId) => removeBid(basketballerId)"
             ></basketballers-table>
         </div>
         <div class="md:w-1/2">
@@ -20,7 +21,7 @@
                 <p class="text-center mr-2">Mes enchères</p>
                 <hr>
                 <div class="space-y-2">
-                    <p class="text-sm text-right">
+                    <p class="text-sm text-right" :class="remainingBudget < 0 ? 'text-red' : ''">
                         Budget restant : {{ remainingBudget }}M / 250M
                     </p>
                     <div v-for="bid in bids" class="flex items-center">
@@ -163,6 +164,9 @@ export default {
             })
             this.remainingBudget = this.remainingBudget + bid.price
             this.updateIsValid()
+        },
+        save() {
+            return true
         },
         updateBid(basketballerId, price) {
             const bidIndex = this.bids.findIndex((bid => bid.id == basketballerId))

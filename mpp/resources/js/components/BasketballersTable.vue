@@ -20,12 +20,13 @@
                 </tr>
             </thead>
             <tbody v-if="!loading">
-                <tr v-for="(item, key) in data" :class="key % 2 == 0 ? 'table-primary' : 'table-secondary'">
+                <tr v-for="(item, key) in data" :class="isSelected(item.id) ? 'table-selected' : key % 2 == 0 ? 'table-primary' : 'table-secondary'">
                     <th>{{ item.name }}</th>
                     <td>{{ item.team }}</td>
                     <td>{{ item.position }}</td>
                     <td>{{ item.odds }}</td>
-                    <td v-if="transferMarket"><i class="fa-solid fa-circle-plus cursor-pointer text-2xl" @click="addBid(item.id)"></i></td>
+                    <td v-if="transferMarket && !isSelected(item.id)"><i class="fa-regular fa-square-plus cursor-pointer text-2xl hover:scale-110" @click="addBid(item.id)"></i></td>
+                    <td v-if="transferMarket && isSelected(item.id)"><i class="fa-regular fa-trash-can cursor-pointer text-xl hover:scale-110" @click="removeBid(item.id)"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -40,14 +41,14 @@
 
 <script>
 export default {
-    emits: ['addBid', 'remove'],
+    emits: ['addBid', 'removeBid'],
     props: {
         urlBrowse: String,
         transferMarket: {
             type: Boolean,
             default: false
         },
-        selectedBasketballerIds: {
+        selectedBasketballers: {
             type: Array,
             default: []
         },
@@ -81,6 +82,18 @@ export default {
         }
     },
     methods: {
+        addBid(basketballerId) {
+            this.$emit('addBid', basketballerId)
+        },
+        isSelected(basketballerId) {
+            let res = false
+            this.selectedBasketballers.forEach((basketballer) => {
+                if (basketballer.id == basketballerId) {
+                    res = true
+                }
+            })
+            return res
+        },
         async load(column) {
             if (!this.loading) {
                 this.loading = true
@@ -105,9 +118,9 @@ export default {
                 this.loading = false
             }
         },
-        addBid(basketballerId) {
-            this.$emit('addBid', basketballerId)
-        }
+        removeBid(basketballerId) {
+            this.$emit('removeBid', basketballerId)
+        },
     },
     mounted() {
         if (this.basketballers.length > 0) {

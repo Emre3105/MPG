@@ -159,11 +159,15 @@
         @apply bg-gray-lightest text-gray-darkest hover:bg-gray-light border-t border-gray-darkest;
     }
 
+    .table-selected {
+        @apply bg-cyan text-white hover:bg-cyan-dark border-t border-gray-darkest;
+    }
+
     .table-head > td {
         @apply font-semibold overflow-hidden;
     }
 
-    .table-head > th, .table-primary > td, .table-secondary > td {
+    .table-head > th, .table-primary > td, .table-secondary > td, .table-selected > td {
         @apply p-3 text-center;
     }
 }
