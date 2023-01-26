@@ -35,6 +35,7 @@
             :url-browse-bid="urlBrowseBid"
             :url-save-bid="urlSaveBid"
             :url-import="urlImport"
+            :url-validate="urlValidate"
             :league-id="league.id"
         ></transfer-market>
     </div>
@@ -50,7 +51,8 @@ export default {
         urlBrowseBasketballer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
-        urlImport: String
+        urlImport: String,
+        urlValidate: String
     },
     data() {
         return {

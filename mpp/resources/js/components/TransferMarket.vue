@@ -49,14 +49,27 @@
                     </div>
                     <button v-if="dataChanged && isValid" class="w-full" :class="saving ? 'btn-loading' : 'btn-primary'" @click="save">Enregister</button>
                     <button v-if="dataChanged && !isValid" class="btn-disabled w-full">Enregister</button>
+                    <button v-if="leagueId != null && isValid" class="btn-secondary w-full" @click="showValidationModal">Valider</button>
+                    <button v-if="leagueId != null && !isValid" class="btn-disabled w-full">Valider</button>
                 </div>
             </div>
         </div>
     </div>
+    <transfer-market-validation-modal
+        v-if="validationModalShown"
+        :loading="validating"
+        @cancel="validationModalShown = false"
+        @validate="validate()"
+    ></transfer-market-validation-modal>
 </template>
 
 <script>
+import TransferMarketValidationModal from './TransferMarketValidationModal.vue'
+
 export default {
+    components: {
+        TransferMarketValidationModal
+    },
     props: {
         urlBrowseBasketballer: String,
         urlBrowseBid: String,
@@ -68,17 +81,23 @@ export default {
         urlImport: {
             type: String,
             default: ""
+        },
+        urlValidate: {
+            type: String,
+            default: ""
         }
     },
     data() {
         return {
             loading: true,
             saving: false,
+            validating: false,
             bids: [],
             basketballers: [],
             dataChanged: false,
             isValid: false,
-            remainingBudget: 250
+            remainingBudget: 250,
+            validationModalShown: false
         }
     },
     methods: {
@@ -223,6 +242,9 @@ export default {
                 this.saving = false
             }
         },
+        showValidationModal() {
+            this.validationModalShown = true
+        },
         updateBid(basketballerId, price) {
             if (price == "") {
                 price = 0
@@ -239,6 +261,17 @@ export default {
                 this.isValid = true
             } else {
                 this.isValid = false
+            }
+        },
+        async validate() {
+            if (!this.validating) {
+                this.validating = true
+                console.log(this.urlValidate)
+                await axios
+                .post(this.urlValidate, {
+                    league_id: this.leagueId
+                })
+                this.validating = false
             }
         }
     },

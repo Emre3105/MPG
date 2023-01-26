@@ -64,4 +64,14 @@ class BidController extends Controller
             return TransferMarket::where('player_id', $playerId)->first()->bids;
         }
     }
+
+    public function validateBids(Request $request) {
+        if(isset($request->league_id)) {
+            $userId = Auth::user()->id;
+            $playerId = Player::where('user_id', $userId)->where('league_id', $request->league_id)->first()->id;
+            $transferMarket = TransferMarket::where('player_id', $playerId)->first();
+            $transferMarket->validated_at = date('Y-m-d H:i:s');
+            $transferMarket->save();
+        }
+    }
 }
