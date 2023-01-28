@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Models\TransferMarket;
 use App\Models\Bid;
 use App\Models\Player;
+use App\Models\League;
+use App\Models\Basketballer;
 
 class BidController extends Controller
 {
@@ -72,6 +76,47 @@ class BidController extends Controller
             $transferMarket = TransferMarket::where('player_id', $playerId)->first();
             $transferMarket->validated_at = date('Y-m-d H:i:s');
             $transferMarket->save();
+
+            $transferMarkets = TransferMarket::whereIn("player_id", League::find($request->league_id)->players->pluck("id")->toArray())->get();
+            $canDistributeBasketballers = true;
+            foreach($transferMarkets as $transferMarket) {
+                if($transferMarket->validated_at == null) {
+                    $canDistributeBasketballers = false;
+                }
+            }
+            if($canDistributeBasketballers) {
+                $this->distributeBasketballers($transferMarkets);
+            }
         }
+    }
+
+    private function distributeBasketballers($transferMarkets) {
+        $basketballerIds = Basketballer::pluck("id")->toArray();
+        foreach($basketballerIds as $basketballerId) {
+            $playerId = $this->getBestOffer($transferMarkets, $basketballerId);
+            if($playerId != null) {
+                DB::insert('insert into basketballers_players (basketballer_id, player_id) values (?, ?)', [$basketballerId, $playerId]);
+            }
+        }
+    }
+
+    private function getBestOffer($transferMarkets, $basketballerId) {
+        $playerId = null; // the player who made the best offer
+        $bestOffer = -1;
+        $bestDate = null;
+        foreach($transferMarkets as $transferMarket) {
+            $bid = $transferMarket->bids->where("basketballer_id", $basketballerId)->first();
+            if ($bid && (
+                // this player made a best offer
+                $bid->price > $bestOffer ||
+                // this player made same offer than then best but earlier
+                $bid->price == $bestOffer && Carbon::parse($transferMarket->validated_at)->lt($bestDate)
+            )) {
+                $playerId = $transferMarket->player_id;
+                $bestOffer = $bid->price;
+                $bestDate = Carbon::parse($transferMarket->validated_at);
+            }
+        }
+        return $playerId;
     }
 }
