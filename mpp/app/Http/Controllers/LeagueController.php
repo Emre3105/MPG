@@ -109,7 +109,8 @@ class LeagueController extends Controller
         $league = League::where('code', $code)->firstOrFail();
         if (Player::where('league_id', $league->id)->where('user_id', Auth::user()->id)->exists()) {
             return view('league', [
-                'league' => League::where('code', $code)->firstOrFail()
+                'league' => $league,
+                'validated' => TransferMarket::where('player_id', Player::where('league_id', $league->id)->where('user_id', Auth::user()->id)->first()->id)->first()->validated_at ? true : false
             ]);
         }
         return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas accès à cette ligue."]);

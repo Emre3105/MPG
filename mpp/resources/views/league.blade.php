@@ -2,6 +2,7 @@
 @section('content')
     <league-panel
         :league="{{$league}}"
+        :validated="{{$validated ? 'true' : 'false'}}"
         :auth="{{Auth::user()->id}}"
         url-browse-players={{route('league.player.browse', $league->id)}}
         url-launch-league={{route('league.launch', $league->id)}}
