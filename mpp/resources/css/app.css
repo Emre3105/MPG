@@ -167,11 +167,22 @@
         @apply bg-cyan text-white hover:bg-cyan-dark border-t border-gray-darkest;
     }
 
+    .table-disabled {
+        @apply bg-orange-light text-gray-darkest border-t border-gray-darkest;
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5px,
+            rgba(0,0,0,.2) 5px,
+            rgba(0,0,0,.2) 10px
+        );
+    }
+
     .table-head > td {
         @apply font-semibold overflow-hidden;
     }
 
-    .table-head > th, .table-primary > td, .table-secondary > td, .table-selected > td {
+    .table-head > th, .table-primary > td, .table-secondary > td, .table-selected > td, .table-disabled > td {
         @apply p-3 text-center;
     }
 }

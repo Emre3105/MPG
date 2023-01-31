@@ -18,6 +18,7 @@
                 :basketballers="basketballers"
                 :transfer-market="true"
                 :selected-basketballers="bids"
+                :bought-basketballers="boughtBasketballers"
                 @add-bid="(basketballerId) => addBid(basketballerId)"
                 @remove-bid="(basketballerId) => removeBid(basketballerId)"
             ></basketballers-table>
@@ -72,6 +73,7 @@ export default {
     },
     props: {
         urlBrowseBasketballer: String,
+        urlBrowseBoughtBasketballer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
         leagueId: {
@@ -94,6 +96,7 @@ export default {
             validating: false,
             bids: [],
             basketballers: [],
+            boughtBasketballers: [],
             dataChanged: false,
             isValid: false,
             remainingBudget: 250,
@@ -193,6 +196,15 @@ export default {
                 this.basketballers = response.data
             ))
         },
+        async loadBoughtBasketballers() {
+            await axios
+            .post(this.urlBrowseBoughtBasketballer, {
+                league_id: this.leagueId
+            })
+            .then(response => (
+                this.boughtBasketballers = response.data
+            ))
+        },
         async loadBids() {
             if (this.leagueId == null) {
                 await axios
@@ -278,6 +290,7 @@ export default {
     async mounted() {
         this.loading = true
         await this.loadBasketballers()
+        await this.loadBoughtBasketballers()
         await this.loadBids()
         this.loading = false
     },

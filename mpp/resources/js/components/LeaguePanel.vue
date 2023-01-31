@@ -35,6 +35,7 @@
         <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
         <transfer-market
             :url-browse-basketballer="urlBrowseBasketballer"
+            :url-browse-bought-basketballer="urlBrowseBoughtBasketballer"
             :url-browse-bid="urlBrowseBid"
             :url-save-bid="urlSaveBid"
             :url-import="urlImport"
@@ -59,6 +60,7 @@ export default {
         urlBrowsePlayers: String,
         urlLaunchLeague: String,
         urlBrowseBasketballer: String,
+        urlBrowseBoughtBasketballer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
         urlImport: String,

@@ -20,13 +20,14 @@
                 </tr>
             </thead>
             <tbody v-if="!loading">
-                <tr v-for="(item, key) in data" :class="isSelected(item.id) ? 'table-selected' : key % 2 == 0 ? 'table-primary' : 'table-secondary'">
+                <tr v-for="(item, key) in data" :class="isSelected(item.id) ? 'table-selected' : isBought(item.id) ? 'table-disabled' : key % 2 == 0 ? 'table-primary' : 'table-secondary'">
                     <th>{{ item.name }}</th>
                     <td>{{ item.team }}</td>
                     <td>{{ item.position }}</td>
                     <td>{{ item.odds }}</td>
-                    <td v-if="transferMarket && !isSelected(item.id)"><i class="fa-regular fa-square-plus cursor-pointer text-2xl hover:scale-110" @click="addBid(item.id)"></i></td>
-                    <td v-if="transferMarket && isSelected(item.id)"><i class="fa-regular fa-trash-can cursor-pointer text-xl hover:scale-110" @click="removeBid(item.id)"></i></td>
+                    <td v-if="transferMarket && !isBought(item.id) && !isSelected(item.id)"><i class="fa-regular fa-square-plus cursor-pointer text-2xl hover:scale-110" @click="addBid(item.id)"></i></td>
+                    <td v-if="transferMarket && !isBought(item.id) && isSelected(item.id)"><i class="fa-regular fa-trash-can cursor-pointer text-xl hover:scale-110" @click="removeBid(item.id)"></i></td>
+                    <td v-if="transferMarket && isBought(item.id)"><i class="fa-solid fa-ban cursor-not-allowed text-xl"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -53,6 +54,10 @@ export default {
             default: []
         },
         basketballers: {
+            type: Array,
+            default: []
+        },
+        boughtBasketballers: {
             type: Array,
             default: []
         }
@@ -84,6 +89,15 @@ export default {
     methods: {
         addBid(basketballerId) {
             this.$emit('addBid', basketballerId)
+        },
+        isBought(basketballerId) {
+            let res = false
+            this.boughtBasketballers.forEach((basketballer) => {
+                if (basketballer.basketballer_id == basketballerId) {
+                    res = true
+                }
+            })
+            return res
         },
         isSelected(basketballerId) {
             let res = false
