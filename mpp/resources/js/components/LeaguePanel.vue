@@ -36,6 +36,7 @@
         <transfer-market
             :url-browse-basketballer="urlBrowseBasketballer"
             :url-browse-bought-basketballer="urlBrowseBoughtBasketballer"
+            :url-browse-bought-basketballer-by-player="urlBrowseBoughtBasketballerByPlayer"
             :url-browse-bid="urlBrowseBid"
             :url-save-bid="urlSaveBid"
             :url-import="urlImport"
@@ -61,6 +62,7 @@ export default {
         urlLaunchLeague: String,
         urlBrowseBasketballer: String,
         urlBrowseBoughtBasketballer: String,
+        urlBrowseBoughtBasketballerByPlayer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
         urlImport: String,

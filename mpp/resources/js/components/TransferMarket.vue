@@ -31,6 +31,12 @@
                     <p class="text-sm text-right" :class="remainingBudget < 0 ? 'text-red' : ''">
                         Budget restant : {{ remainingBudget }}M / 250M
                     </p>
+                    <div v-for="boughtBasketballerByPlayer in boughtBasketballersByPlayer" class="flex items-center py-0.5 text-gray-light">
+                        <p class="font-bold w-10">{{ getAcronym(boughtBasketballerByPlayer.position) }}</p>
+                        <p class="w-full">{{ boughtBasketballerByPlayer.name }}</p>
+                        <p>{{ boughtBasketballerByPlayer.price }}</p>
+                    </div>
+                    <hr v-if="boughtBasketballersByPlayer.length > 0"/>
                     <p v-if="bids.length <= 0" class="italic text-center">[Vous n'avez pas encore enregistré d'enchères]</p>
                     <div v-for="bid in bids" class="flex items-center">
                         <p class="font-bold w-10">{{ getAcronym(bid.position) }}</p>
@@ -74,6 +80,7 @@ export default {
     props: {
         urlBrowseBasketballer: String,
         urlBrowseBoughtBasketballer: String,
+        urlBrowseBoughtBasketballerByPlayer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
         leagueId: {
@@ -97,6 +104,7 @@ export default {
             bids: [],
             basketballers: [],
             boughtBasketballers: [],
+            boughtBasketballersByPlayer: [],
             dataChanged: false,
             isValid: false,
             remainingBudget: 250,
@@ -205,6 +213,18 @@ export default {
                 this.boughtBasketballers = response.data
             ))
         },
+        async loadBoughtBasketballersByPlayer() {
+            await axios
+            .post(this.urlBrowseBoughtBasketballerByPlayer, {
+                league_id: this.leagueId
+            })
+            .then((response) => {
+                response.data.forEach((basketballer) => {
+                    this.remainingBudget = this.remainingBudget - basketballer.price
+                })
+                this.boughtBasketballersByPlayer = response.data
+            })
+        },
         async loadBids() {
             if (this.leagueId == null) {
                 await axios
@@ -291,6 +311,7 @@ export default {
         this.loading = true
         await this.loadBasketballers()
         await this.loadBoughtBasketballers()
+        await this.loadBoughtBasketballersByPlayer()
         await this.loadBids()
         this.loading = false
     },

@@ -57,6 +57,7 @@ Route::group(['prefix' => 'joueurs'], function()
     Route::get('/', [BasketballerController::class, 'index'])->name('basketballer.index');
     Route::post('/', [BasketballerController::class, 'browse'])->name('basketballer.browse');
     Route::post('/indisponible', [BasketballerController::class, 'bought'])->name('basketballer.bought.browse');
+    Route::post('/possede', [BasketballerController::class, 'boughtByPlayer'])->name('basketballer.bought.by.player.browse');
 });
 
 Route::group(['prefix' => 'mercato'], function()
