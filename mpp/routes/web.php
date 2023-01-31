@@ -19,8 +19,11 @@ use App\Http\Controllers\BasketballerController;
 // https://laravel.com/docs/9.x/controllers
 // index (get), browse (post), create (get), store (post), show (get), edit (get), update (put), destroy (delete)
 Route::get('/', function () {
-    if (auth()->check()) { //a user is logged in
+    if (Auth::guard('user')->check()) { //a user is logged in
         return redirect()->route('home.index');
+    }
+    if (Auth::guard('admin')->check()) { //an admin is logged in
+        return redirect()->route('admin.index');
     }
     return view('welcome');
 })->name('welcome');
@@ -35,11 +38,23 @@ Route::get('inscription', [AuthController::class, 'create'])->name('auth.registe
 Route::post('inscription', [AuthController::class, 'store'])->name('auth.register');
 Route::get('deconnexion', [AuthController::class, 'logout'])->name('auth.logout');
 
+Route::group(['prefix' => 'admin'], function () {
+        Route::get('connexion', [AuthController::class, 'adminindex'])->name('auth.adminlogin.index');
+        Route::post('connexion', [AuthController::class, 'adminlogin'])->name('auth.adminlogin');
+        Route::get('accueil', function() {
+            return view('admin');
+        })->name('admin.index')->middleware('auth:admin');
+
+        Route::get('/', function () {
+            return redirect()->route('admin.index');
+        })->name('admin')->middleware('auth:admin');
+});
+
 Route::get('accueil', function() {
     return view('home');
-})->name('home.index')->middleware('auth');
+})->name('home.index')->middleware('auth:user');
 
-Route::group(['prefix' => 'ligues',  'middleware' => 'auth'], function()
+Route::group(['prefix' => 'ligues',  'middleware' => 'auth:user'], function()
 {
     Route::get('/', [LeagueController::class, 'browse'])->name('league.browse');
     Route::post('favori', [LeagueController::class, 'favorite'])->name('league.favorite');

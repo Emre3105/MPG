@@ -1,7 +1,7 @@
 @extends('head')
 @section('base')
 <?php
-if (Auth::check()) {
+if (Auth::guard('user')->check()) {
     $urlHome = route('home.index');
     $items = array(
         (object) array(
@@ -18,7 +18,21 @@ if (Auth::check()) {
             "name" => "Déconnexion"
         )
     );
-} else {
+} else if(Auth::guard('admin')->check()) {
+    $urlHome = route('admin.index');
+    $items = array(
+        (object) array(
+            "url" => route('admin.index'),
+            "icon" => "fa-solid fa-table",
+            "name" => "Portail"
+        ), (object) array(
+            "url" => route('auth.logout'),
+            "icon" => "fa-solid fa-arrow-right-from-bracket",
+            "name" => "Déconnexion"
+        )
+    );
+}
+else {
     $urlHome = route('welcome');
     $items = array(
         (object) array(
@@ -33,6 +47,10 @@ if (Auth::check()) {
             "url" => route('auth.login.index'),
             "icon" => "fa-solid fa-arrow-right-to-bracket",
             "name" => "Connexion"
+        ), (object) array(
+            "url" => route('auth.adminlogin.index'),
+            "icon" => "fa-solid fa-globe",
+            "name" => "Admin"
         )
     );
 }
