@@ -289,7 +289,7 @@ export default {
         },
         updateIsValid() {
             this.dataChanged = true
-            if (this.bids.length + this.boughtBasketballersByPlayer.length >= 8 && this.remainingBudget >= 0 && this.areAllPricesValid() && this.areAllPositionsPresent()) {
+            if (this.bids.length + this.boughtBasketballersByPlayer.length >= 8 && this.remainingBudget == 0 && this.areAllPricesValid() && this.areAllPositionsPresent()) {
                 this.isValid = true
             } else {
                 this.isValid = false
