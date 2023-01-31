@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('basketballer_id');
             $table->unsignedBigInteger('player_id');
+            $table->integer('price');
             $table->timestamps();
             
             $table->unique(['basketballer_id', 'player_id']);
