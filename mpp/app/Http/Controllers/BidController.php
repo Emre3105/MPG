@@ -86,6 +86,19 @@ class BidController extends Controller
             }
             if($canDistributeBasketballers) {
                 $this->distributeBasketballers($transferMarkets);
+                // on recuperer a nouveau les transferMarkets parce que les budget restants ont été modifiés
+                $transferMarkets = TransferMarket::whereIn("player_id", League::find($request->league_id)->players->pluck("id")->toArray())->get();
+                foreach($transferMarkets as $transferMarket) {
+                    // empty bids
+                    foreach($transferMarket->bids as $bid) {
+                        $bid->delete();
+                    }
+                    // reset validated_at when needed
+                    if($transferMarket->remaining_budget > 0) {
+                        $transferMarket->validated_at = null;
+                        $transferMarket->save();
+                    }
+                }
             }
         }
     }
@@ -93,30 +106,34 @@ class BidController extends Controller
     private function distributeBasketballers($transferMarkets) {
         $basketballerIds = Basketballer::pluck("id")->toArray();
         foreach($basketballerIds as $basketballerId) {
-            $playerId = $this->getBestOffer($transferMarkets, $basketballerId);
-            if($playerId != null) {
-                DB::insert('insert into basketballers_players (basketballer_id, player_id) values (?, ?)', [$basketballerId, $playerId]);
+            $bestOffer = $this->getBestOffer($transferMarkets, $basketballerId);
+            $transferMarket = $bestOffer[0];
+            $price = $bestOffer[1];
+            if($transferMarket != null) {
+                DB::insert('insert into basketballers_players (basketballer_id, player_id, price) values (?, ?, ?)', [$basketballerId, $transferMarket->player_id, $price]);
+                $transferMarket->remaining_budget = $transferMarket->remaining_budget - $price;
+                $transferMarket->save();
             }
         }
     }
 
     private function getBestOffer($transferMarkets, $basketballerId) {
-        $playerId = null; // the player who made the best offer
-        $bestOffer = -1;
+        $bestTransferMarket = null; // the player who made the best offer
+        $bestPrice = -1;
         $bestDate = null;
         foreach($transferMarkets as $transferMarket) {
             $bid = $transferMarket->bids->where("basketballer_id", $basketballerId)->first();
             if ($bid && (
                 // this player made a best offer
-                $bid->price > $bestOffer ||
+                $bid->price > $bestPrice ||
                 // this player made same offer than then best but earlier
-                $bid->price == $bestOffer && Carbon::parse($transferMarket->validated_at)->lt($bestDate)
+                $bid->price == $bestPrice && Carbon::parse($transferMarket->validated_at)->lt($bestDate)
             )) {
-                $playerId = $transferMarket->player_id;
-                $bestOffer = $bid->price;
+                $bestTransferMarket = $transferMarket;
+                $bestPrice = $bid->price;
                 $bestDate = Carbon::parse($transferMarket->validated_at);
             }
         }
-        return $playerId;
+        return [$bestTransferMarket, $bestPrice];
     }
 }
