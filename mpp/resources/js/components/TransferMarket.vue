@@ -193,6 +193,8 @@ export default {
         isPositionPresent(position) {
             return this.bids.filter((bid) => {
                 return bid.position == position
+            }).length > 0 || this.boughtBasketballersByPlayer.filter((basketballer) => {
+                return basketballer.position == position
             }).length > 0
         },
         async loadBasketballers() {
@@ -300,7 +302,6 @@ export default {
         async validate() {
             if (!this.validating) {
                 this.validating = true
-                console.log(this.urlValidate)
                 await axios
                 .post(this.urlValidate, {
                     league_id: this.leagueId
