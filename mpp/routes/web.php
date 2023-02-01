@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\BasketballerController;
+use App\Http\Controllers\StatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +75,4 @@ Route::group(['prefix' => 'joueurs'], function()
 });
 
 Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');
+Route::post('ajoutStats', [StatController::class, 'store'])->name('stat.store');

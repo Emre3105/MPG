@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('basketballers', function (Blueprint $table) {
+        Schema::create('stats', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('team');
-            $table->string('position');
-            $table->integer('odds');
-            $table->string('status');
+            $table->string('basketballer_name');
+            $table->date('date');
+            $table->integer('points');
+            $table->float('note');
             $table->timestamps();
+
+            $table->foreign('basketballer_name')->references('name')->on('basketballers');
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('basketballers');
+        Schema::dropIfExists('stats');
     }
 };
