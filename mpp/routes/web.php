@@ -72,3 +72,5 @@ Route::group(['prefix' => 'joueurs'], function()
     // Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
     // Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
 });
+
+Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');

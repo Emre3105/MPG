@@ -23,8 +23,12 @@ if (Auth::guard('user')->check()) {
     $items = array(
         (object) array(
             "url" => route('admin.index'),
-            "icon" => "fa-solid fa-table",
+            "icon" => "fa-solid fa-desktop",
             "name" => "Portail"
+        ), (object) array(
+            "url" => route('basketballer.index'),
+            "icon" => "fa-solid fa-person-circle-question",
+            "name" => "Basketteurs"
         ), (object) array(
             "url" => route('auth.logout'),
             "icon" => "fa-solid fa-arrow-right-from-bracket",
