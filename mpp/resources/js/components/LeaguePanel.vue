@@ -5,6 +5,7 @@
         </div>
     </transition>
     <div v-if="league.status == 0">
+        <!-- league didn't start yet -->
         <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
         <div class="card">
             <p>Nombre de joueurs : {{ league.current_players }} / {{ league.max_players }}</p>
@@ -28,15 +29,49 @@
             </div>
         </div>
     </div>
+    <div v-if="league.status == 1 && validated === false">
+        <!-- league is in transfer market window -->
+        <!-- transfer market is not validated yet -->
+        <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
+        <transfer-market
+            :url-browse-basketballer="urlBrowseBasketballer"
+            :url-browse-bought-basketballer="urlBrowseBoughtBasketballer"
+            :url-browse-bought-basketballer-by-player="urlBrowseBoughtBasketballerByPlayer"
+            :url-browse-bid="urlBrowseBid"
+            :url-save-bid="urlSaveBid"
+            :url-import="urlImport"
+            :url-validate="urlValidate"
+            :league-id="league.id"
+        ></transfer-market>
+    </div>
+    <div v-if="league.status == 1 && validated === true">
+        <!-- league is in transfer market window -->
+        <!-- transfer market is already validated -->
+        <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
+        <p class="italic text-center">[Vous avez déjà validé votre mercato. Veuillez attendre la validation des autres joueurs.]</p>
+    </div>
+    <div v-if="league.status == 2">
+        <!-- league is in progress -->
+        <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
+        <p>MA COMPO</p>
+    </div>
 </template>
   
 <script>
 export default {
     props: {
         league: Object,
+        validated: Boolean,
         auth: Number,
         urlBrowsePlayers: String,
-        urlLaunchLeague: String
+        urlLaunchLeague: String,
+        urlBrowseBasketballer: String,
+        urlBrowseBoughtBasketballer: String,
+        urlBrowseBoughtBasketballerByPlayer: String,
+        urlBrowseBid: String,
+        urlSaveBid: String,
+        urlImport: String,
+        urlValidate: String
     },
     data() {
         return {

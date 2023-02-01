@@ -7,11 +7,15 @@ if (Auth::guard('user')->check()) {
         (object) array(
             "url" => route('home.index'),
             "icon" => "fa-solid fa-table",
-            "name" => "Mes ligues"
+            "name" => "Ligues"
         ), (object) array(
             "url" => route('basketballer.index'),
             "icon" => "fa-solid fa-person-circle-question",
             "name" => "Basketteurs"
+        ), (object) array(
+            "url" => route('transfer_market.index'),
+            "icon" => "fa-solid fa-cart-shopping",
+            "name" => "Mercato"
         ), (object) array(
             "url" => route('auth.logout'),
             "icon" => "fa-solid fa-arrow-right-from-bracket",

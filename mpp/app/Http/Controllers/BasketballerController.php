@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Basketballer;
 use App\Http\Requests\BasketballersRequest;
 use Illuminate\Support\Facades\DB;
+use App\Models\League;
+use App\Models\Player;
 
 class BasketballerController extends Controller
 {
@@ -50,5 +54,31 @@ class BasketballerController extends Controller
             ]);
         }
         return redirect()->back()->with('success', 'Les joueurs ont bien été ajoutés.');
+    }
+
+    public function bought(Request $request) {
+        if (isset($request->league_id)) {
+            $players = League::findOrFail($request->league_id)->players->pluck("id")->toArray();
+            return DB::table('basketballers_players')
+                ->select('basketballers_players.basketballer_id')
+                ->whereIn('basketballers_players.player_id', $players)
+                ->get();
+        }
+        return redirect()->back()->with('error', 'Une erreur est survenue.');
+    }
+
+    public function boughtByPlayer(Request $request) {
+        if (isset($request->league_id)) {
+            $player = Player::where([
+                'user_id' => Auth::user()->id,
+                'league_id' => $request->league_id,
+            ])->first();
+            return DB::table('basketballers_players')
+                ->join('basketballers', 'basketballers_players.basketballer_id', '=', 'basketballers.id')
+                ->select(array('basketballers.id', 'basketballers.name', 'basketballers.position', 'basketballers_players.price'))
+                ->where('basketballers_players.player_id', $player->id)
+                ->get();
+        }
+        return redirect()->back()->with('error', 'Une erreur est survenue.');
     }
 }

@@ -13,7 +13,8 @@ class BasketballerFactory extends Factory
      */
     public function definition()
     {
-        $positions = ["pointGuard", "shootingGuard", "smallForward", "powerForward", "center"];
+        // $positions = ["Point Guard", "Shooting Guard", "Small Forward", "Power Forward", "Center"];
+        $positions = ["Meneur", "Arrière", "Ailier", "Ailier Fort", "Pivot"];
         $statuses = [
             "available", "available", "available", "available", "available", "available", "available", "available",
             "injured",

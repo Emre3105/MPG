@@ -21,6 +21,7 @@ import PasswordRestriction from './components/PasswordRestriction.vue'
 import BasketballersTable from './components/BasketballersTable.vue'
 import LeaguePanel from './components/LeaguePanel.vue'
 import AdminButton from './components/AdminButton.vue'
+import TransferMarket from './components/TransferMarket.vue'
 
 app.component('leagues', Leagues)
 app.component('navbar', Navbar)
@@ -28,6 +29,7 @@ app.component('password-restriction', PasswordRestriction)
 app.component('basketballers-table', BasketballersTable)
 app.component('league-panel', LeaguePanel)
 app.component('admin-button', AdminButton)
+app.component('transfer-market', TransferMarket)
 
 /**
  * The following block of code may be used to automatically register your

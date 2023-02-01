@@ -16,14 +16,18 @@
                             <i v-if="selectedColumn == item.column_name && selectedDirection == 'desc'" class="fa-solid fa-caret-down"></i>
                         </div>
                     </th>
+                    <th v-if="transferMarket"></th>
                 </tr>
             </thead>
             <tbody v-if="!loading">
-                <tr v-for="(item, key) in data" :class="key % 2 == 0 ? 'table-primary' : 'table-secondary'">
+                <tr v-for="(item, key) in data" :class="isSelected(item.id) ? 'table-selected' : isBought(item.id) ? 'table-disabled' : key % 2 == 0 ? 'table-primary' : 'table-secondary'">
                     <th>{{ item.name }}</th>
                     <td>{{ item.team }}</td>
                     <td>{{ item.position }}</td>
                     <td>{{ item.odds }}</td>
+                    <td v-if="transferMarket && !isBought(item.id) && !isSelected(item.id)"><i class="fa-regular fa-square-plus cursor-pointer text-2xl hover:scale-110" @click="addBid(item.id)"></i></td>
+                    <td v-if="transferMarket && !isBought(item.id) && isSelected(item.id)"><i class="fa-regular fa-trash-can cursor-pointer text-xl hover:scale-110" @click="removeBid(item.id)"></i></td>
+                    <td v-if="transferMarket && isBought(item.id)"><i class="fa-solid fa-ban cursor-not-allowed text-xl"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -38,8 +42,25 @@
 
 <script>
 export default {
+    emits: ['addBid', 'removeBid'],
     props: {
-        urlBrowse: String
+        urlBrowse: String,
+        transferMarket: {
+            type: Boolean,
+            default: false
+        },
+        selectedBasketballers: {
+            type: Array,
+            default: []
+        },
+        basketballers: {
+            type: Array,
+            default: []
+        },
+        boughtBasketballers: {
+            type: Array,
+            default: []
+        }
     },
     data() {
         return {
@@ -66,6 +87,27 @@ export default {
         }
     },
     methods: {
+        addBid(basketballerId) {
+            this.$emit('addBid', basketballerId)
+        },
+        isBought(basketballerId) {
+            let res = false
+            this.boughtBasketballers.forEach((basketballer) => {
+                if (basketballer.basketballer_id == basketballerId) {
+                    res = true
+                }
+            })
+            return res
+        },
+        isSelected(basketballerId) {
+            let res = false
+            this.selectedBasketballers.forEach((basketballer) => {
+                if (basketballer.id == basketballerId) {
+                    res = true
+                }
+            })
+            return res
+        },
         async load(column) {
             if (!this.loading) {
                 this.loading = true
@@ -90,9 +132,17 @@ export default {
                 this.loading = false
             }
         },
+        removeBid(basketballerId) {
+            this.$emit('removeBid', basketballerId)
+        },
     },
     mounted() {
-        this.load('odds')
+        if (this.basketballers.length > 0) {
+            this.data = this.basketballers
+            this.selectedColumn = "odds"
+        } else {
+            this.load('odds')
+        }
     },
 }
 </script>

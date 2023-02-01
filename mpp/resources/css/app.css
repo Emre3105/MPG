@@ -19,6 +19,10 @@
         @apply py-2 px-4 bg-gray-very-lightest hover:bg-gray-lightest text-gray-dark font-semibold shadow-sm rounded-lg border border-gray-dark;
     }
 
+    .btn-info {
+        @apply py-2 px-4 bg-white hover:bg-gray-very-lightest text-gray-dark font-semibold shadow-sm rounded-lg border border-gray-dark;
+    }
+
     .btn-success {
         @apply py-2 px-4 bg-green hover:bg-green-dark text-white font-semibold shadow-sm rounded-lg border border-green hover:border-green-dark;
     }
@@ -159,11 +163,26 @@
         @apply bg-gray-lightest text-gray-darkest hover:bg-gray-light border-t border-gray-darkest;
     }
 
+    .table-selected {
+        @apply bg-cyan text-white hover:bg-cyan-dark border-t border-gray-darkest;
+    }
+
+    .table-disabled {
+        @apply bg-orange-light text-gray-darkest border-t border-gray-darkest;
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5px,
+            rgba(0,0,0,.2) 5px,
+            rgba(0,0,0,.2) 10px
+        );
+    }
+
     .table-head > td {
         @apply font-semibold overflow-hidden;
     }
 
-    .table-head > th, .table-primary > td, .table-secondary > td {
+    .table-head > th, .table-primary > td, .table-secondary > td, .table-selected > td, .table-disabled > td {
         @apply p-3 text-center;
     }
 }

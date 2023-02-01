@@ -80,6 +80,7 @@
                     <div class="space-x-4">
                         <button class="btn-primary">btn-primary</button>
                         <button class="btn-secondary">btn-secondary</button>
+                        <button class="btn-info">btn-info</button>
                         <button class="btn-success">btn-success</button>
                         <button class="btn-danger">btn-danger</button>
                         <button class="btn-loading">btn-loading</button>
@@ -298,8 +299,8 @@
                                     <td>Column content</td>
                                     <td>Column content</td>
                                 </tr>
-                                <tr class="table-primary">
-                                    <td>table-primary</td>
+                                <tr class="table-selected">
+                                    <td>table-selected</td>
                                     <td>Column content</td>
                                     <td>Column content</td>
                                     <td>Column content</td>

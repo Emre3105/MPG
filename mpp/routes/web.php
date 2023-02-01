@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\BasketballerController;
 use App\Http\Controllers\StatController;
+use App\Http\Controllers\TransferMarketController;
+use App\Http\Controllers\BidController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,8 +72,21 @@ Route::group(['prefix' => 'joueurs'], function()
 {
     Route::get('/', [BasketballerController::class, 'index'])->name('basketballer.index');
     Route::post('/', [BasketballerController::class, 'browse'])->name('basketballer.browse');
-    // Route::post('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
-    // Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
+    Route::post('/indisponible', [BasketballerController::class, 'bought'])->name('basketballer.bought.browse');
+    Route::post('/possede', [BasketballerController::class, 'boughtByPlayer'])->name('basketballer.bought.by.player.browse');
+});
+
+Route::group(['prefix' => 'mercato'], function()
+{
+    Route::get('/', [TransferMarketController::class, 'index'])->name('transfer_market.index');
+});
+
+Route::group(['prefix' => 'enchere'], function()
+{
+    Route::post('/', [BidController::class, 'browse'])->name('bid.browse');
+    Route::post('/enregister', [BidController::class, 'save'])->name('bid.save');
+    Route::post('/importer', [BidController::class, 'import'])->name('bid.import');
+    Route::post('/valider', [BidController::class, 'validateBids'])->name('bid.validate');
 });
 
 Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');
