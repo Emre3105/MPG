@@ -170,6 +170,9 @@ export default {
             if (position == "Pivot") {
                 return "P"
             }
+            if (position == "Flexible") {
+                return "F"
+            }
             return "ERR"
         },
         async importTransferMarket() {
