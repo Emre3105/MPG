@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Basketballer;
 use App\Http\Requests\BasketballersRequest;
-use Illuminate\Support\Facades\DB;
 use App\Models\League;
 use App\Models\Player;
 
