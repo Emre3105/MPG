@@ -6,7 +6,7 @@
         </svg>
     </div>
     <div class="text-center md:text-right md:px-8">
-        <button v-if="!loading && leagueId != null" class="btn-info" @click="importTransferMarket()">
+        <button v-if="!loading && leagueId != null && boughtBasketballersAreLoaded && boughtBasketballers.length <= 0" class="btn-info" @click="importTransferMarket()">
             <i class="fa-solid fa-download"></i>
             Importer mon mercato
         </button>
@@ -99,6 +99,7 @@ export default {
     data() {
         return {
             loading: true,
+            boughtBasketballersAreLoaded: false,
             saving: false,
             validating: false,
             bids: [],
@@ -212,6 +213,7 @@ export default {
             .then(response => (
                 this.boughtBasketballers = response.data
             ))
+            this.boughtBasketballersAreLoaded = true
         },
         async loadBoughtBasketballersByPlayer() {
             await axios
