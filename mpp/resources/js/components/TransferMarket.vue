@@ -307,6 +307,7 @@ export default {
                     league_id: this.leagueId
                 })
                 this.validating = false
+                location.reload()
             }
         }
     },
