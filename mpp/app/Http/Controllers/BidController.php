@@ -99,6 +99,8 @@ class BidController extends Controller
                         $transferMarket->save();
                     }
                 }
+                // update league status if players have no remaining budget
+                $this->endTransferMarker($request->league_id);
             }
         }
     }
@@ -135,5 +137,20 @@ class BidController extends Controller
             }
         }
         return [$bestTransferMarket, $bestPrice];
+    }
+
+    private function endTransferMarker($leagueId) {
+        $league = League::findOrFail($leagueId);
+        $transferMarkets = TransferMarket::whereIn("player_id", $league->players->pluck("id")->toArray())->get();
+        $canEnd = true;
+        foreach($transferMarkets as $transferMarket) {
+            if ($transferMarket->remaining_budget > 0) {
+                $canEnd = false;
+            }
+        }
+        if ($canEnd) {
+            $league->status = 2;
+            $league->save();
+        }
     }
 }

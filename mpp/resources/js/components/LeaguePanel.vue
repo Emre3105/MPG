@@ -50,6 +50,11 @@
         <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
         <p class="italic text-center">[Vous avez déjà validé votre mercato. Veuillez attendre la validation des autres joueurs.]</p>
     </div>
+    <div v-if="league.status == 2">
+        <!-- league is in progress -->
+        <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
+        <p>MA COMPO</p>
+    </div>
 </template>
   
 <script>
