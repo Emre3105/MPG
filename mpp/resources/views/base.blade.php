@@ -63,7 +63,9 @@ else {
     <div class="min-h-screen py-8 px-4">
         @yield('content')
     </div>
-    <footer class="bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white p-2">
-        <p>Application développée par Emre - Nour Eddine - Anthony</p>
+    <footer class="bg-white dark:bg-gray-darkest text-gray-darkest dark:text-white px-4 py-2">
+        <div class="container mx-auto text-center">
+            MPP - Développé par Emre, Nour Eddine et Anthony
+        </div>
     </footer>
 @endsection
