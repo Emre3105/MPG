@@ -53,12 +53,57 @@
     <div v-if="league.status == 2">
         <!-- league is in progress -->
         <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
-        <p>MA COMPO</p>
+        <div>
+            <div class="flex justify-center">
+                <div 
+                    class="px-4 sm:px-8 py-3 cursor-pointer sm:text-xl" 
+                    :class="currentTab === 'Ma compo' ? 'border-b-2' : ''" 
+                    @click="currentTab = 'Ma compo'"
+                >
+                    Ma compo
+                </div>
+                <div 
+                    class="px-4 sm:px-8 py-3 cursor-pointer sm:text-xl" 
+                    :class="currentTab === 'Calendrier' ? 'border-b-2' : ''" 
+                    @click="currentTab = 'Calendrier'"
+                >
+                    Calendrier
+                </div>
+                <div 
+                    class="px-4 sm:px-8 py-3 cursor-pointer sm:text-xl" 
+                    :class="currentTab === 'Classement' ? 'border-b-2' : ''" 
+                    @click="currentTab = 'Classement'"
+                >
+                    Classement
+                </div>
+            </div>
+            <div class="mt-8">
+                <div v-show="currentTab === 'Ma compo'">
+                    <line-up
+                        :url-browse-basketballer-player="urlBrowseBasketballerPlayer"
+                        :url-save-line-up="urlSaveLineUp"
+                        :url-browse-line-up="urlBrowseLineUp"
+                        :league-id="league.id"
+                    ></line-up>
+                </div>
+                <div v-show="currentTab === 'Calendrier'">
+                    Contenu de l'onglet "Calendrier"
+                </div>
+                <div v-show="currentTab === 'Classement'">
+                    Contenu de l'onglet "Classement"
+                </div>
+            </div>
+        </div>
     </div>
 </template>
   
 <script>
+import LineUp from './LineUp.vue'
+
 export default {
+    components: {
+        LineUp
+    },
     props: {
         league: Object,
         validated: Boolean,
@@ -66,10 +111,13 @@ export default {
         urlBrowsePlayers: String,
         urlLaunchLeague: String,
         urlBrowseBasketballer: String,
+        urlBrowseBasketballerPlayer: String,
         urlBrowseBoughtBasketballer: String,
         urlBrowseBoughtBasketballerByPlayer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
+        urlSaveLineUp: String,
+        urlBrowseLineUp: String,
         urlImport: String,
         urlValidate: String
     },
@@ -77,7 +125,8 @@ export default {
         return {
             loading: false,
             data: null,
-            showAlert: false
+            showAlert: false,
+            currentTab: 'Ma compo'
         }
     },
     methods: {

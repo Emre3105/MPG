@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Player;
+use App\Models\LineUp;
 
 class PlayerSeeder extends Seeder
 {
@@ -17,6 +18,9 @@ class PlayerSeeder extends Seeder
     {
         $player = Player::factory(1)->create()->first();
         TransferMarket::create([
+            'player_id' => $player->id
+        ]);
+        LineUp::create([
             'player_id' => $player->id
         ]);
     }
