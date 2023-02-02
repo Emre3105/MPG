@@ -56,28 +56,28 @@
         <div>
             <div class="flex justify-center">
                 <div 
-                    class="px-8 py-3 cursor-pointer" 
+                    class="px-4 sm:px-8 py-3 cursor-pointer sm:text-xl" 
                     :class="currentTab === 'Ma compo' ? 'border-b-2' : ''" 
                     @click="currentTab = 'Ma compo'"
                 >
                     Ma compo
                 </div>
                 <div 
-                    class="px-8 py-3 cursor-pointer" 
+                    class="px-4 sm:px-8 py-3 cursor-pointer sm:text-xl" 
                     :class="currentTab === 'Calendrier' ? 'border-b-2' : ''" 
                     @click="currentTab = 'Calendrier'"
                 >
                     Calendrier
                 </div>
                 <div 
-                    class="px-8 py-3 cursor-pointer" 
+                    class="px-4 sm:px-8 py-3 cursor-pointer sm:text-xl" 
                     :class="currentTab === 'Classement' ? 'border-b-2' : ''" 
                     @click="currentTab = 'Classement'"
                 >
                     Classement
                 </div>
             </div>
-            <div class="p-[20px]">
+            <div class="mt-8">
                 <div v-show="currentTab === 'Ma compo'">
                     <line-up
                         :url-browse-basketballer-player="urlBrowseBasketballerPlayer"

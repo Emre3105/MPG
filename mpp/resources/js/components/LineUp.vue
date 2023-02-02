@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-center sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+    <div class="flex justify-center">
         <div class="w-[24rem] z-10 h-[23rem] rounded text-gray-darkest">
             <div class="absolute ml-16 mt-12 text-center w-20">
                 <button class="btn-secondary w-12 px-0" @click="showSelectionModal('Pivot')">P</button>
@@ -27,7 +27,7 @@
                 <p class="bg-white font-bold mt-1 border rounded" v-else>???</p>
             </div>
         </div>
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="absolute w-[24rem] -translate-x-2 bg-white"
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="absolute w-[24rem] bg-white"
             viewBox="0 0 500.000000 472.000000"
             preserveAspectRatio="xMidYMid meet"
         >
