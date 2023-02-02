@@ -123,9 +123,19 @@ class LeagueController extends Controller
         return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas accès à cette ligue."]);
     }
 
-    public function browsePlayers($id) {
+    public function browsePlayerNames($id) {
         $league = League::findOrFail($id);
         return DB::table('users')->select('users.username')->whereIn('users.id', $league->players->pluck("user_id"))->get();
+    }
+
+    public function browsePlayerIdAndNames($id) {
+        $league = League::findOrFail($id);
+        // return DB::table('users')->select('users.username', 'players.id')->whereIn('users.id', $league->players->pluck("user_id"))->get();
+        return DB::table('users')
+            ->join('players', 'users.id', '=', 'players.user_id')
+            ->join('leagues', 'leagues.id', '=', 'players.league_id')
+            ->where('leagues.id', $id)
+            ->select('users.username', 'players.id')->get();
     }
 
     public function launch($id) {

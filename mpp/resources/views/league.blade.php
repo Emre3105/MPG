@@ -4,6 +4,7 @@
         :league="{{$league}}"
         :validated="{{isset($validated) && $validated ? 'true' : 'false'}}"
         :auth="{{Auth::user()->id}}"
+        url-browse-player-names={{route('league.player.name.browse', $league->id)}}
         url-browse-players={{route('league.player.browse', $league->id)}}
         url-launch-league={{route('league.launch', $league->id)}}
         url-browse-basketballer="{{ route('basketballer.browse') }}"
@@ -16,5 +17,6 @@
         url-browse-line-up="{{ route('lineup.browse') }}"
         url-import="{{ route('bid.import') }}"
         url-validate="{{ route('bid.validate') }}"
+        url-browse-game="{{ route('game.browse') }}"
     ></league-panel>
 @endsection
