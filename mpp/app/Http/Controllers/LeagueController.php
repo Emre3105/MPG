@@ -152,4 +152,10 @@ class LeagueController extends Controller
         }
         return redirect()->route('home.index')->withErrors(['error' => "Désolé, vous n'avez pas les droits sur cette ligue."]);
     }
+
+    public function currentGame($id) {
+        $leagueid = DB::table('players')->select('players.league_id')->where('id', $id)->get();
+        $leagueid = $leagueid[0]->league_id;
+        return DB::table('leagues')->select('leagues.current_game')->where('id', $leagueid)->get();
+    }
 }

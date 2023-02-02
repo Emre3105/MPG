@@ -112,3 +112,4 @@ Route::group(['prefix' => 'games'], function()
 
 Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');
 Route::post('ajoutStats', [StatController::class, 'store'])->name('stat.store');
+Route::post('ligues/{id}/currentGame', [LeagueController::class, 'currentGame'])->name('league.currentGame');

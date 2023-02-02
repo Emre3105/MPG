@@ -187,16 +187,25 @@ export default {
         async calculResults(){
             let player1list = []
             let player2list = []
+            let gamenumberlist = []
             await axios.post('/games')
                 .then(response => {
                     response.data.forEach(element => {
                         player1list.push(element.home_player_id)
                         player2list.push(element.visiting_player_id)
+                        gamenumberlist.push(element.game_number)
                     })
                     
                 })
             for(let i = 0; i < player1list.length; i++){
-                await this.calculResult(player1list[i], player2list[i])
+                let currentGame = 0
+                await axios.post('/ligues/' + player1list[i] + '/currentGame')
+                    .then(response => {
+                        currentGame = response.data[0].current_game
+                    })
+                if(currentGame == gamenumberlist[i]){
+                    await this.calculResult(player1list[i], player2list[i])
+                }
             }
         },
 
