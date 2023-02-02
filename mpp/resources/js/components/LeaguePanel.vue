@@ -90,11 +90,16 @@
                     Contenu de l'onglet "Calendrier"
                 </div>
                 <div v-if="currentTab === 'Classement'">
-                    <leaderboard-panel  :players="data">
-                    </leaderboard-panel>
+                    <leaderboard-panel  :players="data"></leaderboard-panel>
                 </div>
             </div>
         </div>
+    </div>
+    <div v-if="league.status === 3">
+        <!-- league is finished -->
+        <h1 class="text-3xl text-center mb-10">Ligue {{league.name}} terminée !</h1>
+        <h2 class="text-2xl text-center mb-8">Classement final</h2>
+        <leaderboard-panel  :players="data"></leaderboard-panel>
     </div>
 </template>
   
@@ -127,7 +132,7 @@ export default {
             loading: false,
             data: null,
             showAlert: false,
-            currentTab: 'Ma compo'
+            currentTab: 'Ma compo',
         }
     },
     methods: {
