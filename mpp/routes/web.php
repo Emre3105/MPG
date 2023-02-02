@@ -101,5 +101,14 @@ Route::group(['prefix' => 'composition'], function()
 
 Route::post('matchs', [GameController::class, 'browse'])->name('game.browse');
 
+Route::group(['prefix' => 'games'], function()
+{
+    Route::post('/', [GameController::class, 'getGames'])->name('game.get');
+    Route::post('/{id}', [GameController::class, 'getBasketballers'])->name('game.basketballers');
+    Route::post('/{id}/points', [GameController::class, 'getPoints'])->name('game.basketballer.points');
+    Route::post('/{id1}/{id2}/{points1}/{points2}', [GameController::class, 'setPoints'])->name('game.setpoints');
+}
+);
+
 Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');
 Route::post('ajoutStats', [StatController::class, 'store'])->name('stat.store');
