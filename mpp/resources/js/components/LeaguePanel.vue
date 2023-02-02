@@ -87,7 +87,11 @@
                     ></line-up>
                 </div>
                 <div v-show="currentTab === 'Calendrier'">
-                    Contenu de l'onglet "Calendrier"
+                    <games-calendar
+                        :league="league"
+                        :url-browse-game="urlBrowseGame"
+                        :url-browse-players="urlBrowsePlayers"
+                    ></games-calendar>
                 </div>
                 <div v-show="currentTab === 'Classement'">
                     Contenu de l'onglet "Classement"
@@ -99,15 +103,17 @@
   
 <script>
 import LineUp from './LineUp.vue'
+import GamesCalendar from './GamesCalendar.vue'
 
 export default {
     components: {
-        LineUp
+        LineUp, GamesCalendar
     },
     props: {
         league: Object,
         validated: Boolean,
         auth: Number,
+        urlBrowsePlayerNames: String,
         urlBrowsePlayers: String,
         urlLaunchLeague: String,
         urlBrowseBasketballer: String,
@@ -115,11 +121,13 @@ export default {
         urlBrowseBoughtBasketballer: String,
         urlBrowseBoughtBasketballerByPlayer: String,
         urlBrowseBid: String,
+        urlBrowsePlayer: String,
         urlSaveBid: String,
         urlSaveLineUp: String,
         urlBrowseLineUp: String,
         urlImport: String,
-        urlValidate: String
+        urlValidate: String,
+        urlBrowseGame: String
     },
     data() {
         return {
@@ -135,7 +143,7 @@ export default {
                 this.loading = true
     
                 await axios
-                    .post(this.urlBrowsePlayers)
+                    .post(this.urlBrowsePlayerNames)
                     .then(response => (
                         this.data = response.data
                     ))

@@ -8,6 +8,7 @@ use App\Http\Controllers\StatController;
 use App\Http\Controllers\TransferMarketController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\LineUpController;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +66,8 @@ Route::group(['prefix' => 'ligues',  'middleware' => 'auth:user'], function()
     Route::get('rejoindre/{code}', [LeagueController::class, 'join'])->name('league.join');
     Route::post('creer', [LeagueController::class, 'store'])->name('league.store');
     Route::get('/{code}', [LeagueController::class, 'show'])->name('league.show');
-    Route::post('/{id}/joueurs', [LeagueController::class, 'browsePlayers'])->name('league.player.browse');
+    Route::post('/{id}/joueurs/noms', [LeagueController::class, 'browsePlayerNames'])->name('league.player.name.browse');
+    Route::post('/{id}/joueurs', [LeagueController::class, 'browsePlayerIdAndNames'])->name('league.player.browse');
     Route::get('/{id}/lancement', [LeagueController::class, 'launch'])->name('league.launch');
 });
 
@@ -96,6 +98,8 @@ Route::group(['prefix' => 'composition'], function()
     Route::post('/', [LineUpController::class, 'browse'])->name('lineup.browse');
     Route::post('/enregister', [LineUpController::class, 'save'])->name('lineup.save');
 });
+
+Route::post('matchs', [GameController::class, 'browse'])->name('game.browse');
 
 Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');
 Route::post('ajoutStats', [StatController::class, 'store'])->name('stat.store');
