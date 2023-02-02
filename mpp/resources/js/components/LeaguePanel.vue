@@ -89,8 +89,9 @@
                 <div v-show="currentTab === 'Calendrier'">
                     Contenu de l'onglet "Calendrier"
                 </div>
-                <div v-show="currentTab === 'Classement'">
-                    Contenu de l'onglet "Classement"
+                <div v-if="currentTab === 'Classement'">
+                    <leaderboard-panel  :players="data">
+                    </leaderboard-panel>
                 </div>
             </div>
         </div>
@@ -139,7 +140,12 @@ export default {
                     .then(response => (
                         this.data = response.data
                     ))
-                
+                for (let i = 0; i < this.data.length; i++) {
+                    let rand = Math.floor(Math.random() * this.data.length)
+                    this.data[i]["victoires"] = rand
+                    this.data[i]["defaites"] = this.data.length - rand
+                    this.data[i]["scoreavg"] = Math.floor(Math.random() * 100)
+                }
                 this.loading = false
             }
         },

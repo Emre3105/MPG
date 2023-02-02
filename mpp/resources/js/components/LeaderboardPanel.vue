@@ -7,6 +7,7 @@
                     <th>Nom</th>
                     <th>Victoires</th>
                     <th>Défaites</th>
+                    <th>+/-</th>
                 </tr>
             </thead>
             <tbody v-if="!loading">
@@ -21,9 +22,10 @@
                         <i class="fa-solid fa-medal fa-xl text-bronze"></i>
                     </td>
                     <td class="font-bold text-lg" v-if="player.rang > 3">{{player.rang}}</td>
-                    <td>{{player.nom}}</td>
+                    <td class="font-bold">{{player.username}}</td>
                     <td>{{player.victoires}}</td>
                     <td>{{player.defaites}}</td>
+                    <td>{{player.scoreavg}}</td>
                 </tr>
             </tbody>
         </table>
@@ -38,14 +40,12 @@
 
 <script>
 export default {
+        props: {
+            players: Array
+        },
         data() {
             return {
-                loading: true,
-                players: [{nom: "emre", victoires: 10, defaites: 0, scoreavg: 100},
-                {nom: "Pascale", victoires: 2, defaites: 8, scoreavg:50},
-                {nom: "Reba", victoires: 10, defaites: 0, scoreavg: 60},
-                {nom: "Alphonso", victoires: 4, defaites: 6, scoreavg: 70},
-                {nom: "Kacey", victoires: 8, defaites: 2, scoreavg: 80}]
+                loading: true
             }
         },
         methods: {
@@ -55,7 +55,7 @@ export default {
                                                      : (b.scoreavg - a.scoreavg)
                 })
                 this.players.forEach((player, index) => {
-                    player.rang = index + 1
+                    player["rang"] = index + 1
                 })
             }
         },
