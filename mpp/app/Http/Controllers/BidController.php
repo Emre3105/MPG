@@ -11,6 +11,7 @@ use App\Models\Bid;
 use App\Models\Player;
 use App\Models\League;
 use App\Models\Basketballer;
+use App\Models\Game;
 
 class BidController extends Controller
 {
@@ -151,6 +152,136 @@ class BidController extends Controller
         if ($canEnd) {
             $league->status = 2;
             $league->save();
+            if ($league->max_players == 2) {
+                $this->generateTwoPlayersGames($league->players);
+            } else if ($league->max_players == 4) {
+                $this->generateFourPlayersGames($league->players);
+            } else if ($league->max_players == 6) {
+                $this->generateSixPlayersGames($league->players);
+            } else if ($league->max_players == 8) {
+                $this->generateEightPlayersGames($league->players);
+            }
+        }
+    }
+
+    private function generateTwoPlayersGames($players) {
+        Game::create([
+            'home_player_id' => $players[0]->id,
+            'visiting_player_id' => $players[1]->id,
+            'game_number' => 1
+        ]);
+        Game::create([
+            'home_player_id' => $players[1]->id,
+            'visiting_player_id' => $players[0]->id,
+            'game_number' => 2
+        ]);
+    }
+
+    private function generateFourPlayersGames($players) {
+        $games = [
+            [
+                [0, 1], [2, 3]
+            ], [
+                [0, 2], [1, 3]
+            ], [
+                [0, 3], [1, 2]
+            ]
+        ];
+        // matchs allés
+        for ($i = 0; $i < 3; $i++) {
+            foreach ($games[$i] as $game) {
+                Game::create([
+                    'home_player_id' => $players[$game[0]]->id,
+                    'visiting_player_id' => $players[$game[1]]->id,
+                    'game_number' => $i + 1
+                ]);
+            }
+        }
+        // matchs retours
+        for ($i = 0; $i < 3; $i++) {
+            foreach ($games[$i] as $game) {
+                Game::create([
+                    'home_player_id' => $players[$game[1]]->id,
+                    'visiting_player_id' => $players[$game[0]]->id,
+                    'game_number' => $i + 4
+                ]);
+            }
+        }
+    }
+
+    private function generateSixPlayersGames($players) {
+        $games = [
+            [
+                [0, 1], [2, 3], [4, 5]
+            ], [
+                [0, 2], [1, 4], [3, 5]
+            ], [
+                [0, 3], [1, 5], [2, 4]
+            ], [
+                [0, 4], [1, 3], [2, 5]
+            ], [
+                [0, 5], [1, 2], [3, 4]
+            ]
+        ];
+        // matchs allés
+        for ($i = 0; $i < 5; $i++) {
+            foreach ($games[$i] as $game) {
+                Game::create([
+                    'home_player_id' => $players[$game[0]]->id,
+                    'visiting_player_id' => $players[$game[1]]->id,
+                    'game_number' => $i + 1
+                ]);
+            }
+        }
+        // matchs retours
+        for ($i = 0; $i < 5; $i++) {
+            foreach ($games[$i] as $game) {
+                Game::create([
+                    'home_player_id' => $players[$game[1]]->id,
+                    'visiting_player_id' => $players[$game[0]]->id,
+                    'game_number' => $i + 6
+                ]);
+            }
+        }
+    }
+
+    private function generateEightPlayersGames($players) {
+        $games = [
+            [
+                [0, 1], [2, 3], [4, 5], [6, 7]
+            ], [
+                [1, 6], [0, 3], [4, 7], [2, 5]
+            ], [
+                [1, 4], [3, 6], [0, 2], [5, 7]
+            ], [
+                [1, 7], [2, 6], [3, 4], [0, 5]
+            ], [
+                [1, 5], [2, 4], [0, 6], [3, 7]
+            ], [
+                [1, 3], [2, 7], [5, 6], [0, 4]
+            ], [
+                [1, 2], [4, 6], [0, 7], [3, 5]
+            ]
+        ];
+        // matchs allés
+        for ($i = 0; $i < 7; $i++) {
+            foreach ($games[$i] as $game) {
+                Game::create([
+                    'home_player_id' => $players[$game[0]]->id,
+                    'visiting_player_id' => $players[$game[1]]->id,
+                    'game_number' => $i + 1
+                ]);
+            }
+        }
+        // matchs retours
+        for ($i = 0; $i < 7; $i++) {
+            foreach ($games[$i] as $game) {
+                Game::create([
+                    'home_player_id' => $players[$game[1]]->id,
+                    'visiting_player_id' => $players[$game[0]]->id,
+                    'game_number' => $i + 8
+                ]);
+            }
         }
     }
 }
