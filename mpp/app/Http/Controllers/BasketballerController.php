@@ -9,6 +9,7 @@ use App\Models\Basketballer;
 use App\Http\Requests\BasketballersRequest;
 use App\Models\League;
 use App\Models\Player;
+use App\Models\LineUp;
 
 class BasketballerController extends Controller
 {
@@ -35,6 +36,18 @@ class BasketballerController extends Controller
                     ->get();
             }
             return Basketballer::orderBy($request->column, $request->direction)->get();
+        }
+        return redirect()->back()->with('error', 'Une erreur est survenue.');
+    }
+
+    public function browseBasketballerPlayer(Request $request) {
+        if (isset($request->league_id)) {
+            $player = Player::where([
+                'user_id' => Auth::user()->id,
+                'league_id' => $request->league_id,
+            ])->first();
+            // dd(DB::table("basketballers_players")->select('basketballer_id')->where('player_id', $player->id)->get()->toArray());
+            return Basketballer::whereIn('id', DB::table("basketballers_players")->select('*')->where('player_id', $player->id)->pluck('basketballer_id')->toArray())->get();
         }
         return redirect()->back()->with('error', 'Une erreur est survenue.');
     }

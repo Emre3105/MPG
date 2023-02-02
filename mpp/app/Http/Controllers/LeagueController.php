@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\League;
 use App\Models\Player;
 use App\Models\TransferMarket;
+use App\Models\LineUp;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\LeagueStoreRequest;
 use Illuminate\Support\Str;
@@ -78,6 +79,9 @@ class LeagueController extends Controller
         TransferMarket::create([
             'player_id' => $player->id
         ]);
+        LineUp::create([
+            'player_id' => $player->id
+        ]);
         $league->current_players = $league->current_players + 1;
         $league->save();
         return view('league', [
@@ -99,6 +103,9 @@ class LeagueController extends Controller
             'league_id' => $league->id
         ]);
         TransferMarket::create([
+            'player_id' => $player->id
+        ]);
+        LineUp::create([
             'player_id' => $player->id
         ]);
 

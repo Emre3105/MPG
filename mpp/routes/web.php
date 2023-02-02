@@ -7,6 +7,7 @@ use App\Http\Controllers\BasketballerController;
 use App\Http\Controllers\StatController;
 use App\Http\Controllers\TransferMarketController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\LineUpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,7 @@ Route::group(['prefix' => 'joueurs'], function()
 {
     Route::get('/', [BasketballerController::class, 'index'])->name('basketballer.index');
     Route::post('/', [BasketballerController::class, 'browse'])->name('basketballer.browse');
+    Route::post('/effectif', [BasketballerController::class, 'browseBasketballerPlayer'])->name('basketballer.player.browse');
     Route::post('/indisponible', [BasketballerController::class, 'bought'])->name('basketballer.bought.browse');
     Route::post('/possede', [BasketballerController::class, 'boughtByPlayer'])->name('basketballer.bought.by.player.browse');
 });
@@ -87,6 +89,12 @@ Route::group(['prefix' => 'enchere'], function()
     Route::post('/enregister', [BidController::class, 'save'])->name('bid.save');
     Route::post('/importer', [BidController::class, 'import'])->name('bid.import');
     Route::post('/valider', [BidController::class, 'validateBids'])->name('bid.validate');
+});
+
+Route::group(['prefix' => 'composition'], function()
+{
+    Route::post('/', [LineUpController::class, 'browse'])->name('lineup.browse');
+    Route::post('/enregister', [LineUpController::class, 'save'])->name('lineup.save');
 });
 
 Route::post('ajoutBasketteurs', [BasketballerController::class, 'store'])->name('basketballer.store');

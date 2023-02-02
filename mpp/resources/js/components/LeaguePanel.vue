@@ -53,12 +53,22 @@
     <div v-if="league.status == 2">
         <!-- league is in progress -->
         <h1 class="text-3xl text-center mb-8">{{league.name}}</h1>
-        <p>MA COMPO</p>
+        <line-up
+            :url-browse-basketballer-player="urlBrowseBasketballerPlayer"
+            :url-save-line-up="urlSaveLineUp"
+            :url-browse-line-up="urlBrowseLineUp"
+            :league-id="league.id"
+        ></line-up>
     </div>
 </template>
   
 <script>
+import LineUp from './LineUp.vue'
+
 export default {
+    components: {
+        LineUp
+    },
     props: {
         league: Object,
         validated: Boolean,
@@ -66,10 +76,13 @@ export default {
         urlBrowsePlayers: String,
         urlLaunchLeague: String,
         urlBrowseBasketballer: String,
+        urlBrowseBasketballerPlayer: String,
         urlBrowseBoughtBasketballer: String,
         urlBrowseBoughtBasketballerByPlayer: String,
         urlBrowseBid: String,
         urlSaveBid: String,
+        urlSaveLineUp: String,
+        urlBrowseLineUp: String,
         urlImport: String,
         urlValidate: String
     },
