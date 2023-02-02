@@ -8,7 +8,8 @@
                 v-if="canBeFavorite"
                 :class="[isFavorite ? 'fa-solid' : 'fa-regular', loading ? 'text-gray-lightest cursor-progress' : 'text-gold-dark hover:text-gold-darkest cursor-pointer']"
                 class="fa-star"
-                @click="makeFavorite"
+                @click.stop="makeFavorite"
+                @click.stop.prevent="$event.stopPropagation()"
             ></i>
         </p>
         <hr>
