@@ -163,7 +163,7 @@ class LeagueController extends Controller
         $leagueid = DB::table('players')->select('players.league_id')->where('id', $id)->get();
         $leagueid = $leagueid[0]->league_id;
         $league = League::findOrFail($leagueid);
-        $currentGame = $league->current_game;
+        $currentGame = $league->current_game + 1;
         if($currentGame <= (($league->max_players - 1) * 2)){
             $league->current_game = $league->current_game + 1;
             $league->save();
