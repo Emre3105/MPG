@@ -317,8 +317,10 @@ export default {
     async mounted() {
         this.loading = true
         await this.loadBasketballers()
-        await this.loadBoughtBasketballers()
-        await this.loadBoughtBasketballersByPlayer()
+        if (this.leagueId) {
+            await this.loadBoughtBasketballers()
+            await this.loadBoughtBasketballersByPlayer()
+        }
         await this.loadBids()
         this.loading = false
     },
