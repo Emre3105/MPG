@@ -208,6 +208,7 @@ export default {
                     })
                 if(currentGame == gamenumberlist[i]){
                     await this.calculResult(player1list[i], player2list[i])
+                    await axios.post('/ligues/' + player1list[i] + '/incrementCurrentGame')
                 }
             }
             this.loading3 = false
