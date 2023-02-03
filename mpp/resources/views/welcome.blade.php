@@ -3,7 +3,7 @@
 <div class="flex flex-col justify-center items-center h-screen space-y-20">
     <div class="text-center">
         <p class="text-5xl">Bienvenue sur MPP</p>
-        <div class="mt-10 space-x-8 text-3xl">
+        <div class="mt-10 space-x-8 text-3xl text-orange">
             <i class="fa-solid fa-basketball"></i>
             <i class="fa-solid fa-basketball"></i>
             <i class="fa-solid fa-basketball"></i>
