@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Player;
 use App\Models\LineUp;
+use App\Models\TransferMarket;
 
 class PlayerSeeder extends Seeder
 {
