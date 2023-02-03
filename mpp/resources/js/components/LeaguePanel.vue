@@ -94,7 +94,7 @@
                     ></games-calendar>
                 </div>
                 <div v-if="currentTab === 'Classement'">
-                    <leaderboard-panel  :players="data"></leaderboard-panel>
+                    <leaderboard-panel :players="data"></leaderboard-panel>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
         <!-- league is finished -->
         <h1 class="text-3xl text-center mb-10">Ligue {{league.name}} terminée !</h1>
         <h2 class="text-2xl text-center mb-8">Classement final</h2>
-        <leaderboard-panel  :players="data"></leaderboard-panel>
+        <leaderboard-panel v-if="!loading" :players="data"></leaderboard-panel>
     </div>
 </template>
   
@@ -137,7 +137,7 @@ export default {
     },
     data() {
         return {
-            loading: false,
+            loading: true,
             data: null,
             showAlert: false,
             currentTab: 'Ma compo',
@@ -145,21 +145,16 @@ export default {
     },
     methods: {
         async load() {
-            if (!this.loading) {
-                this.loading = true
-    
-                await axios
-                    .post(this.urlBrowsePlayerNames)
-                    .then(response => (
-                        this.data = response.data
-                    ))
-                for (let i = 0; i < this.data.length; i++) {
-                    let rand = Math.floor(Math.random() * this.data.length)
-                    this.data[i]["victoires"] = rand
-                    this.data[i]["defaites"] = this.data.length - rand
-                    this.data[i]["scoreavg"] = Math.floor(Math.random() * 100)
-                }
-                this.loading = false
+            await axios
+                .post(this.urlBrowsePlayerNames)
+                .then(response => (
+                    this.data = response.data
+                ))
+            for (let i = 0; i < this.data.length; i++) {
+                let rand = Math.floor(Math.random() * this.data.length)
+                this.data[i]["victoires"] = rand
+                this.data[i]["defaites"] = this.data.length - rand
+                this.data[i]["scoreavg"] = Math.floor(Math.random() * 100)
             }
         },
         async copy() {
@@ -171,8 +166,10 @@ export default {
             }
         }
     },
-    mounted() {
-        this.load()
+    async mounted() {
+        this.loading = true
+        await this.load()
+        this.loading = false
     },
 }
 </script>

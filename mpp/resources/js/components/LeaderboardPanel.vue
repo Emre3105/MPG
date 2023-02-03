@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody v-if="!loading">
-                <tr :class="player.rang % 2 == 0 ?'table-primary' : 'table-secondary'" v-for="player in players" :key="index">
+                <tr :class="player.rang % 2 == 0 ?'table-primary' : 'table-secondary'" v-for="player in players">
                     <td v-if="player.rang == 1">
                         <i class="fa-solid fa-trophy fa-xl text-gold-dark"></i>
                     </td>
